@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cris <cris@student.42lyon.fr>              +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 17:12:52 by cjover-n          #+#    #+#             */
-/*   Updated: 2020/11/13 22:20:25 by cris             ###   ########lyon.fr   */
+/*   Updated: 2020/11/14 16:45:36 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int     main(int argc, char **argv)
     void           *img_ptr;
     t_structcub     cub;
 
-    ft_init_parameters(&cub);
+    init_parameters(&cub);
     if (argc != 2)
     {
         ft_printf("AQUÍ FALTAN PARÁMETROS O HAY DEMASIADOS\n");

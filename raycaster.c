@@ -12,8 +12,11 @@ void    init_parameters(t_structcub *cub)
     cub->planeY = 0.66;
     cub->rotspeed = 0.1;
     cub->movespeed = 0.25;
+}
 
-    int x;
-    while (x)
-    x = cub->width;
+void    lode_stuff_begining(t_structcub *cub)
+{
+    int     x;
+
+
 }

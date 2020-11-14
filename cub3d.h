@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 23:43:46 by cjover-n          #+#    #+#             */
-/*   Updated: 2020/11/14 12:42:30 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2020/11/14 19:57:03 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_structcub
     char    **map;
 }              t_structcub;
 
-void    ft_init_parameters(t_structcub *cub);
+void    init_parameters(t_structcub *cub);
 void    readmap(char *cubmap, t_structcub *cub);
 void    linechecker(char *line, t_structcub *cub);
 int     ft_numlen(int n);

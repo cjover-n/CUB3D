@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 19:00:09 by cjover-n          #+#    #+#             */
-/*   Updated: 2020/11/14 10:11:36 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2020/11/14 20:30:05 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,13 @@ int		ft_numlen(int n)
 	return (len);
 }
 
+char    *texture_parser(char *arr)
+{
+    while (*arr != '.')
+        arr++;
+    return(ft_strdup(arr));
+}
+
 void    linechecker(char *line, t_structcub *cub)
 {
     char    *arr;
@@ -76,42 +83,13 @@ void    linechecker(char *line, t_structcub *cub)
         ft_printf("TIENE WIDTH DE %i\n", cub->width);
         ft_printf("TIENE HEIGHT DE %i\n", cub->height);
     }
+    else if ((arr = ft_strnstr(line, "NO", len)))
+        cub->t_north = texture_parser(line);
+    else if ((arr = ft_strnstr(line, "EA", len)))
+        cub->t_east = texture_parser(line);
+    else if ((arr = ft_strnstr(line, "SO", len)))
+        cub->t_south = texture_parser(line);
+    else if ((arr = ft_strnstr(line, "WE", len)))
+        cub->t_west = texture_parser(line);
     
-
-    /*
-    char    **arr;
-    int     i;
-
-    arr= ft_split(line, ' ');
-    i = 0;
-    if (arr[0][0] == 'R')
-    {
-        ft_printf("MAPA TIENE RESOLUCION\n");
-        i = 2;
-        if (ft_isdigit(line[i]) == 1)
-        {
-            cub->width = ft_atoi(&line[i]);
-            i = ft_numlen(cub->width) + 3;
-            if (ft_isdigit(line[i]) == 1)
-                cub->height = ft_atoi(&line[i]);
-        }
-        else
-            ft_printf ("ERROR DE RESOLUCION\n");
-        ft_printf("TIENE WIDTH DE %i\n", cub->width);
-        ft_printf("TIENE HEIGHT DE %i\n", cub->height);
-    }
-    if (line[0] == 'E' && line[1] == 'A' && line[2] == ' ')
-    {
-        ft_printf("EL MAPA TIENE TEXTURA ESTE\n");
-        i = 3;
-        
-    }
-
-    if (line[0] == 'N' && line[1] == 'O' && line[2] == ' ')
-        ft_printf("EL MAPA TIENE TEXTURA NORTE\n");
-    if (line[0] == 'S' && line[1] == 'O' && line[2] == ' ')
-        ft_printf("EL MAPA TIENE TEXTURA SUR\n");
-    if (line[0] == 'W' && line[1] == 'E' && line[2] == ' ')
-        ft_printf("EL MAPA TIENE TEXTURA OESTE\n");
-*/
 }
