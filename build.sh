@@ -1,2 +1,2 @@
-gcc -I ./ -I /usr/X11/include -g -L /usr/X11/lib -L ./Libft/ -lft -l mlx -framework OpenGL -framework AppKit main.c raycaster.c readmap.c
+gcc -I ./ -I /usr/X11/include -g -L /usr/X11/lib -L ./Libft/ -lft -l mlx -framework OpenGL -framework AppKit main.c raycaster.c readmap.c rgbutils.c parsersmap.c errorhandler.c
 ./a.out map.cub

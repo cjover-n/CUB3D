@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+         #
+#    By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/11/25 21:13:39 by cjover-n          #+#    #+#              #
-#    Updated: 2020/10/07 23:37:40 by cjover-n         ###   ########.fr        #
+#    Updated: 2020/11/15 16:58:17 by cjover-n         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC =	ft_isalpha.c	ft_isprint.c	ft_strlcpy.c	ft_strrchr.c	\
 		ft_putstr_fd.c	ft_putendl_fd.c	ft_putnbr_fd.c	ft_strmapi.c	\
 		ft_itoa.c		ft_split.c		ft_lstiter.c	ft_strcdup.c	\
 		ft_strnew.c		ft_putchar.c	ft_putnbr.c		ft_putstr.c		\
-		ft_strcdup.c	get_next_line.c
+		ft_strcdup.c	get_next_line.c	ft_numlen.c		ft_isspace.c
 
 SRCBONUS =	ft_lstnew.c	ft_lstadd_front.c	ft_lstsize.c	ft_lstlast.c \
 		  	ft_lstadd_back.c	ft_lstdelone.c	ft_lstclear.c ft_lstmap.c
