@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 19:00:09 by cjover-n          #+#    #+#             */
-/*   Updated: 2020/11/15 17:47:09 by cjover-n         ###   ########.fr       */
+/*   Updated: 2020/11/22 13:52:40 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,46 +16,89 @@ void    readmap(char *cubmap, t_structcub *cub, t_errors *error)
 {
     char    *line;
     int     fd;
-    int     *res;
+	int		gnl;
+	int		isline;
+	char	*map_buffer;
 
     fd = open(cubmap, O_RDONLY, S_IRUSR);
-    res = NULL;
+	isline = 0;
+	map_buffer = NULL;
     if (fd >= 3)
     {
         line = NULL;
-        while (get_next_line(fd, &line) > 0)
+        while ((gnl = get_next_line(fd, &line)) > 0)
         {
-            line_checker(line, cub);
+			isline = 0;
+			if (!everything_ok(cub))
+            	line_checker(line, cub, error);
+			else
+			{
+				if (line[0] != '\0')
+				{
+					isline = is_map_line(line, cub, error);
+					if (!isline)
+					{
+						error->maptrash = 1;
+						error_handler1(cub, error);
+						return ;
+					}
+					else
+						get_map(line, &map_buffer);
+				}
+			}
         }
-        if (get_next_line(fd, &line) < 0)
+        if (gnl < 0)
 		{
 			error->mapfile = 1;
 			error_handler1(cub, error);
 		}
-        close(fd);
+		else if (!everything_ok(cub))
+		{
+			error->everythingnotok = 1;
+			error_handler1(cub, error);
+		}
+		else if (gnl == 0)
+		{
+			cub->map = ft_split(map_buffer, '.');
+			free(map_buffer);
+		}
+		messages(cub);
+		close(fd);
     }
 }
 
-void    line_checker(char *line, t_structcub *cub)
+void    line_checker(char *line, t_structcub *cub, t_errors *error)
 {
     char    *arr;
     int     len;
 
     len = ft_strlen(line);
     if ((arr = ft_strchr(line, 'R')))
-        resolution_parser(line, cub);
+        resolution_parser(line, cub, error);
     else if ((arr = ft_strnstr(line, "NO", len)))
-        cub->t_north = texture_parser(line);
+        cub->t_north = texture_parser(line, cub, error);
     else if ((arr = ft_strnstr(line, "EA", len)))
-        cub->t_east = texture_parser(line);
+        cub->t_east = texture_parser(line, cub, error);
     else if ((arr = ft_strnstr(line, "SO", len)))
-        cub->t_south = texture_parser(line);
+        cub->t_south = texture_parser(line, cub, error);
     else if ((arr = ft_strnstr(line, "WE", len)))
-        cub->t_west = texture_parser(line);
+        cub->t_west = texture_parser(line, cub, error);
     else if ((arr = ft_strchr(line, 'S')))
-        cub->t_sprite = texture_parser(line);
+        cub->t_sprite = texture_parser(line, cub, error);
     else if ((arr = ft_strchr(line, 'F')))
         cub->f_hex = color_parser(line, cub);
     else if ((arr = ft_strchr(line, 'C')))
         cub->c_hex = color_parser(line, cub);
+}
+
+int		everything_ok(t_structcub *cub)
+{
+	int		todo;
+
+	if (!cub->t_north || !cub->t_west || !cub->t_east || !cub->t_south
+		|| !cub->t_sprite || !cub->width || !cub->height || !cub->f_hex || !cub->c_hex)
+		todo = 0;
+	else
+		todo = 1;
+	return (todo);
 }

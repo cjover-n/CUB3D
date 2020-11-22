@@ -4,19 +4,20 @@
 
 void    init_parameters(t_structcub *cub)
 {
-    cub->posX = 22;
-    cub->posY = 12;
-    cub->dirX = -1;
-    cub->dirY = 0;
-    cub->planeX = 0;
-    cub->planeY = 0.66;
+    cub->pos_x = 22;
+    cub->pos_y = 12;
+    cub->dir_x = -1;
+    cub->dir_y = 0;
+    cub->plane_x = 0;
+    cub->plane_y = 0.66;
     cub->rotspeed = 0.1;
     cub->movespeed = 0.25;
 }
-
+/*
 void    lode_stuff_begining(t_structcub *cub)
 {
     int     x;
 
-
+	
 }
+*/
