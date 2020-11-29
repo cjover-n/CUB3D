@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 19:00:09 by cjover-n          #+#    #+#             */
-/*   Updated: 2020/11/22 13:52:40 by cjover-n         ###   ########.fr       */
+/*   Updated: 2020/11/29 11:46:46 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void    readmap(char *cubmap, t_structcub *cub, t_errors *error)
 			cub->map = ft_split(map_buffer, '.');
 			free(map_buffer);
 		}
-		messages(cub);
 		close(fd);
     }
 }
@@ -96,7 +95,7 @@ int		everything_ok(t_structcub *cub)
 	int		todo;
 
 	if (!cub->t_north || !cub->t_west || !cub->t_east || !cub->t_south
-		|| !cub->t_sprite || !cub->width || !cub->height || !cub->f_hex || !cub->c_hex)
+		|| !cub->t_sprite || !cub->screen.width || !cub->screen.height || !cub->f_hex || !cub->c_hex)
 		todo = 0;
 	else
 		todo = 1;

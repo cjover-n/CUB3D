@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 16:56:29 by cjover-n          #+#    #+#             */
-/*   Updated: 2020/11/22 13:48:57 by cjover-n         ###   ########.fr       */
+/*   Updated: 2020/11/29 10:32:28 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void    resolution_parser(char *line, t_structcub *cub, t_errors *error)
         i++;
     if (ft_isdigit(line[i]))
     {
-        cub->width = ft_atoi(&line[i]);
-        i = ft_numlen(cub->width) + 3;
+        cub->screen.width = ft_atoi(&line[i]);
+        i = ft_numlen(cub->screen.width) + 3;
         if (ft_isdigit(line[i]) == 1)
-            cub->height = ft_atoi(&line[i]);
+            cub->screen.height = ft_atoi(&line[i]);
     }
     else
     {
