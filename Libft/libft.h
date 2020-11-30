@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 20:37:31 by cjover-n          #+#    #+#             */
-/*   Updated: 2020/11/15 16:58:50 by cjover-n         ###   ########.fr       */
+/*   Updated: 2020/11/30 19:13:19 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ char			*ft_strnew(size_t size);
 void			ft_putchar(char c);
 void			ft_putnbr(int nb);
 void			ft_putstr(char *str);
-char			*ft_strcdup(const char *s1, int c);
 int				get_next_line(int fd, char **line);
 int				ft_printf(const char *format, ...);
 void			ft_putchar_print(t_tab *c, const char d);

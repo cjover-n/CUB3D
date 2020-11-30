@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 23:43:46 by cjover-n          #+#    #+#             */
-/*   Updated: 2020/11/29 15:15:22 by cjover-n         ###   ########.fr       */
+/*   Updated: 2020/11/30 23:24:15 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,20 @@
 # include <math.h>
 # include <stdio.h>
 # include "./Libft/libft.h"
+
+# define KEY_ESC 53
+# define KEY_PRESS 2
+# define KEY_RELEASE 3
+# define KEY_W 13
+# define KEY_S 1
+# define KEY_A 0
+# define KEY_D 2
+# define KEY_UP 126
+# define KEY_DOWN 125
+# define KEY_LEFT 123
+# define KEY_RIGHT 124
+# define KEY_SPACE 49
+# define KEY_T 17
 
 #define RED 0x00FF0000
 #define BLUE 0x000000FF
@@ -46,8 +60,6 @@ typedef struct s_structcub
 	double			camerax;
 	double			deltadist_x;
 	double			deltadist_y;
-	//int				stpx;
-	//int				stpy;
 	double			sidedist_x;
 	double			sidedist_y;
     double			rotspeed;
@@ -83,6 +95,7 @@ typedef struct s_structcub
 	int				map_len;
 	int				map_height;
 	int				start_copy;
+	int				end_copy;
 }				t_structcub;
 
 
@@ -101,6 +114,11 @@ typedef struct s_errors
 void			init_parameters(t_structcub *cub);
 void			error_handler1(t_structcub *cub, t_errors *error);
 void			messages(t_structcub *cub);
+int				deal_key(int key, t_structcub *cub);
+void			vertical_movement(t_structcub *cub);
+void			horizontal_movement(t_structcub *cub);
+void			rotation_right(t_structcub *cub);
+void			rotation_left(t_structcub *cub);
 void			readmap(char *cubmap, t_structcub *cub, t_errors *error);
 void			line_checker(char *line, t_structcub *cub, t_errors *error);
 void			resolution_parser(char *line, t_structcub *cub, t_errors *error);
@@ -108,7 +126,7 @@ int				rgb_range(int cr);
 unsigned int	create_trgb(int t, int r, int g, int b);
 char			*texture_parser(char *arr, t_structcub *cub, t_errors *error);
 unsigned int	color_parser(char *line, t_structcub *cub);
-void			space_checker(char *line, int i);
+int				space_checker(char *line, int i);
 int				is_map_line(char *line, t_structcub *cub, t_errors *error);
 int				everything_ok(t_structcub *cub);
 void			get_map(char *line, char **buffer);

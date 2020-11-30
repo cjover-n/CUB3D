@@ -5,8 +5,8 @@ SO ./textures/purple.xpm
 WE ./textures/snow.xpm
 
 S ./textures/sans.xpm
-F 0,255,235
-C 26,5,30
+C 163,73,164
+F 255,127,0
 
 11111111111111111111111111111
 11100000001110000000000000001

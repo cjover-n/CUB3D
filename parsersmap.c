@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 16:56:29 by cjover-n          #+#    #+#             */
-/*   Updated: 2020/11/29 10:32:28 by cjover-n         ###   ########.fr       */
+/*   Updated: 2020/11/30 22:42:25 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ unsigned int    color_parser(char *line, t_structcub *cub)
 
     i = 1;
     x = 0;
-    space_checker(line, i);
+    i = space_checker(line, i);
     while (ft_isdigit(line[i]) && x < 3)
     {
         if (ft_isdigit(line[i]))

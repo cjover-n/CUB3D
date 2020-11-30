@@ -1,4 +1,14 @@
-//Acordarme de poner el header de 42
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycaster.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/11/30 07:01:42 by cjover-n          #+#    #+#             */
+/*   Updated: 2020/11/30 23:11:30 by cjover-n         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
@@ -17,8 +27,6 @@ void    init_parameters(t_structcub *cub)
 int    raycaster(t_structcub *cub)
 {
 	cub->x = 0;
-    //img_ptr = mlx_xpm_file_to_image(mlx_ptr, "./textures/pink.xpm", &cub.width, &cub.height);
-    //mlx_put_image_to_window(mlx_ptr, win_ptr, img_ptr, 100, 100);
 	while (cub->x < cub->screen.width)
 	{
 		cub->camerax = 2 * cub->x / (double)cub->screen.width - 1;
@@ -26,10 +34,6 @@ int    raycaster(t_structcub *cub)
 		cub->raydiry = cub->dir_y + cub->plane_y * cub->camerax;
 		cub->map_x = (int)cub->pos_x;
 		cub->map_y = (int)cub->pos_y;
-		//cub->deltadist_x = fabs(1 / cub->raydirx);
-		//cub->deltadist_y = fabs(1 / cub->raydiry);
-		//double deltaDistX = (rayDirY == 0) ? 0 : ((rayDirX == 0) ? 1 : abs(1 / rayDirX));
-      	//double deltaDistY = (rayDirX == 0) ? 0 : ((rayDirY == 0) ? 1 : abs(1 / rayDirY));
 		if (cub->raydiry == 0)
 			cub->deltadist_x = 0;
 		else if (cub->raydirx == 0)
@@ -81,8 +85,14 @@ int    raycaster(t_structcub *cub)
 		else if (cub->side == 1 && cub->raydiry < 0)
 			cub->color = YELLOW;
 		cub->start_copy = cub->draw_start;
+		cub->end_copy = cub->draw_end;
 		while (cub->start_copy < cub->draw_end)
-			cub->screen.addr_img[cub->start_copy++ * cub->screen.width + cub->x] = cub->color;
+			cub->screen.addr_img[cub->start_copy++ * cub->screen.width + cub->x] = cub->color;//importante: y * w + x
+		while (cub->side < cub->draw_start)
+			cub->screen.addr_img[cub->side++ * cub->screen.width + cub->x] = cub->c_hex;
+		cub->side = cub->end_copy;
+		while (cub->side < cub->screen.width)
+			cub->screen.addr_img[cub->side++ * cub->screen.width + cub->x] = cub->f_hex;
 		cub->x++;
 	}
 	mlx_put_image_to_window(cub->screen.mlx_ptr, cub->screen.win_ptr, cub->screen.buffer_img, 0, 0);

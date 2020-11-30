@@ -6,25 +6,60 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 17:12:52 by cjover-n          #+#    #+#             */
-/*   Updated: 2020/11/29 14:57:58 by cjover-n         ###   ########.fr       */
+/*   Updated: 2020/11/30 23:57:58 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/*
-int     deal_key(int key, void *param)
+int		deal_key(int key, t_structcub *cub)
 {
-    
-    //mlx_pixel_put(mlx_ptr, win_ptr);
-    if (key == 0x35 || key == 0x00)
+	(void)cub;
+	if (key == KEY_ESC)
 	{
-		ft_printf("\n**** THANKS FOR PLAYING! :D ****\n\n");
-		//exit();
+		//mlx_destroy_image(cub->screen.mlx_ptr, cub->img_ptr);
+		mlx_destroy_window(cub->screen.mlx_ptr, cub->screen.win_ptr);
+		//free(cub);
+		exit(0);
 	}
-    return (0);
+	if (key == KEY_W)
+	{
+		if (cub->map[(int)cub->pos_y][(int)(cub->pos_x + cub->dir_x * 1)] != '1')
+			cub->pos_x += cub->dir_x * cub->movespeed;
+		if (cub->map[(int)(cub->pos_y + cub->dir_y * 1)][(int)cub->pos_x] != '1')
+			cub->pos_y += cub->dir_y * cub->movespeed;
+	}
+	if (key == KEY_A)
+	{
+		if (cub->map[(int)cub->pos_y][(int)(cub->pos_x + cub->plane_x * 1)] != '1')
+			cub->pos_x -= cub->plane_x * cub->movespeed;
+		if (cub->map[(int)(cub->pos_y + cub->plane_y * 1)][(int)cub->pos_x] != '1')
+			cub->pos_y -= cub->plane_y * cub->movespeed;
+	}
+	if (key == KEY_S)
+	{
+		if (cub->map[(int)cub->pos_y][(int)(cub->pos_x + cub->dir_x * 1)] != '1')
+			cub->pos_x -= cub->dir_x * cub->movespeed;
+		if (cub->map[(int)(cub->pos_y + cub->dir_y * 1)][(int)cub->pos_x] != '1')
+			cub->pos_y -= cub->dir_y * cub->movespeed;
+	}
+	if (key == KEY_D)
+	{
+		if (cub->map[(int)cub->pos_y][(int)(cub->pos_x + cub->plane_x * 1)] != '1')
+			cub->pos_x += cub->plane_x * cub->movespeed;
+		if (cub->map[(int)(cub->pos_y + cub->plane_y * 1)][(int)cub->pos_x] != '1')
+			cub->pos_y += cub->plane_y * cub->movespeed;
+	}
+	if (key == KEY_UP)
+		key = KEY_W;
+	if (key == KEY_DOWN)
+		key = KEY_S;
+	if (key == KEY_LEFT)
+		rotation_left(cub);
+	if (key == KEY_RIGHT)
+		rotation_right(cub);
+	return (0);
 }
-*/
 
 void	messages(t_structcub *cub)
 {
@@ -72,6 +107,7 @@ int     main(int argc, char **argv)
 		messages(&cub);
 		cub.screen.mlx_ptr = mlx_init();
     	cub.screen.win_ptr = mlx_new_window(cub.screen.mlx_ptr, cub.screen.width, cub.screen.height, "Nombre ventana");
+		mlx_key_hook(cub.screen.win_ptr, deal_key, &cub);
 		cub.screen.buffer_img = mlx_new_image(cub.screen.mlx_ptr, cub.screen.width, cub.screen.height);
 		cub.screen.addr_img = (unsigned int*)mlx_get_data_addr(cub.screen.buffer_img, &cub.bit, &cub.size_line, &cub.endian);
 		mlx_loop_hook(cub.screen.mlx_ptr, raycaster, &cub);
