@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 17:12:52 by cjover-n          #+#    #+#             */
-/*   Updated: 2020/11/30 23:57:58 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/01/03 11:52:19 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,38 +16,34 @@ int		deal_key(int key, t_structcub *cub)
 {
 	(void)cub;
 	if (key == KEY_ESC)
-	{
-		//mlx_destroy_image(cub->screen.mlx_ptr, cub->img_ptr);
-		mlx_destroy_window(cub->screen.mlx_ptr, cub->screen.win_ptr);
-		//free(cub);
-		exit(0);
-	}
+		destroy_and_exit(cub);
 	if (key == KEY_W)
 	{
-		if (cub->map[(int)cub->pos_y][(int)(cub->pos_x + cub->dir_x * 1)] != '1')
+		if (cub->map[(int)cub->pos_y][(int)(cub->pos_x + cub->dir_x * cub->movespeed)] != '1')
 			cub->pos_x += cub->dir_x * cub->movespeed;
-		if (cub->map[(int)(cub->pos_y + cub->dir_y * 1)][(int)cub->pos_x] != '1')
+		if (cub->map[(int)(cub->pos_y + cub->dir_y * cub->movespeed)][(int)cub->pos_x] != '1')
 			cub->pos_y += cub->dir_y * cub->movespeed;
+		
 	}
 	if (key == KEY_A)
 	{
-		if (cub->map[(int)cub->pos_y][(int)(cub->pos_x + cub->plane_x * 1)] != '1')
+		if (cub->map[(int)cub->pos_y][(int)(cub->pos_x + cub->plane_x * cub->movespeed)] != '1')
 			cub->pos_x -= cub->plane_x * cub->movespeed;
-		if (cub->map[(int)(cub->pos_y + cub->plane_y * 1)][(int)cub->pos_x] != '1')
+		if (cub->map[(int)(cub->pos_y + cub->plane_y * cub->movespeed)][(int)cub->pos_x] != '1')
 			cub->pos_y -= cub->plane_y * cub->movespeed;
 	}
 	if (key == KEY_S)
 	{
-		if (cub->map[(int)cub->pos_y][(int)(cub->pos_x + cub->dir_x * 1)] != '1')
+		if (cub->map[(int)cub->pos_y][(int)(cub->pos_x + cub->dir_x * cub->movespeed)] != '1')
 			cub->pos_x -= cub->dir_x * cub->movespeed;
-		if (cub->map[(int)(cub->pos_y + cub->dir_y * 1)][(int)cub->pos_x] != '1')
+		if (cub->map[(int)(cub->pos_y + cub->dir_y * cub->movespeed)][(int)cub->pos_x] != '1')
 			cub->pos_y -= cub->dir_y * cub->movespeed;
 	}
 	if (key == KEY_D)
 	{
-		if (cub->map[(int)cub->pos_y][(int)(cub->pos_x + cub->plane_x * 1)] != '1')
+		if (cub->map[(int)cub->pos_y][(int)(cub->pos_x + cub->plane_x * cub->movespeed)] != '1')
 			cub->pos_x += cub->plane_x * cub->movespeed;
-		if (cub->map[(int)(cub->pos_y + cub->plane_y * 1)][(int)cub->pos_x] != '1')
+		if (cub->map[(int)(cub->pos_y + cub->plane_y * cub->movespeed)][(int)cub->pos_x] != '1')
 			cub->pos_y += cub->plane_y * cub->movespeed;
 	}
 	if (key == KEY_UP)
@@ -59,6 +55,14 @@ int		deal_key(int key, t_structcub *cub)
 	if (key == KEY_RIGHT)
 		rotation_right(cub);
 	return (0);
+}
+
+void	destroy_and_exit(t_structcub *cub)
+{
+	mlx_destroy_image(cub->screen.mlx_ptr, cub->screen.buffer_img);
+	mlx_destroy_window(cub->screen.mlx_ptr, cub->screen.win_ptr);
+	//free(cub);
+	exit(0);
 }
 
 void	messages(t_structcub *cub)
@@ -100,6 +104,12 @@ int     main(int argc, char **argv)
     else
 	{
 		readmap(argv[1], &cub, &error);
+		if (cub.player.player_ok == 0)
+		{
+			error.noplayer = 1;
+			error_handler1(&cub, &error);
+			exit(0);
+		}
 		while (cub.map[cub.map_height] != NULL)
 		{
 			cub.map_height++;
@@ -110,6 +120,7 @@ int     main(int argc, char **argv)
 		mlx_key_hook(cub.screen.win_ptr, deal_key, &cub);
 		cub.screen.buffer_img = mlx_new_image(cub.screen.mlx_ptr, cub.screen.width, cub.screen.height);
 		cub.screen.addr_img = (unsigned int*)mlx_get_data_addr(cub.screen.buffer_img, &cub.bit, &cub.size_line, &cub.endian);
+		//aquí es el punto en que tengo que hacer la gestión de las texturas para que estén listas antes del raycaster
 		mlx_loop_hook(cub.screen.mlx_ptr, raycaster, &cub);
 		mlx_loop(cub.screen.mlx_ptr);
 	}

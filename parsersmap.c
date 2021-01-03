@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 16:56:29 by cjover-n          #+#    #+#             */
-/*   Updated: 2020/11/30 22:42:25 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/01/03 11:10:41 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,18 @@ int		is_map_line(char *line, t_structcub *cub, t_errors *error)
 			|| line[i] == 'S' || line[i] == 'W' || line[i] == 'E' || line[i] == ' ')
 		{
 			cub->isline = 1;
-			cub->map_len = ft_strlen(line);
+			if (line[i] == 'N' || line[i] == 'S' || line[i] == 'W' || line[i] == 'E')
+			{
+				if (cub->player.player_ok == 0)
+					get_player(cub, line[i], error);
+				else
+				{
+					error->toomanyplayers = 1;
+					error_handler1(cub, error);
+					exit(0);
+				}
+			}
+			cub->map_len = ft_strlen(line);//tener en cuenta que solo está almacenando ahora mismo el largo de la ÚLTIMA línea
 		}
 		else
 			cub->isline = 0;

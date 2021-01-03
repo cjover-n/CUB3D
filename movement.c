@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 17:08:55 by cjover-n          #+#    #+#             */
-/*   Updated: 2020/11/30 23:56:23 by cjover-n         ###   ########.fr       */
+/*   Updated: 2020/12/06 12:59:55 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void		horizontal_movement(t_structcub *cub)
 		cub->pos_y += cub->plane_y * cub->movespeed;
 }
 
-void		rotation_right(t_structcub *cub)
+void		rotation_left(t_structcub *cub)
 {
 	double dir_y_copy;
 	double plane_y_copy;
@@ -48,7 +48,7 @@ void		rotation_right(t_structcub *cub)
 	cub->plane_x = plane_y_copy * sin(cub->movespeed) + cub->plane_x * cos(cub->movespeed);
 }
 
-void		rotation_left(t_structcub *cub)
+void		rotation_right(t_structcub *cub)
 {
 	double dir_y_copy;
 	double plane_y_copy;

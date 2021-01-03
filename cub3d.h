@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 23:43:46 by cjover-n          #+#    #+#             */
-/*   Updated: 2020/11/30 23:24:15 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/01/03 11:09:29 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,21 @@ typedef struct s_screen
 	unsigned int	*addr_img;
 }				t_structscreen;
 
+typedef struct s_player
+{
+	int				player_ok;
+	int				player_north;
+	int				player_east;
+	int				player_south;
+	int				player_west;
+}				t_structplayer;
+
 typedef struct s_structcub 
 {
 	t_structscreen	screen;
+	t_structplayer	player;
 	int				x;
-    void			*img_ptr;
+    //void			*img_ptr;
 	int				bit;
 	int				endian;
 	int				size_line;//va a ser igual que cub.screen.width * 4
@@ -109,6 +119,8 @@ typedef struct s_errors
 	int				everythingnotok;
 	int				maptrash;
 	int				duplicate;
+	int				noplayer;
+	int				toomanyplayers;
 }				t_errors;
 
 void			init_parameters(t_structcub *cub);
@@ -120,6 +132,7 @@ void			horizontal_movement(t_structcub *cub);
 void			rotation_right(t_structcub *cub);
 void			rotation_left(t_structcub *cub);
 void			readmap(char *cubmap, t_structcub *cub, t_errors *error);
+void			gnl_handler(int gnl, int isline, char *line, char *map_buffer, t_structcub *cub, t_errors *error);
 void			line_checker(char *line, t_structcub *cub, t_errors *error);
 void			resolution_parser(char *line, t_structcub *cub, t_errors *error);
 int				rgb_range(int cr);
@@ -132,5 +145,8 @@ int				everything_ok(t_structcub *cub);
 void			get_map(char *line, char **buffer);
 int				raycaster(t_structcub *cub);
 void			step(t_structcub *cub);
+void			get_player(t_structcub *cub, char line, t_errors *error);
+void			player_north(t_structcub *cub, int x);
+void			destroy_and_exit(t_structcub *cub);
 
 #endif
