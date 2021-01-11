@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 19:00:09 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/01/03 11:18:35 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/01/11 22:42:32 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,7 @@ void    readmap(char *cubmap, t_structcub *cub, t_errors *error)
 						return ;
 					}
 					else
-					{
-						get_map(line, &map_buffer);
-					}
+						get_map(cub, line, &map_buffer);
 				}
 			}
         }
@@ -78,7 +76,7 @@ void	gnl_handler(int gnl, int isline, char *line, char *map_buffer, t_structcub 
 			}
 			else
 			{
-				get_map(line, &map_buffer);
+				get_map(cub, line, &map_buffer);
 			}
 			cub->map = ft_split(map_buffer, '.');
 			free(map_buffer);

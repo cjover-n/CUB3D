@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 23:43:46 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/01/03 11:09:29 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/01/11 23:23:46 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ typedef struct s_structcub
 	int				map_height;
 	int				start_copy;
 	int				end_copy;
+	int				line_counter;
 }				t_structcub;
 
 
@@ -142,11 +143,14 @@ unsigned int	color_parser(char *line, t_structcub *cub);
 int				space_checker(char *line, int i);
 int				is_map_line(char *line, t_structcub *cub, t_errors *error);
 int				everything_ok(t_structcub *cub);
-void			get_map(char *line, char **buffer);
+void			get_map(t_structcub *cub, char *line, char **buffer);
 int				raycaster(t_structcub *cub);
 void			step(t_structcub *cub);
-void			get_player(t_structcub *cub, char line, t_errors *error);
-void			player_north(t_structcub *cub, int x);
+void			get_player(t_structcub *cub, char line, int i, t_errors *error);
+void			player_north(t_structcub *cub);
+void			player_east(t_structcub *cub);
+void			player_south(t_structcub *cub);
+void			player_west(t_structcub *cub);
 void			destroy_and_exit(t_structcub *cub);
 
 #endif

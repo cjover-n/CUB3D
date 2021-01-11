@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 07:01:42 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/01/03 11:52:33 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/01/11 23:26:18 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,8 @@
 
 void    init_parameters(t_structcub *cub)
 {
-    cub->pos_x = 1;
-    cub->pos_y = 6;
-    cub->dir_x = 1;
-    cub->dir_y = 0;
-    cub->plane_x = 0;
-    cub->plane_y = 0.66;
     cub->rotspeed = 0.1;
-    cub->movespeed = 0.25;
+    cub->movespeed = 0.30;
 }
 
 int    raycaster(t_structcub *cub)
