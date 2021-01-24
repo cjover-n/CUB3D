@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 19:00:09 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/01/11 22:42:32 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/01/12 20:37:36 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void    readmap(char *cubmap, t_structcub *cub, t_errors *error)
         {
 			isline = 0;
 			if (!everything_ok(cub))
-            	line_checker(line, cub, error);
+				line_checker(line, cub, error);
 			else
 			{
 				if (line[0] != '\0')
@@ -40,7 +40,7 @@ void    readmap(char *cubmap, t_structcub *cub, t_errors *error)
 					{
 						error->maptrash = 1;
 						error_handler1(cub, error);
-						return ;
+						exit(0);
 					}
 					else
 						get_map(cub, line, &map_buffer);
@@ -102,9 +102,9 @@ void    line_checker(char *line, t_structcub *cub, t_errors *error)
     else if ((arr = ft_strchr(line, 'S')))
         cub->t_sprite = texture_parser(line, cub, error);
     else if ((arr = ft_strchr(line, 'F')))
-        cub->f_hex = color_parser(line, cub);
+        cub->f_hex = color_parser(line);
     else if ((arr = ft_strchr(line, 'C')))
-        cub->c_hex = color_parser(line, cub);
+        cub->c_hex = color_parser(line);
 }
 
 int		everything_ok(t_structcub *cub)

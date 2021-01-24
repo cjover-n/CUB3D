@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/15 17:21:19 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/01/03 11:11:22 by cjover-n         ###   ########.fr       */
+/*   Created: 2021/01/12 20:43:12 by cjover-n          #+#    #+#             */
+/*   Updated: 2021/01/12 20:43:24 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	error_handler1(t_structcub *cub, t_errors *error)
 	if (error->maptrash == 1)
 		ft_printf("Error\nHay caracteres basura antes/después del mapa.\n");
 	if (error->duplicate == 1)
-		ft_printf("Error\nMapa inválido porque algún caracter está duplicado. ¡Revísalo!\n");
+		ft_printf("Error\nMapa inválido, algún caracter está duplicado.\n");
 	if (error->noplayer == 1)
 		ft_printf("Error\nNo se encuentra jugador en el mapa. ¿Dónde está?\n");
 	if (error->toomanyplayers == 1)

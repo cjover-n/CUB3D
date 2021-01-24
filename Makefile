@@ -6,14 +6,14 @@
 #    By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/30 18:49:31 by cjover-n          #+#    #+#              #
-#    Updated: 2020/12/06 20:39:47 by cjover-n         ###   ########.fr        #
+#    Updated: 2021/01/12 20:56:37 by cjover-n         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = CUB3D
 
 SRC =	main.c raycaster.c readmap.c rgbutils.c parsersmap.c errorhandler.c \
-		cubutils.c movement.c player.c
+		cubutils.c movement.c player.c input.c textures.c
 
 SRCLIB =	ft_isalpha.c	ft_isprint.c	ft_strlcpy.c	ft_strrchr.c	\
 			ft_atoi.c		ft_isascii.c	ft_strchr.c		ft_strlen.c		\
@@ -34,8 +34,8 @@ DIRLIBFTSRC = Libft/
 DIRPRINTSRC =	Libft/ft_printf/
 
 SRCPRINT =	ft_printf.c		ft_filler.c		ft_conversions.c	ft_zero.c	\
-			ft_atoiprint.c	ft_flags.c		printf_utils.c	
-			
+			ft_atoiprint.c	ft_flags.c		printf_utils.c
+
 ADDLIBFT =	$(addprefix $(DIRLIBFTSRC)/,$(SRCLIB))
 
 ADDPRINT =	$(addprefix $(DIRPRINTSRC)/,$(SRCPRINT))
@@ -54,6 +54,7 @@ $(NAME): $(SRC) $(ADDLIBFT) $(ADDPRINT) Libft/libft.h
 clean:
 	@rm -f *.o
 	@rm -f *.out
+	@rm -f -r *.dSYM
 
 fclean: clean
 	@rm -f $(NAME)

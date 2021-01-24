@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 07:01:42 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/01/11 23:26:18 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/01/24 19:36:44 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,37 +70,7 @@ int    raycaster(t_structcub *cub)
 		cub->draw_end = cub->lineheight / 2 + cub->screen.height / 2;
 		if (cub->draw_end >= cub->screen.height)
 			cub->draw_end = cub->screen.height - 1;
-		//meter aquí función de texturas. Antes que todo esto, gestionar las imágenes primero con función de minilibx de xpm_to_window y luego hacer get_data_addr
-		if (cub->side == 0 && cub->raydirx > 0)
-			cub->color = RED;
-		else if (cub->side == 0 && cub->raydirx < 0)
-			cub->color = BLUE;
-		else if (cub->side == 1 && cub->raydiry > 0)
-			cub->color = GREEN;
-		else if (cub->side == 1 && cub->raydiry < 0)
-			cub->color = YELLOW;
-		cub->start_copy = cub->draw_start;
-		cub->end_copy = cub->draw_end;
-		while (cub->start_copy < cub->draw_end)
-			cub->screen.addr_img[cub->start_copy++ * cub->screen.width + cub->x] = cub->color;//importante: y * w + x
-		/*Todo este último while, de cara a cambiar color por textura, se cambia por este fragmento de código de Lode:
-		for(int y = drawStart; y<drawEnd; y++)
-      {
-        // Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
-        int texY = (int)texPos & (texHeight - 1);
-        texPos += step;
-        Uint32 color = texture[texNum][texHeight * texY + texX];
-        //make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
-        if(side == 1) color = (color >> 1) & 8355711;
-        buffer[y][x] = color;
-      }
-	  */
-		while (cub->side < cub->draw_start)
-			cub->screen.addr_img[cub->side++ * cub->screen.width + cub->x] = cub->c_hex;
-		cub->side = cub->end_copy;
-		while (cub->side < cub->screen.height)
-			cub->screen.addr_img[cub->side++ * cub->screen.width + cub->x] = cub->f_hex;
-		cub->x++;
+		textures(cub);
 	}
 	mlx_put_image_to_window(cub->screen.mlx_ptr, cub->screen.win_ptr, cub->screen.buffer_img, 0, 0);
 	return(0);

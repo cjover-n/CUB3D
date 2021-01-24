@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 23:43:46 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/01/11 23:23:46 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/01/24 20:12:24 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,34 @@ typedef struct s_screen
 	unsigned int	*addr_img;
 }				t_structscreen;
 
+typedef struct s_texture
+{
+	void			*t_north;
+	void			*t_east;
+	void			*t_south;
+	void			*t_west;
+	unsigned int	*addr_north;
+	unsigned int	*addr_south;
+	unsigned int	*addr_east;
+	unsigned int	*addr_west;
+	int				t_n_height;
+	int				t_n_width;
+	int				t_s_height;
+	int				t_s_width;
+	int				t_e_height;
+	int				t_e_width;
+	int				t_w_height;
+	int				t_w_width;
+	unsigned int	*active;
+	int				active_width;
+	int				active_height;
+	double			wallx;
+	int				tex_x;
+	int				tex_y;
+	double			step;
+	double			tex_pos;
+}				t_structtexture;
+
 typedef struct s_player
 {
 	int				player_ok;
@@ -58,10 +86,11 @@ typedef struct s_player
 	int				player_west;
 }				t_structplayer;
 
-typedef struct s_structcub 
+typedef struct s_structcub
 {
 	t_structscreen	screen;
 	t_structplayer	player;
+	t_structtexture	texture;
 	int				x;
     //void			*img_ptr;
 	int				bit;
@@ -139,7 +168,7 @@ void			resolution_parser(char *line, t_structcub *cub, t_errors *error);
 int				rgb_range(int cr);
 unsigned int	create_trgb(int t, int r, int g, int b);
 char			*texture_parser(char *arr, t_structcub *cub, t_errors *error);
-unsigned int	color_parser(char *line, t_structcub *cub);
+unsigned int	color_parser(char *line);
 int				space_checker(char *line, int i);
 int				is_map_line(char *line, t_structcub *cub, t_errors *error);
 int				everything_ok(t_structcub *cub);
@@ -152,5 +181,11 @@ void			player_east(t_structcub *cub);
 void			player_south(t_structcub *cub);
 void			player_west(t_structcub *cub);
 void			destroy_and_exit(t_structcub *cub);
+void			textures(t_structcub *cub);
+void			plain_color(t_structcub *cub);
+void			load_texture(t_structcub *cub);
+void			texture_calculation(t_structcub *cub);
+void			texture_color_selector(t_structcub *cub);
+void			texture_floor_ceiling(t_structcub *cub);
 
 #endif
