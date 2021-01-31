@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 07:01:42 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/01/24 19:36:44 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/01/31 20:42:26 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,8 @@ int    raycaster(t_structcub *cub)
 			cub->deltadist_y = 1;
 		else
 			cub->deltadist_y = fabs(1 / cub->raydiry);
-		cub->hit = 0;
 		step(cub);
-		while (cub->hit == 0)
-      	{
-        	if (cub->sidedist_x < cub->sidedist_y)
-        	{
-        		cub->sidedist_x += cub->deltadist_x;
-          		cub->map_x += cub->step_x;
-          		cub->side = 0;
-        	}
-        	else
-        	{
-        		cub->sidedist_y += cub->deltadist_y;
-        		cub->map_y += cub->step_y;
-        		cub->side = 1;
-        	}
-        	if (cub->map[cub->map_y][cub->map_x] == '1')
-				cub->hit = 1;
-      	}
+		floodfill(cub, cub->pos_y, cub->pos_x);
 		if (cub->side == 0)
 			cub->perpwalldist = (cub->map_x - cub->pos_x + (1 - cub->step_x) / 2) / cub->raydirx;
 		else
@@ -79,23 +62,23 @@ int    raycaster(t_structcub *cub)
 void	step(t_structcub *cub)
 {
 	if (cub->raydirx < 0)
-      {
-        cub->step_x = -1;
-        cub->sidedist_x = (cub->pos_x - cub->map_x) * cub->deltadist_x;
-      }
-      else
-      {
-        cub->step_x = 1;
-        cub->sidedist_x = (cub->map_x + 1.0 - cub->pos_x) * cub->deltadist_x;
-      }
-      if (cub->raydiry < 0)
-      {
-        cub->step_y = -1;
-        cub->sidedist_y = (cub->pos_y - cub->map_y) * cub->deltadist_y;
-      }
-      else
-      {
-        cub->step_y = 1;
-        cub->sidedist_y = (cub->map_y + 1.0 - cub->pos_y) * cub->deltadist_y;
-      }
+	{
+		cub->step_x = -1;
+		cub->sidedist_x = (cub->pos_x - cub->map_x) * cub->deltadist_x;
+	}
+	else
+	{
+		cub->step_x = 1;
+		cub->sidedist_x = (cub->map_x + 1.0 - cub->pos_x) * cub->deltadist_x;
+	}
+	if (cub->raydiry < 0)
+	{
+		cub->step_y = -1;
+		cub->sidedist_y = (cub->pos_y - cub->map_y) * cub->deltadist_y;
+	}
+	else
+	{
+		cub->step_y = 1;
+		cub->sidedist_y = (cub->map_y + 1.0 - cub->pos_y) * cub->deltadist_y;
+	}
 }

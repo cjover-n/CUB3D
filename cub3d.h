@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 23:43:46 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/01/24 20:12:24 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/01/31 20:39:52 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,5 +187,6 @@ void			load_texture(t_structcub *cub);
 void			texture_calculation(t_structcub *cub);
 void			texture_color_selector(t_structcub *cub);
 void			texture_floor_ceiling(t_structcub *cub);
+void			floodfill(t_structcub *cub, int posy, int posx);
 
 #endif

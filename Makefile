@@ -6,14 +6,14 @@
 #    By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/30 18:49:31 by cjover-n          #+#    #+#              #
-#    Updated: 2021/01/12 20:56:37 by cjover-n         ###   ########.fr        #
+#    Updated: 2021/01/31 00:48:35 by cjover-n         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = CUB3D
 
 SRC =	main.c raycaster.c readmap.c rgbutils.c parsersmap.c errorhandler.c \
-		cubutils.c movement.c player.c input.c textures.c
+		cubutils.c movement.c player.c input.c textures.c	floodfill.c
 
 SRCLIB =	ft_isalpha.c	ft_isprint.c	ft_strlcpy.c	ft_strrchr.c	\
 			ft_atoi.c		ft_isascii.c	ft_strchr.c		ft_strlen.c		\
