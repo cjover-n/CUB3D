@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 20:39:29 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/01/24 18:50:04 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/02/21 19:00:17 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,35 +15,29 @@
 void	get_player(t_structcub *cub, char line, int i, t_errors *error)
 {
 	(void)error;
+	cub->pos_x = (double)i + 0.5;
+	cub->pos_y = (double)cub->line_counter + 0.5;
 	if (line == 'N')
 	{
 		player_north(cub);
-		cub->pos_x = i;
-		cub->pos_y = cub->line_counter + 1;
 		cub->player.player_north = 1;
 		cub->player.player_ok = 1;
 	}
 	else if (line == 'E')
 	{
 		player_east(cub);
-		cub->pos_x = i;
-		cub->pos_y = cub->line_counter + 1;
 		cub->player.player_east = 1;
 		cub->player.player_ok = 1;
 	}
 	else if (line == 'S')
 	{
 		player_south(cub);
-		cub->pos_x = i;
-		cub->pos_y = cub->line_counter + 1;
 		cub->player.player_south = 1;
 		cub->player.player_ok = 1;
 	}
 	else if (line == 'W')
 	{
 		player_west(cub);
-		cub->pos_x = i;
-		cub->pos_y = cub->line_counter + 1;
 		cub->player.player_west = 1;
 		cub->player.player_ok = 1;
 	}

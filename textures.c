@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 20:52:29 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/01/24 20:27:46 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/02/21 18:57:14 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,26 @@
 
 void	load_texture(t_structcub *cub)
 {
-	cub->texture.t_north = mlx_xpm_file_to_image(cub->screen.mlx_ptr, cub->t_north, &cub->texture.t_n_width, &cub->texture.t_n_height);
-	cub->texture.addr_north = (unsigned int *)mlx_get_data_addr(cub->texture.t_north, &cub->bit, &cub->size_line, &cub->endian);
-	cub->texture.t_east = mlx_xpm_file_to_image(cub->screen.mlx_ptr, cub->t_east, &cub->texture.t_e_width, &cub->texture.t_e_height);
-	cub->texture.addr_east = (unsigned int *)mlx_get_data_addr(cub->texture.t_east, &cub->bit, &cub->size_line, &cub->endian);
-	cub->texture.t_south = mlx_xpm_file_to_image(cub->screen.mlx_ptr, cub->t_south, &cub->texture.t_s_width, &cub->texture.t_s_height);
-	cub->texture.addr_south = (unsigned int *)mlx_get_data_addr(cub->texture.t_south, &cub->bit, &cub->size_line, &cub->endian);
-	cub->texture.t_west = mlx_xpm_file_to_image(cub->screen.mlx_ptr, cub->t_west, &cub->texture.t_w_width, &cub->texture.t_w_height);
-	cub->texture.addr_west = (unsigned int *)mlx_get_data_addr(cub->texture.t_west, &cub->bit, &cub->size_line, &cub->endian);
+	cub->texture.t_north = mlx_xpm_file_to_image(cub->screen.mlx_ptr,
+		cub->t_north, &cub->texture.t_n_width, &cub->texture.t_n_height);
+	cub->texture.addr_north = (unsigned int *)mlx_get_data_addr(cub->texture.t_north,
+		&cub->bit, &cub->size_line, &cub->endian);
+	cub->texture.t_east = mlx_xpm_file_to_image(cub->screen.mlx_ptr,
+		cub->t_east, &cub->texture.t_e_width, &cub->texture.t_e_height);
+	cub->texture.addr_east = (unsigned int *)mlx_get_data_addr(cub->texture.t_east,
+		&cub->bit, &cub->size_line, &cub->endian);
+	cub->texture.t_south = mlx_xpm_file_to_image(cub->screen.mlx_ptr,
+		cub->t_south, &cub->texture.t_s_width, &cub->texture.t_s_height);
+	cub->texture.addr_south = (unsigned int *)mlx_get_data_addr(cub->texture.t_south,
+		&cub->bit, &cub->size_line, &cub->endian);
+	cub->texture.t_west = mlx_xpm_file_to_image(cub->screen.mlx_ptr,
+		cub->t_west, &cub->texture.t_w_width, &cub->texture.t_w_height);
+	cub->texture.addr_west = (unsigned int *)mlx_get_data_addr(cub->texture.t_west,
+		&cub->bit, &cub->size_line, &cub->endian);
+	cub->sprite.t_sprite = mlx_xpm_file_to_image(cub->screen.mlx_ptr,
+		cub->t_sprite, &cub->sprite.s_width, &cub->sprite.s_height);
+	cub->sprite.addr_sprite = (unsigned int *)mlx_get_data_addr(cub->sprite.t_sprite,
+		&cub->bit, &cub->size_line, &cub->endian);
 }
 
 void	plain_color(t_structcub *cub)
@@ -52,6 +64,8 @@ void	textures(t_structcub *cub)
 		cub->texture.tex_x = cub->texture.active_width - cub->texture.tex_x - 1;
 	if (cub->side == 1 && cub->raydiry < 0)
 		cub->texture.tex_x = cub->texture.active_width - cub->texture.tex_x - 1;
+	cub->start_copy = cub->draw_start;
+	cub->end_copy = cub->draw_end;
 	texture_calculation(cub);
 	texture_color_selector(cub);
 	texture_floor_ceiling(cub);
@@ -106,12 +120,9 @@ void	texture_color_selector(t_structcub *cub)
 
 void	texture_floor_ceiling(t_structcub *cub)
 {
-	cub->start_copy = cub->draw_start;
-	cub->end_copy = cub->draw_end;
-	while (cub->side < cub->draw_start)
+	while (cub->side < cub->start_copy)
 		cub->screen.addr_img[cub->side++ * cub->screen.width + cub->x] = cub->c_hex;
-	cub->side = cub->end_copy;
+	cub->side = cub->draw_end;
 	while (cub->side < cub->screen.height)
 		cub->screen.addr_img[cub->side++ * cub->screen.width + cub->x] = cub->f_hex;
-	cub->x++;
 }

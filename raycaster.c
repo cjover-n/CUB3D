@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 07:01:42 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/01/31 20:42:26 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/02/21 19:16:11 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int    raycaster(t_structcub *cub)
 		else
 			cub->deltadist_y = fabs(1 / cub->raydiry);
 		step(cub);
-		floodfill(cub, cub->pos_y, cub->pos_x);
+		hit_checker(cub);
 		if (cub->side == 0)
 			cub->perpwalldist = (cub->map_x - cub->pos_x + (1 - cub->step_x) / 2) / cub->raydirx;
 		else
@@ -54,6 +54,9 @@ int    raycaster(t_structcub *cub)
 		if (cub->draw_end >= cub->screen.height)
 			cub->draw_end = cub->screen.height - 1;
 		textures(cub);
+		//cub->sprite.zbuffer[cub->x] = cub->perpwalldist;
+		sprite(cub);
+		cub->x++;
 	}
 	mlx_put_image_to_window(cub->screen.mlx_ptr, cub->screen.win_ptr, cub->screen.buffer_img, 0, 0);
 	return(0);
@@ -81,4 +84,27 @@ void	step(t_structcub *cub)
 		cub->step_y = 1;
 		cub->sidedist_y = (cub->map_y + 1.0 - cub->pos_y) * cub->deltadist_y;
 	}
+}
+
+void	hit_checker(t_structcub *cub)
+{
+	cub->hit = 0;
+	while (cub->hit == 0)
+	{
+		if (cub->sidedist_x < cub->sidedist_y)
+		{
+			cub->sidedist_x += cub->deltadist_x;
+			cub->map_x += cub->step_x;
+			cub->side = 0;
+		}
+		else
+		{
+			cub->sidedist_y += cub->deltadist_y;
+			cub->map_y += cub->step_y;
+			cub->side = 1;
+		}
+		if (cub->map[cub->map_y][cub->map_x] == '1')
+			cub->hit = 1;
+	}
+
 }

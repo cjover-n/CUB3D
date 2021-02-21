@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 23:43:46 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/01/31 20:39:52 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/02/21 13:02:45 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,34 @@ typedef struct s_player
 	int				player_west;
 }				t_structplayer;
 
+typedef struct s_sprite
+{
+	int				found;//contador de sprites en mapa
+	void			*t_sprite;//imagen sin addr
+	int				s_width;//ancho del sprite
+	int				s_height;//alto del sprite
+	unsigned int	*addr_sprite;//addr imagen sprite
+	double			*zbuffer;//distancia entre la distancia de cada muro y el jugador
+	int				order;
+	double			dist;
+	int				i;
+	int				*array;
+}				t_structsprite;
+
+typedef struct s_spritelist
+{
+	struct s_spritelist *next;
+	double				posx;
+	double				posy;
+}				t_spritelist;
+
 typedef struct s_structcub
 {
 	t_structscreen	screen;
 	t_structplayer	player;
 	t_structtexture	texture;
+	t_structsprite	sprite;
+	t_spritelist	*spritelist;
 	int				x;
     //void			*img_ptr;
 	int				bit;
@@ -101,14 +124,14 @@ typedef struct s_structcub
 	double			deltadist_y;
 	double			sidedist_x;
 	double			sidedist_y;
-    double			rotspeed;
-    double			movespeed;
-    double			pos_x;//posicion del jugador, el mismo cambio en pos se aplica a plane
-    double			pos_y;
-    double			dir_x;//plano x del mapa
-    double			dir_y;//el plano "y" empieza en -1 OJO!!
-    double			plane_x;//direccion de la camara, linea perpendicular al jugador
-    double			plane_y;
+	double			rotspeed;
+	double			movespeed;
+	double			pos_x;//posicion del jugador, el mismo cambio en pos se aplica a plane
+	double			pos_y;
+	double			dir_x;//plano x del mapa
+	double			dir_y;//el plano "y" empieza en -1 OJO!!
+	double			plane_x;//direccion de la camara, linea perpendicular al jugador
+	double			plane_y;
 	double			raydirx;
 	double			raydiry;
 	double			perpwalldist;
@@ -121,14 +144,14 @@ typedef struct s_structcub
 	int				lineheight;
 	int				draw_start;
 	int				draw_end;
-    char			*t_east;
-    char			*t_south;
-    char			*t_north;
-    char			*t_west;
-    char			*t_sprite;
-    char			**map;
-    unsigned int	f_hex;
-    unsigned int    c_hex;
+	char			*t_east;
+	char			*t_south;
+	char			*t_north;
+	char			*t_west;
+	char			*t_sprite;
+	char			**map;
+	unsigned int	f_hex;
+	unsigned int	c_hex;
 	unsigned int	color;
 	int				isline;
 	int				map_len;
@@ -187,6 +210,8 @@ void			load_texture(t_structcub *cub);
 void			texture_calculation(t_structcub *cub);
 void			texture_color_selector(t_structcub *cub);
 void			texture_floor_ceiling(t_structcub *cub);
-void			floodfill(t_structcub *cub, int posy, int posx);
+void			hit_checker(t_structcub *cub);
+int				flood_check(t_structcub *cub, int posy, int posx);
+void			sprite(t_structcub *cub);
 
 #endif

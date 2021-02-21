@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 17:12:52 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/01/12 21:25:00 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/02/19 19:28:30 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	messages(t_structcub *cub)
 		ft_printf("%s\n", cub->map[n]);
 		n++;
 	}
+	ft_printf("El número de sprites es: %i\n", cub->sprite.found);
 }
 
 int		main(int argc, char **argv)

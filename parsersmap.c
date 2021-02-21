@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 16:56:29 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/01/24 18:44:50 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/02/19 19:26:16 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,10 @@ int				is_map_line(char *line, t_structcub *cub, t_errors *error)
 			|| line[i] == 'S' || line[i] == 'W' || line[i] == 'E' || line[i] == ' ')
 		{
 			cub->isline = 1;
+			if (line[i] == '0')
+				line[i] = 33;
+			if (line[i] == '2')
+				cub->sprite.found++;
 			if (line[i] == 'N' || line[i] == 'S' || line[i] == 'W' || line[i] == 'E')
 			{
 				if (cub->player.player_ok == 0)

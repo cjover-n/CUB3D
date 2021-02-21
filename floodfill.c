@@ -6,32 +6,34 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 18:25:25 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/01/31 20:42:10 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/02/21 19:15:44 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	floodfill(t_structcub *cub, int posy, int posx)
+int		flood_check(t_structcub *cub, int posy, int posx)
 {
-	(void)posy;
-	(void)posx;
-	cub->hit = 0;
-	while (cub->hit == 0)
+	if (posx < cub->map_len && posy < cub->line_counter)
 	{
-		if (cub->sidedist_x < cub->sidedist_y)
+		if ((cub->map[posy][posx] > '2' || cub->map[posy][posx] < '0') &&
+		cub->map[posy][posx] != 33)
+			return (1);
+		else if (cub->map[posy][posx] == 33)
 		{
-			cub->sidedist_x += cub->deltadist_x;
-			cub->map_x += cub->step_x;
-			cub->side = 0;
+			cub->map[posy][posx] = 0;
+			if (flood_check(cub, posy + 1, posx) == 1)
+				return (1);
+			if (flood_check(cub, posy, posx + 1) == 1)
+				return (1);
+			if (posy == 0 || posx == 0)
+				return (1);
+			if (flood_check(cub, posy - 1, posx) == 1)
+				return (1);
+			if (flood_check(cub, posy, posx - 1) == 1)
+				return (1);
 		}
-		else
-		{
-			cub->sidedist_y += cub->deltadist_y;
-			cub->map_y += cub->step_y;
-			cub->side = 1;
-		}
-		if (cub->map[cub->map_y][cub->map_x] == '1')
-			cub->hit = 1;
+		return (0);
 	}
+	return (1);
 }
