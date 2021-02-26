@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 09:39:01 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/02/26 07:27:10 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/02/27 00:26:59 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 void	sprite(t_structcub *cub)
 {
+	int i = 0;
 	while (cub->sprite.i < cub->sprite.found)
 	{
-		cub->sprite.order[cub->sprite.i] = cub->sprite.i;
-		cub->sprite.dist[cub->sprite.i] = ((cub->pos_x - sprite[i].x) * (cub->pos_x - sprite[i].x) + (cub->pos_y - sprite[i].y) * (cub->pos_y - sprite[i].y));
+		cub->sprite.spriteOrder[cub->sprite.i] = cub->sprite.i;
+		cub->sprite.spriteDistance[cub->sprite.i] = ((cub->pos_x - cub->sprite[i].x) * (cub->pos_x - cub->sprite[i].x) + (cub->pos_y - cub->sprite[i].y) * (cub->pos_y - cub->sprite[i].y));
 	}
 }
 

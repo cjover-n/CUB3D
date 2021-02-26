@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 23:43:46 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/02/26 20:04:11 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/02/27 00:27:02 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,8 @@ typedef struct s_sprite
 	int				s_height;//alto del sprite
 	unsigned int	*addr_sprite;//addr imagen sprite
 	double			*zbuffer;//distancia entre la distancia de cada muro y el jugador
-	int				*order;
-	double			dist;
+	int				*spriteOrder;
+	double			*spriteDistance;
 	int				i;
 	double			x;
 	double			y;
