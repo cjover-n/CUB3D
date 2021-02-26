@@ -6,11 +6,13 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 20:44:48 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/02/21 19:13:56 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/02/21 21:20:38 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+//ESTO NO SE ESTÁ USANDO!!!!!!!!!! SE USA INPUT.C
 
 void		vertical_movement(t_structcub *cub)
 {

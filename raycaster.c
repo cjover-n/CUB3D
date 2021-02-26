@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 07:01:42 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/02/21 19:16:11 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/02/26 07:04:05 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void    init_parameters(t_structcub *cub)
 {
     cub->rotspeed = 0.1;
-    cub->movespeed = 0.30;
+    cub->movespeed = 0.3;
 }
 
 int    raycaster(t_structcub *cub)
@@ -54,7 +54,7 @@ int    raycaster(t_structcub *cub)
 		if (cub->draw_end >= cub->screen.height)
 			cub->draw_end = cub->screen.height - 1;
 		textures(cub);
-		//cub->sprite.zbuffer[cub->x] = cub->perpwalldist;
+		cub->sprite.zbuffer[cub->x] = cub->perpwalldist;
 		sprite(cub);
 		cub->x++;
 	}
@@ -89,7 +89,7 @@ void	step(t_structcub *cub)
 void	hit_checker(t_structcub *cub)
 {
 	cub->hit = 0;
-	while (cub->hit == 0)
+	while (!cub->hit)
 	{
 		if (cub->sidedist_x < cub->sidedist_y)
 		{

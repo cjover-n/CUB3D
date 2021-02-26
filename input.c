@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 19:39:11 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/01/14 21:29:11 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/02/21 21:43:53 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int		deal_key(int key, t_structcub *cub)
 {
-	(void)cub;
 	if (key == KEY_ESC)
 		destroy_and_exit(cub);
 	if (key == KEY_W || key == KEY_UP)
@@ -27,16 +26,16 @@ int		deal_key(int key, t_structcub *cub)
 	}
 	if (key == KEY_A)
 	{
-		if (cub->map[(int)cub->pos_y][(int)(cub->pos_x + cub->plane_x * cub->movespeed)] != '1')
+		if (cub->map[(int)cub->pos_y][(int)(cub->pos_x - cub->plane_x * cub->movespeed)] != '1')
 			cub->pos_x -= cub->plane_x * cub->movespeed;
-		if (cub->map[(int)(cub->pos_y + cub->plane_y * cub->movespeed)][(int)cub->pos_x] != '1')
+		if (cub->map[(int)(cub->pos_y - cub->plane_y * cub->movespeed)][(int)cub->pos_x] != '1')
 			cub->pos_y -= cub->plane_y * cub->movespeed;
 	}
 	if (key == KEY_S || key == KEY_DOWN)
 	{
-		if (cub->map[(int)cub->pos_y][(int)(cub->pos_x + cub->dir_x * cub->movespeed)] != '1')
+		if (cub->map[(int)cub->pos_y][(int)(cub->pos_x - cub->dir_x * cub->movespeed)] != '1')
 			cub->pos_x -= cub->dir_x * cub->movespeed;
-		if (cub->map[(int)(cub->pos_y + cub->dir_y * cub->movespeed)][(int)cub->pos_x] != '1')
+		if (cub->map[(int)(cub->pos_y - cub->dir_y * cub->movespeed)][(int)cub->pos_x] != '1')
 			cub->pos_y -= cub->dir_y * cub->movespeed;
 	}
 	if (key == KEY_D)

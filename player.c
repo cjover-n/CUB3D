@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 20:39:29 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/02/21 19:00:17 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/02/21 20:42:17 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	get_player(t_structcub *cub, char line, int i, t_errors *error)
 		cub->player.player_west = 1;
 		cub->player.player_ok = 1;
 	}
+	line = '0';
 }
 
 void	player_north(t_structcub *cub)
