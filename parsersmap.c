@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsersmap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 16:56:29 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/02/21 23:16:56 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/02/27 20:31:27 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,9 @@ int				is_map_line(char *line, t_structcub *cub, t_errors *error)
 			cub->isline = 1;
 			if (line[i] == '0')
 				line[i] = 33;
-			flood_check(cub, cub->pos_y, cub->pos_x);
+			//flood_check(cub, cub->pos_y, cub->pos_x);
 			if (line[i] == '2')
-				cub->sprite.found++;
+				cub->spr.found++;
 			if (line[i] == 'N' || line[i] == 'S' || line[i] == 'W' || line[i] == 'E')
 			{
 				if (cub->player.player_ok == 0)

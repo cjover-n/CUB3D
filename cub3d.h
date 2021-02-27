@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 23:43:46 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/02/27 00:27:02 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/02/27 21:09:27 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,22 @@
 # define KEY_SPACE 49
 # define KEY_T 17
 
-#define RED 0x00FF0000
-#define BLUE 0x000000FF
-#define GREEN 0x0000FF00
-#define YELLOW 0x00FFFF00
+# define RED 0x00FF0000
+# define BLUE 0x000000FF
+# define GREEN 0x0000FF00
+# define YELLOW 0x00FFFF00
 
-typedef struct s_screen
+typedef struct	s_screen
 {
 	void			*mlx_ptr;
-    void			*win_ptr;
+	void			*win_ptr;
 	void			*buffer_img;
 	int				width;
-    int				height;
+	int				height;
 	unsigned int	*addr_img;
 }				t_structscreen;
 
-typedef struct s_texture
+typedef struct	s_texture
 {
 	void			*t_north;
 	void			*t_east;
@@ -77,7 +77,7 @@ typedef struct s_texture
 	double			tex_pos;
 }				t_structtexture;
 
-typedef struct s_player
+typedef struct	s_player
 {
 	int				player_ok;
 	int				player_north;
@@ -86,7 +86,21 @@ typedef struct s_player
 	int				player_west;
 }				t_structplayer;
 
-typedef struct s_sprite
+typedef struct	s_errors
+{
+	int				parameters;
+	int				mapfile;
+	int				resolution;
+	int				badchars;
+	int				badtexture;
+	int				everythingnotok;
+	int				maptrash;
+	int				duplicate;
+	int				noplayer;
+	int				toomanyplayers;
+}				t_errors;
+
+typedef struct	s_sprite
 {
 	int				found;//contador de sprites en mapa
 	void			*t_sprite;//imagen sin addr
@@ -94,27 +108,38 @@ typedef struct s_sprite
 	int				s_height;//alto del sprite
 	unsigned int	*addr_sprite;//addr imagen sprite
 	double			*zbuffer;//distancia entre la distancia de cada muro y el jugador
-	int				*spriteOrder;
-	double			*spriteDistance;
-	int				i;
+	int				*spriteorder;
+	double			*spritedistance;
 	double			x;
 	double			y;
-	int				*array;
+	double			sprite_x;
+	double			sprite_y;
+	double			invdet;
+	double			trans_x;
+	double			trans_y;
+	int				sprscreenx;
+	int				sprheight;
+	int				sprwidth;
+	int				drawstart_y;
+	int				drawstart_x;
+	int				drawend_y;
+	int				drawend_x;
+	unsigned int	color;
 }				t_structsprite;
 
-typedef struct s_spritelist
+typedef struct	s_spritelist
 {
 	struct s_spritelist *next;
 	double				posx;
 	double				posy;
 }				t_spritelist;
 
-typedef struct s_structcub
+typedef struct	s_structcub
 {
 	t_structscreen	screen;
 	t_structplayer	player;
-	t_structtexture	texture;
-	t_structsprite	sprite;
+	t_structtexture	tex;
+	t_structsprite	spr;
 	t_spritelist	*spritelist;
 	int				x;
     //void			*img_ptr;
@@ -163,21 +188,6 @@ typedef struct s_structcub
 	int				line_counter;
 }				t_structcub;
 
-
-typedef struct s_errors
-{
-    int				parameters;
-    int				mapfile;
-	int				resolution;
-	int				badchars;
-	int				badtexture;
-	int				everythingnotok;
-	int				maptrash;
-	int				duplicate;
-	int				noplayer;
-	int				toomanyplayers;
-}				t_errors;
-
 void			init_parameters(t_structcub *cub);
 void			error_handler1(t_structcub *cub, t_errors *error);
 void			messages(t_structcub *cub);
@@ -207,7 +217,7 @@ void			player_south(t_structcub *cub);
 void			player_west(t_structcub *cub);
 void			destroy_and_exit(t_structcub *cub);
 void			textures(t_structcub *cub);
-void			plain_color(t_structcub *cub);
+//void			plain_color(t_structcub *cub);
 void			load_texture(t_structcub *cub);
 void			texture_calculation(t_structcub *cub);
 void			texture_color_selector(t_structcub *cub);
@@ -215,5 +225,6 @@ void			texture_floor_ceiling(t_structcub *cub);
 void			hit_checker(t_structcub *cub);
 int				flood_check(t_structcub *cub, int posy, int posx);
 void			sprite(t_structcub *cub);
+t_spritelist	*spriteiter(t_structcub *cub, int listmember);
 
 #endif

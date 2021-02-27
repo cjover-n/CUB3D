@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+         #
+#    By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/30 18:49:31 by cjover-n          #+#    #+#              #
-#    Updated: 2021/02/16 09:39:55 by cjover-n         ###   ########lyon.fr    #
+#    Updated: 2021/02/27 12:41:17 by cjover-n         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ ADDPRINT =	$(addprefix $(DIRPRINTSRC)/,$(SRCPRINT))
 
 FLAGS = -Wextra -Wall -Werror
 
-MLX = -I ./ -I /usr/X11/include -g -L /usr/X11/lib -l mlx
+MLX = -I ./ -I /usr/X11/include -g -I /usr/X11/lib -l mlx
 
 MLXFLAGS = -framework OpenGL -framework AppKit
 

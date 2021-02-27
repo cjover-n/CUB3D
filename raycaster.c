@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 07:01:42 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/02/26 07:04:05 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/02/27 20:31:27 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void    init_parameters(t_structcub *cub)
+void	init_parameters(t_structcub *cub)
 {
-    cub->rotspeed = 0.1;
-    cub->movespeed = 0.3;
+	cub->rotspeed = 0.2;
+	cub->movespeed = 0.5;
 }
 
 int    raycaster(t_structcub *cub)
@@ -43,9 +43,11 @@ int    raycaster(t_structcub *cub)
 		step(cub);
 		hit_checker(cub);
 		if (cub->side == 0)
-			cub->perpwalldist = (cub->map_x - cub->pos_x + (1 - cub->step_x) / 2) / cub->raydirx;
+			cub->perpwalldist = (cub->map_x - cub->pos_x +
+				(1 - cub->step_x) / 2) / cub->raydirx;
 		else
-			cub->perpwalldist = (cub->map_y - cub->pos_y + (1 - cub->step_y) / 2) / cub->raydiry;
+			cub->perpwalldist = (cub->map_y - cub->pos_y +
+				(1 - cub->step_y) / 2) / cub->raydiry;
 		cub->lineheight = (int)(cub->screen.height / cub->perpwalldist);
 		cub->draw_start = (-1 * cub->lineheight) / 2 + cub->screen.height / 2;
 		if (cub->draw_start < 0)
@@ -54,12 +56,13 @@ int    raycaster(t_structcub *cub)
 		if (cub->draw_end >= cub->screen.height)
 			cub->draw_end = cub->screen.height - 1;
 		textures(cub);
-		cub->sprite.zbuffer[cub->x] = cub->perpwalldist;
+		cub->spr.zbuffer[cub->x] = cub->perpwalldist;
 		sprite(cub);
 		cub->x++;
 	}
-	mlx_put_image_to_window(cub->screen.mlx_ptr, cub->screen.win_ptr, cub->screen.buffer_img, 0, 0);
-	return(0);
+	mlx_put_image_to_window(cub->screen.mlx_ptr, cub->screen.win_ptr,
+		cub->screen.buffer_img, 0, 0);
+	return (0);
 }
 
 void	step(t_structcub *cub)
@@ -106,5 +109,4 @@ void	hit_checker(t_structcub *cub)
 		if (cub->map[cub->map_y][cub->map_x] == '1')
 			cub->hit = 1;
 	}
-
 }
