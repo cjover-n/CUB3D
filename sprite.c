@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 09:39:01 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/02/27 21:21:42 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/02/28 18:54:48 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,18 @@
 
 void	sprites(t_structcub *cub)
 {
+	t_spritelist	*spritelist;
+	//t_structsprite	*sprite;
+	int				i;
+
+	i = 0;
+	cub->spr.zbuffer[cub->x] = cub->perpwalldist;
 	spritedistance(cub);
 	sortsprites(cub);
+	while (i < cub->spr.found)
+	spritelist = spriteiter(cub, cub->spr.spriteorder[i]);
+	spriteproject(cub);
+	spritedraw(cub);
 }
 
 void	spriteproject(t_structcub *cub)
@@ -34,12 +44,12 @@ void	spriteproject(t_structcub *cub)
 		cub->spr.trans_y = cub->spr.invdet * ((-1 * cub->plane_y) *
 			cub->spr.sprite_x + cub->plane_x * cub->spr.sprite_y);
 		cub->spr.sprscreenx = (int)(cub->screen.width / 2) * (1 + cub->spr.trans_x / cub->spr.trans_y);
-		cub->spr.sprheight = fabs((int)(cub->screen.height / cub->spr.trans_y));
+		cub->spr.sprheight = abs((int)(cub->screen.height / cub->spr.trans_y));
 		cub->spr.drawstart_y = (-1 * cub->spr.sprheight) / 2 + cub->screen.height / 2;
 		cub->spr.drawstart_y < 0 ? cub->spr.drawstart_y = 0 : 0;
 		cub->spr.drawend_y = cub->spr.sprheight / 2 + cub->screen.height / 2;
 		cub->spr.drawend_y >= cub->screen.height ? cub->spr.drawend_y = cub->screen.height - 1 : 0;
-		cub->spr.sprwidth = fabs((int)(cub->screen.height / cub->spr.trans_y));
+		cub->spr.sprwidth = abs((int)(cub->screen.height / cub->spr.trans_y));
 		cub->spr.drawstart_x = -1 * cub->spr.sprwidth / 2 + cub->spr.sprscreenx;
 		cub->spr.drawstart_x < 0 ? cub->spr.drawstart_x = 0 : 0;
 		cub->spr.drawend_x = cub->spr.sprwidth / 2 + cub->spr.sprscreenx;
@@ -58,16 +68,19 @@ void	spritedraw(t_structcub *cub)
 
 	int texwidth = 64;
 	int	texheight = 64;
+	stripe = cub->spr.drawstart_x;
 	while (stripe < cub->spr.drawend_x)
 	{
 		texx = (int)(256 * (stripe - ((-1) * cub->spr.sprwidth / 2 + cub->spr.sprscreenx)) * texwidth / cub->spr.sprwidth) / 256;
 		if (cub->spr.trans_y > 0 && stripe > 0 && stripe < cub->screen.width && cub->spr.trans_y < cub->spr.zbuffer[stripe])
 		{
+			y = cub->spr.drawstart_y;
 			while (y < cub->spr.drawend_y)
 			{
 				d = y * 256 - cub->screen.height * 128 + cub->spr.s_height * 128;
 				texy = ((d * texheight) / cub->spr.s_height) / 256;
-				//cub->spr.color = cub->spr.addr_sprite[] ME HE QUEDADO COPIANDO AQUI Y ME HE BLOQUEADO
+				cub->spr.color = cub->spr.addr_sprite[cub->spr.sprwidth * texy + texx];
+				//Uint32 color = texture[             sprite[spriteOrder[i]].texture][texWidth * texY + texX];
 			}
 		}
 	}

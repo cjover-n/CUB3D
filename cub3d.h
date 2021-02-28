@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 23:43:46 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/02/27 21:09:27 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/02/28 17:02:10 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,7 +224,12 @@ void			texture_color_selector(t_structcub *cub);
 void			texture_floor_ceiling(t_structcub *cub);
 void			hit_checker(t_structcub *cub);
 int				flood_check(t_structcub *cub, int posy, int posx);
-void			sprite(t_structcub *cub);
+void			sprites(t_structcub *cub);
 t_spritelist	*spriteiter(t_structcub *cub, int listmember);
+
+void	spriteproject(t_structcub *cub);
+void	spritedraw(t_structcub *cub);
+void	spritedistance(t_structcub *cub);
+void	sortsprites(t_structcub *cub);
 
 #endif
