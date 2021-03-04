@@ -6,13 +6,13 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 16:56:29 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/02/27 20:31:27 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/03/04 18:07:47 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void			resolution_parser(char *line, t_structcub *cub, t_errors *error)
+void			resolution_parser(char *line, t_structcub *cub)
 {
 	int		i;
 
@@ -27,20 +27,16 @@ void			resolution_parser(char *line, t_structcub *cub, t_errors *error)
 			cub->screen.height = ft_atoi(&line[i]);
 	}
 	else
-	{
-		error->resolution = 1;
-		error_handler1(cub, error);
-	}
+		error_handler1(3);
 }
 
-char			*texture_parser(char *arr, t_structcub *cub, t_errors *error)
+char			*texture_parser(char *arr)
 {
 	while (*arr != '.' && *arr != '\0')
 		arr++;
 	if (*arr != '.')
 	{
-		error->badtexture = 1;
-		error_handler1(cub, error);
+		error_handler1(5);
 		return (NULL);
 	}
 	return (ft_strdup(arr));
@@ -77,7 +73,7 @@ unsigned int	color_parser(char *line)
 	return (ret);
 }
 
-int				is_map_line(char *line, t_structcub *cub, t_errors *error)
+int				is_map_line(char *line, t_structcub *cub)
 {
 	int		i;
 
@@ -88,22 +84,20 @@ int				is_map_line(char *line, t_structcub *cub, t_errors *error)
 			|| line[i] == 'S' || line[i] == 'W' || line[i] == 'E' || line[i] == ' ')
 		{
 			cub->isline = 1;
-			if (line[i] == '0')
-				line[i] = 33;
-			//flood_check(cub, cub->pos_y, cub->pos_x);
 			if (line[i] == '2')
 				cub->spr.found++;
 			if (line[i] == 'N' || line[i] == 'S' || line[i] == 'W' || line[i] == 'E')
 			{
 				if (cub->player.player_ok == 0)
-					get_player(cub, line[i], i, error);
+					get_player(cub, line[i], i);
 				else
 				{
-					error->toomanyplayers = 1;
-					error_handler1(cub, error);
+					error_handler1(10);
 					exit(0);
 				}
 			}
+			if (line[i] == '0' || line[i] == 'N' || line[i] == 'S' || line[i] == 'W' || line[i] == 'E')
+				line[i] = 33;
 			cub->map_len = ft_strlen(line);//tener en cuenta que solo está almacenando ahora mismo el largo de la ÚLTIMA línea
 		}
 		else

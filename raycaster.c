@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/30 07:01:42 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/03/04 17:17:17 by cjover-n         ###   ########.fr       */
+/*   Created: 2021/03/04 17:18:59 by cjover-n          #+#    #+#             */
+/*   Updated: 2021/03/04 17:19:01 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ int    raycaster(t_structcub *cub)
 		if (cub->draw_end >= cub->screen.height)
 			cub->draw_end = cub->screen.height - 1;
 		textures(cub);
-		sprites(cub);
+		//cub->spr.zbuffer[cub->x] = cub->perpwalldist;
+		//sprites(cub);
 		cub->x++;
 	}
 	mlx_put_image_to_window(cub->screen.mlx_ptr, cub->screen.win_ptr,

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   readmap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 19:00:09 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/01/12 20:37:36 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/03/04 18:30:10 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void    readmap(char *cubmap, t_structcub *cub, t_errors *error)
+void    readmap(char *cubmap, t_structcub *cub)
 {
     char    *line;
     int     fd;
@@ -30,16 +30,15 @@ void    readmap(char *cubmap, t_structcub *cub, t_errors *error)
         {
 			isline = 0;
 			if (!everything_ok(cub))
-				line_checker(line, cub, error);
+				line_checker(line, cub);
 			else
 			{
 				if (line[0] != '\0')
 				{
-					isline = is_map_line(line, cub, error);
+					isline = is_map_line(line, cub);
 					if (!isline)
 					{
-						error->maptrash = 1;
-						error_handler1(cub, error);
+						error_handler1(7);
 						exit(0);
 					}
 					else
@@ -47,60 +46,60 @@ void    readmap(char *cubmap, t_structcub *cub, t_errors *error)
 				}
 			}
         }
-        gnl_handler(gnl, isline, line, map_buffer, cub, error);
+        gnl_handler(gnl, isline, line, map_buffer, cub);
 		close(fd);
     }
 }
 
-void	gnl_handler(int gnl, int isline, char *line, char *map_buffer, t_structcub *cub, t_errors *error)
+void	gnl_handler(int gnl, int isline, char *line, char *map_buffer, t_structcub *cub)
 {
 	if (gnl < 0)
+	{
+		error_handler1(2);
+	}
+	else if (!everything_ok(cub))
+	{
+		error_handler1(6);
+	}
+	else if (gnl == 0)
+	{
+		isline = 0;
+		isline = is_map_line(line, cub);
+		if (!isline)
 		{
-			error->mapfile = 1;
-			error_handler1(cub, error);
-		}
-		else if (!everything_ok(cub))
+			error_handler1(7);
+			return ;
+		}	
+		else
+			get_map(cub, line, &map_buffer);
+		cub->map = ft_split(map_buffer, '.');
+		if (flood_check(cub, cub->pos_y, cub->pos_x) == 1)
 		{
-			error->everythingnotok = 1;
-			error_handler1(cub, error);
+			error_handler1(11);
+			return ;
 		}
-		else if (gnl == 0)
-		{
-			isline = 0;
-			isline = is_map_line(line, cub, error);
-			if (!isline)
-			{
-				error->maptrash = 1;
-				error_handler1(cub, error);
-				return ;
-			}
-			else
-			{
-				get_map(cub, line, &map_buffer);
-			}
-			cub->map = ft_split(map_buffer, '.');
-			free(map_buffer);
-		}
+		free(map_buffer);
+	}
 }
 
-void    line_checker(char *line, t_structcub *cub, t_errors *error)
+void    line_checker(char *line, t_structcub *cub)
 {
     char    *arr;
     int     len;
 
     len = ft_strlen(line);
     if ((arr = ft_strchr(line, 'R')))
-        resolution_parser(line, cub, error);
+        resolution_parser(line, cub);
     else if ((arr = ft_strnstr(line, "NO", len)))
-        cub->t_north = texture_parser(line, cub, error);
+        cub->t_north = texture_parser(line);
     else if ((arr = ft_strnstr(line, "EA", len)))
-        cub->t_east = texture_parser(line, cub, error);
+        cub->t_east = texture_parser(line);
     else if ((arr = ft_strnstr(line, "SO", len)))
-        cub->t_south = texture_parser(line, cub, error);
+        cub->t_south = texture_parser(line);
     else if ((arr = ft_strnstr(line, "WE", len)))
-        cub->t_west = texture_parser(line, cub, error);
+        cub->t_west = texture_parser(line);
     else if ((arr = ft_strchr(line, 'S')))
-        cub->t_sprite = texture_parser(line, cub, error);
+        cub->t_sprite = texture_parser(line);
     else if ((arr = ft_strchr(line, 'F')))
         cub->f_hex = color_parser(line);
     else if ((arr = ft_strchr(line, 'C')))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 09:39:01 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/02/28 18:54:48 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/03/03 00:12:47 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	sprites(t_structcub *cub)
 	int				i;
 
 	i = 0;
-	cub->spr.zbuffer[cub->x] = cub->perpwalldist;
+
 	spritedistance(cub);
 	sortsprites(cub);
 	while (i < cub->spr.found)
@@ -94,9 +94,9 @@ void	spritedistance(t_structcub *cub)
 	while (i < cub->spr.found)
 	{
 		cub->spr.spriteorder[i] = i;
-		cub->spr.spritedistance[i] = pow(cub->pos_x -
+		cub->spr.spritedistance[i] = sqrt(pow(cub->pos_x -
 			(spriteiter(cub, i))->posx, 2.0) + pow(cub->pos_y -
-			(spriteiter(cub, i))->posy, 2.0);
+			(spriteiter(cub, i))->posy, 2.0));
 	}
 }
 
@@ -133,3 +133,4 @@ void	sortsprites(t_structcub *cub)
 		}
 	}
 }
+

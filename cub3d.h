@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 23:43:46 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/02/28 17:02:10 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/03/04 18:07:40 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,20 +85,6 @@ typedef struct	s_player
 	int				player_south;
 	int				player_west;
 }				t_structplayer;
-
-typedef struct	s_errors
-{
-	int				parameters;
-	int				mapfile;
-	int				resolution;
-	int				badchars;
-	int				badtexture;
-	int				everythingnotok;
-	int				maptrash;
-	int				duplicate;
-	int				noplayer;
-	int				toomanyplayers;
-}				t_errors;
 
 typedef struct	s_sprite
 {
@@ -189,28 +175,28 @@ typedef struct	s_structcub
 }				t_structcub;
 
 void			init_parameters(t_structcub *cub);
-void			error_handler1(t_structcub *cub, t_errors *error);
+void			error_handler1(int error);
 void			messages(t_structcub *cub);
 int				deal_key(int key, t_structcub *cub);
 void			vertical_movement(t_structcub *cub);
 void			horizontal_movement(t_structcub *cub);
 void			rotation_right(t_structcub *cub);
 void			rotation_left(t_structcub *cub);
-void			readmap(char *cubmap, t_structcub *cub, t_errors *error);
-void			gnl_handler(int gnl, int isline, char *line, char *map_buffer, t_structcub *cub, t_errors *error);
-void			line_checker(char *line, t_structcub *cub, t_errors *error);
-void			resolution_parser(char *line, t_structcub *cub, t_errors *error);
+void			readmap(char *cubmap, t_structcub *cub);
+void			gnl_handler(int gnl, int isline, char *line, char *map_buffer, t_structcub *cub);
+void			line_checker(char *line, t_structcub *cub);
+void			resolution_parser(char *line, t_structcub *cub);
 int				rgb_range(int cr);
 unsigned int	create_trgb(int t, int r, int g, int b);
-char			*texture_parser(char *arr, t_structcub *cub, t_errors *error);
+char			*texture_parser(char *arr);
 unsigned int	color_parser(char *line);
 int				space_checker(char *line, int i);
-int				is_map_line(char *line, t_structcub *cub, t_errors *error);
+int				is_map_line(char *line, t_structcub *cub);
 int				everything_ok(t_structcub *cub);
 void			get_map(t_structcub *cub, char *line, char **buffer);
 int				raycaster(t_structcub *cub);
 void			step(t_structcub *cub);
-void			get_player(t_structcub *cub, char line, int i, t_errors *error);
+void			get_player(t_structcub *cub, char line, int i);
 void			player_north(t_structcub *cub);
 void			player_east(t_structcub *cub);
 void			player_south(t_structcub *cub);

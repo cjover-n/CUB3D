@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 17:12:52 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/02/27 20:31:27 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/03/04 18:08:19 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ void	destroy_and_exit(t_structcub *cub)
 {
 	mlx_destroy_image(cub->screen.mlx_ptr, cub->screen.buffer_img);
 	mlx_destroy_window(cub->screen.mlx_ptr, cub->screen.win_ptr);
+	free(cub->spr.zbuffer);
+	if (cub->spr.found)
+		free(cub->spr.spriteorder);
 	//free(cub);
 	exit(0);
 }
@@ -46,24 +49,20 @@ void	messages(t_structcub *cub)
 int		main(int argc, char **argv)
 {
 	t_structcub		cub;
-	t_errors		error;
 
 	ft_bzero(&cub, sizeof(cub));
-	ft_bzero(&error, sizeof(error));
 	init_parameters(&cub);
 	if (argc != 2)
 	{
-		error.parameters = 1;
-		error_handler1(&cub, &error);
+		error_handler1(1);
 		return (0);
 	}
 	else
 	{
-		readmap(argv[1], &cub, &error);
+		readmap(argv[1], &cub);
 		if (cub.player.player_ok == 0)
 		{
-			error.noplayer = 1;
-			error_handler1(&cub, &error);
+			error_handler1(9);
 			exit(0);
 		}
 		while (cub.map[cub.map_height] != NULL)
@@ -80,6 +79,12 @@ int		main(int argc, char **argv)
 		cub.screen.addr_img = (unsigned int*)mlx_get_data_addr(
 			cub.screen.buffer_img, &cub.bit, &cub.size_line, &cub.endian);
 		load_texture(&cub);
+		cub.spr.zbuffer = ft_calloc(cub.screen.width, sizeof(double));
+		if (cub.spr.found)
+		{
+			cub.spr.spriteorder = ft_calloc(cub.spr.found, sizeof(int));
+			cub.spr.spritedistance = ft_calloc(cub.screen.width, sizeof(double));
+		}
 		mlx_loop_hook(cub.screen.mlx_ptr, raycaster, &cub);
 		mlx_loop(cub.screen.mlx_ptr);
 	}

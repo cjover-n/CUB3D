@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/06 20:39:29 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/02/21 20:42:17 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/03/04 18:08:29 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	get_player(t_structcub *cub, char line, int i, t_errors *error)
+void	get_player(t_structcub *cub, char line, int i)
 {
-	(void)error;
 	cub->pos_x = (double)i + 0.5;
 	cub->pos_y = (double)cub->line_counter + 0.5;
 	if (line == 'N')
