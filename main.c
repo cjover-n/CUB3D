@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 17:12:52 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/03/04 18:08:19 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/03/04 21:01:49 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	destroy_and_exit(t_structcub *cub)
 	free(cub->spr.zbuffer);
 	if (cub->spr.found)
 		free(cub->spr.spriteorder);
-	//free(cub);
+	if (cub->spritelist)
+		free(cub->spritelist);
 	exit(0);
 }
 
@@ -53,18 +54,12 @@ int		main(int argc, char **argv)
 	ft_bzero(&cub, sizeof(cub));
 	init_parameters(&cub);
 	if (argc != 2)
-	{
 		error_handler1(1);
-		return (0);
-	}
 	else
 	{
 		readmap(argv[1], &cub);
 		if (cub.player.player_ok == 0)
-		{
 			error_handler1(9);
-			exit(0);
-		}
 		while (cub.map[cub.map_height] != NULL)
 		{
 			cub.map_height++;
@@ -80,6 +75,8 @@ int		main(int argc, char **argv)
 			cub.screen.buffer_img, &cub.bit, &cub.size_line, &cub.endian);
 		load_texture(&cub);
 		cub.spr.zbuffer = ft_calloc(cub.screen.width, sizeof(double));
+		if (!(cub.spritelist = malloc(sizeof(t_spritelist) * cub.spr.found)))
+			return (0);
 		if (cub.spr.found)
 		{
 			cub.spr.spriteorder = ft_calloc(cub.spr.found, sizeof(int));

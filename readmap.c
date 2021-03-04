@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 19:00:09 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/03/04 18:30:10 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/03/04 18:40:16 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,7 @@ void    readmap(char *cubmap, t_structcub *cub)
 				{
 					isline = is_map_line(line, cub);
 					if (!isline)
-					{
 						error_handler1(7);
-						exit(0);
-					}
 					else
 						get_map(cub, line, &map_buffer);
 				}
@@ -54,9 +51,7 @@ void    readmap(char *cubmap, t_structcub *cub)
 void	gnl_handler(int gnl, int isline, char *line, char *map_buffer, t_structcub *cub)
 {
 	if (gnl < 0)
-	{
 		error_handler1(2);
-	}
 	else if (!everything_ok(cub))
 	{
 		error_handler1(6);
@@ -66,18 +61,12 @@ void	gnl_handler(int gnl, int isline, char *line, char *map_buffer, t_structcub 
 		isline = 0;
 		isline = is_map_line(line, cub);
 		if (!isline)
-		{
 			error_handler1(7);
-			return ;
-		}	
 		else
 			get_map(cub, line, &map_buffer);
 		cub->map = ft_split(map_buffer, '.');
 		if (flood_check(cub, cub->pos_y, cub->pos_x) == 1)
-		{
 			error_handler1(11);
-			return ;
-		}
 		free(map_buffer);
 	}
 }

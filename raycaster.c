@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 17:18:59 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/03/04 17:19:01 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/03/04 20:35:51 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	init_parameters(t_structcub *cub)
 {
 	cub->rotspeed = 0.2;
-	cub->movespeed = 0.5;
+	cub->movespeed = 0.8;
 }
 
 int    raycaster(t_structcub *cub)
@@ -56,8 +56,8 @@ int    raycaster(t_structcub *cub)
 		if (cub->draw_end >= cub->screen.height)
 			cub->draw_end = cub->screen.height - 1;
 		textures(cub);
-		//cub->spr.zbuffer[cub->x] = cub->perpwalldist;
-		//sprites(cub);
+		cub->spr.zbuffer[cub->x] = cub->perpwalldist;
+		sprites(cub);
 		cub->x++;
 	}
 	mlx_put_image_to_window(cub->screen.mlx_ptr, cub->screen.win_ptr,

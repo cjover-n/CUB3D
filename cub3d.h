@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 23:43:46 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/03/04 18:07:40 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/03/04 21:11:34 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ typedef struct	s_sprite
 
 typedef struct	s_spritelist
 {
-	struct s_spritelist *next;
 	double				posx;
 	double				posy;
 }				t_spritelist;
@@ -211,11 +210,11 @@ void			texture_floor_ceiling(t_structcub *cub);
 void			hit_checker(t_structcub *cub);
 int				flood_check(t_structcub *cub, int posy, int posx);
 void			sprites(t_structcub *cub);
-t_spritelist	*spriteiter(t_structcub *cub, int listmember);
 
 void	spriteproject(t_structcub *cub);
 void	spritedraw(t_structcub *cub);
 void	spritedistance(t_structcub *cub);
 void	sortsprites(t_structcub *cub);
+void	spritewhere(t_structcub *cub, int i);
 
 #endif
