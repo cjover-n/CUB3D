@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 17:12:52 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/03/04 21:01:49 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/03/06 21:50:09 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ void	destroy_and_exit(t_structcub *cub)
 	free(cub->spr.zbuffer);
 	if (cub->spr.found)
 		free(cub->spr.spriteorder);
-	if (cub->spritelist)
-		free(cub->spritelist);
 	exit(0);
 }
 
@@ -68,15 +66,17 @@ int		main(int argc, char **argv)
 		cub.screen.mlx_ptr = mlx_init();
 		cub.screen.win_ptr = mlx_new_window(cub.screen.mlx_ptr,
 			cub.screen.width, cub.screen.height, "Nombre ventana");
-		mlx_key_hook(cub.screen.win_ptr, deal_key, &cub);
+		mlx_do_key_autorepeatoff(cub.screen.mlx_ptr);
+		mlx_hook(cub.screen.win_ptr, 2, 1L << 0, keypress, &cub);
+		//mlx_key_hook(cub.screen.win_ptr, deal_key, &cub);
+		mlx_hook(cub.screen.win_ptr, 3, 1L << 1, keyrelease, &cub);
 		cub.screen.buffer_img = mlx_new_image(cub.screen.mlx_ptr,
 			cub.screen.width, cub.screen.height);
 		cub.screen.addr_img = (unsigned int*)mlx_get_data_addr(
 			cub.screen.buffer_img, &cub.bit, &cub.size_line, &cub.endian);
 		load_texture(&cub);
 		cub.spr.zbuffer = ft_calloc(cub.screen.width, sizeof(double));
-		if (!(cub.spritelist = malloc(sizeof(t_spritelist) * cub.spr.found)))
-			return (0);
+		
 		if (cub.spr.found)
 		{
 			cub.spr.spriteorder = ft_calloc(cub.spr.found, sizeof(int));

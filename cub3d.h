@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 23:43:46 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/03/04 21:11:34 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/03/06 21:45:02 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,13 +111,21 @@ typedef struct	s_sprite
 	int				drawend_y;
 	int				drawend_x;
 	unsigned int	color;
+	char			*array;
+	double			posx;
+	double			posy;
 }				t_structsprite;
 
-typedef struct	s_spritelist
+typedef struct	s_input
 {
-	double				posx;
-	double				posy;
-}				t_spritelist;
+	int				esc;
+	int				w;
+	int				a;
+	int				s;
+	int				d;
+	int				l;
+	int				r;
+}				t_input;
 
 typedef struct	s_structcub
 {
@@ -125,7 +133,7 @@ typedef struct	s_structcub
 	t_structplayer	player;
 	t_structtexture	tex;
 	t_structsprite	spr;
-	t_spritelist	*spritelist;
+	t_input			input;
 	int				x;
     //void			*img_ptr;
 	int				bit;
@@ -171,12 +179,15 @@ typedef struct	s_structcub
 	int				start_copy;
 	int				end_copy;
 	int				line_counter;
+	size_t			buf;
 }				t_structcub;
 
 void			init_parameters(t_structcub *cub);
 void			error_handler1(int error);
 void			messages(t_structcub *cub);
-int				deal_key(int key, t_structcub *cub);
+int				deal_key(t_structcub *cub);
+int				keypress(int key, t_structcub *cub);
+int				keyrelease(int key, t_structcub *cub);
 void			vertical_movement(t_structcub *cub);
 void			horizontal_movement(t_structcub *cub);
 void			rotation_right(t_structcub *cub);
@@ -210,11 +221,12 @@ void			texture_floor_ceiling(t_structcub *cub);
 void			hit_checker(t_structcub *cub);
 int				flood_check(t_structcub *cub, int posy, int posx);
 void			sprites(t_structcub *cub);
+void			ft_realloc(t_structcub *cub);
 
 void	spriteproject(t_structcub *cub);
 void	spritedraw(t_structcub *cub);
 void	spritedistance(t_structcub *cub);
 void	sortsprites(t_structcub *cub);
-void	spritewhere(t_structcub *cub, int i);
+void	spritewhere(t_structcub *cub, int found, int i);
 
 #endif

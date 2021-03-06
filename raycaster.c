@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 17:18:59 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/03/04 20:35:51 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/03/06 21:51:14 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 void	init_parameters(t_structcub *cub)
 {
-	cub->rotspeed = 0.2;
-	cub->movespeed = 0.8;
+	cub->rotspeed = 0.01;
+	cub->movespeed = 0.03;
+	cub->buf = 4;
+	if (!(cub->spr.array = malloc(sizeof(double) * cub->buf)))
+		return ;
 }
 
 int    raycaster(t_structcub *cub)
@@ -62,6 +65,7 @@ int    raycaster(t_structcub *cub)
 	}
 	mlx_put_image_to_window(cub->screen.mlx_ptr, cub->screen.win_ptr,
 		cub->screen.buffer_img, 0, 0);
+	deal_key(cub);
 	return (0);
 }
 

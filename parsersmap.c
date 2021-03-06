@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 16:56:29 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/03/04 21:11:07 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/03/06 20:26:01 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int				is_map_line(char *line, t_structcub *cub)
 			if (line[i] == '2')
 			{
 				cub->spr.found++;
-				spritewhere(cub, cub->spr.found);
+				spritewhere(cub, cub->spr.found, i);
 			}
 			if (line[i] == 'N' || line[i] == 'S' || line[i] == 'W' || line[i] == 'E')
 			{
