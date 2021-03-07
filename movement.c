@@ -3,31 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 20:44:48 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/02/21 21:20:38 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/03/07 17:57:32 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-//ESTO NO SE ESTÁ USANDO!!!!!!!!!! SE USA INPUT.C
-
-void		vertical_movement(t_structcub *cub)
+int		movement(t_structcub *cub)
 {
-	if (cub->map[(int)cub->pos_y][(int)(cub->pos_x + cub->dir_x * cub->movespeed)] != '1')
-		cub->pos_x += cub->dir_x * cub->movespeed;
-	if (cub->map[(int)(cub->pos_y + cub->dir_y * cub->movespeed)][(int)cub->pos_x] != '1')
-		cub->pos_y += cub->dir_y * cub->movespeed;
-}
-
-void		horizontal_movement(t_structcub *cub)
-{
-	if (cub->map[(int)cub->pos_y][(int)(cub->pos_x + cub->plane_x * cub->movespeed)] != '1')
-		cub->pos_x += cub->plane_x * cub->movespeed;
-	if (cub->map[(int)(cub->pos_y + cub->plane_y * cub->movespeed)][(int)cub->pos_x] != '1')
-		cub->pos_y += cub->plane_y * cub->movespeed;
+	if (cub->input.esc == 1)
+		destroy_and_exit(cub);
+	if (cub->input.w == 1)
+	{
+		if (cub->map[(int)cub->pos_y][(int)(cub->pos_x + cub->dir_x *
+		cub->movespeed)] != '1')
+			cub->pos_x += cub->dir_x * cub->movespeed;
+		if (cub->map[(int)(cub->pos_y + cub->dir_y *
+		cub->movespeed)][(int)cub->pos_x] != '1')
+			cub->pos_y += cub->dir_y * cub->movespeed;
+	}
+	if (cub->input.a == 1)
+	{
+		if (cub->map[(int)cub->pos_y][(int)(cub->pos_x -
+		cub->plane_x * cub->movespeed)] != '1')
+			cub->pos_x -= cub->plane_x * cub->movespeed;
+		if (cub->map[(int)(cub->pos_y - cub->plane_y *
+		cub->movespeed)][(int)cub->pos_x] != '1')
+			cub->pos_y -= cub->plane_y * cub->movespeed;
+	}
+	if (cub->input.s == 1)
+	{
+		if (cub->map[(int)cub->pos_y][(int)(cub->pos_x -
+		cub->dir_x * cub->movespeed)] != '1')
+			cub->pos_x -= cub->dir_x * cub->movespeed;
+		if (cub->map[(int)(cub->pos_y - cub->dir_y *
+		cub->movespeed)][(int)cub->pos_x] != '1')
+			cub->pos_y -= cub->dir_y * cub->movespeed;
+	}
+	if (cub->input.d == 1)
+	{
+		if (cub->map[(int)cub->pos_y][(int)(cub->pos_x +
+		cub->plane_x * cub->movespeed)] != '1')
+			cub->pos_x += cub->plane_x * cub->movespeed;
+		if (cub->map[(int)(cub->pos_y + cub->plane_y *
+		cub->movespeed)][(int)cub->pos_x] != '1')
+			cub->pos_y += cub->plane_y * cub->movespeed;
+	}
+	if (cub->input.l == 1)
+		rotation_left(cub);
+	if (cub->input.r == 1)
+		rotation_right(cub);
+	return (0);
 }
 
 void		rotation_left(t_structcub *cub)

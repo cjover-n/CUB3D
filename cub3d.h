@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 23:43:46 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/03/06 21:45:02 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/03/07 19:31:04 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,7 @@ typedef struct	s_sprite
 	char			*array;
 	double			posx;
 	double			posy;
+	int				vmovescreen;
 }				t_structsprite;
 
 typedef struct	s_input
@@ -125,6 +126,8 @@ typedef struct	s_input
 	int				d;
 	int				l;
 	int				r;
+	int				t;
+	int				plain;
 }				t_input;
 
 typedef struct	s_structcub
@@ -185,7 +188,7 @@ typedef struct	s_structcub
 void			init_parameters(t_structcub *cub);
 void			error_handler1(int error);
 void			messages(t_structcub *cub);
-int				deal_key(t_structcub *cub);
+int				movement(t_structcub *cub);
 int				keypress(int key, t_structcub *cub);
 int				keyrelease(int key, t_structcub *cub);
 void			vertical_movement(t_structcub *cub);

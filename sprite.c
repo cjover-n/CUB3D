@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 09:39:01 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/03/06 20:43:21 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/03/07 21:50:46 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	sprites(t_structcub *cub)
 {
+	cub->spr.vmovescreen = (int)(0.0 / cub->spr.trans_y);
 	spritedistance(cub);
 	sortsprites(cub);
 	spriteproject(cub);
-	spritedraw(cub);
 }
 
 void	spritewhere(t_structcub *cub, int found, int i)
@@ -27,8 +27,6 @@ void	spritewhere(t_structcub *cub, int found, int i)
 	cub->spr.posy = (double)cub->line_counter;
 	cub->spr.array[(found * 2) - 2] = cub->spr.posx;
 	cub->spr.array[(found * 2) - 1] = cub->spr.posy;
-
-
 }
 
 void	spriteproject(t_structcub *cub)
@@ -47,16 +45,20 @@ void	spriteproject(t_structcub *cub)
 		cub->spr.trans_y = cub->spr.invdet * ((-1 * cub->plane_y) *
 			cub->spr.sprite_x + cub->plane_x * cub->spr.sprite_y);
 		cub->spr.sprscreenx = (int)(cub->screen.width / 2) * (1 + cub->spr.trans_x / cub->spr.trans_y);
+		
 		cub->spr.sprheight = abs((int)(cub->screen.height / cub->spr.trans_y));
 		cub->spr.drawstart_y = (-1 * cub->spr.sprheight) / 2 + cub->screen.height / 2;
-		cub->spr.drawstart_y < 0 ? cub->spr.drawstart_y = 0 : 0;
-		cub->spr.drawend_y = cub->spr.sprheight / 2 + cub->screen.height / 2;
-		cub->spr.drawend_y >= cub->screen.height ? cub->spr.drawend_y = cub->screen.height - 1 : 0;
+		if (cub->spr.drawstart_y < 0)
+			 cub->spr.drawstart_y = 0;
+		cub->spr.drawend_y = cub->spr.sprheight / 2 + cub->screen.height / 2 + cub->spr.vmovescreen;
+		if (cub->spr.drawend_y >= cub->screen.height)
+			cub->spr.drawend_y = cub->screen.height - 1;
 		cub->spr.sprwidth = abs((int)(cub->screen.height / cub->spr.trans_y));
 		cub->spr.drawstart_x = -1 * cub->spr.sprwidth / 2 + cub->spr.sprscreenx;
 		cub->spr.drawstart_x < 0 ? cub->spr.drawstart_x = 0 : 0;
 		cub->spr.drawend_x = cub->spr.sprwidth / 2 + cub->spr.sprscreenx;
-		cub->spr.drawend_x > cub->screen.width ? cub->spr.drawend_x = cub->screen.width - 1 : 0;
+		if (cub->spr.drawend_x > cub->screen.width)
+			cub->spr.drawend_x = cub->screen.width - 1;
 		spritedraw(cub);
 		i++;
 	}
@@ -70,19 +72,18 @@ void	spritedraw(t_structcub *cub)
 	int		y;
 	int		d;
 
-	int texwidth = 64;
-	int	texheight = 64;
 	stripe = cub->spr.drawstart_x;
 	while (stripe < cub->spr.drawend_x)
 	{
-		texx = (int)(256 * (stripe - ((-1) * cub->spr.sprwidth / 2 + cub->spr.sprscreenx)) * texwidth / cub->spr.sprwidth) / 256;
+		texx = (int)(256 * (stripe - ((-1) * cub->spr.sprwidth / 2 + cub->spr.sprscreenx)) * cub->spr.s_width / cub->spr.sprwidth) / 256;
 		if (cub->spr.trans_y > 0 && stripe > 0 && stripe < cub->screen.width && cub->spr.trans_y < cub->spr.zbuffer[stripe])
 		{
 			y = cub->spr.drawstart_y;
 			while (y < cub->spr.drawend_y)
 			{
-				d = y * 256 - cub->screen.height * 128 + cub->spr.s_height * 128;
-				texy = ((d * texheight) / cub->spr.s_height) / 256;
+				d = (y - cub->spr.vmovescreen) * 256 - cub->screen.height * 128 + cub->spr.sprheight * 128;
+				//texy = ((d * texheight) / cub->spr.s_height) / 256;
+				texy = ((d * cub->spr.s_height) / cub->spr.sprheight) / 256;
 				cub->spr.color = cub->spr.addr_sprite[cub->spr.sprwidth * texy + texx];
 				y++;
 			}

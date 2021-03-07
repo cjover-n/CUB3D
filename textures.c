@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 13:01:02 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/02/27 20:53:38 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/03/07 18:36:10 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@ void	load_texture(t_structcub *cub)
 		&cub->bit, &cub->size_line, &cub->endian);
 }
 
-/*
+
 void	plain_color(t_structcub *cub)
 {
+	cub->input.plain = 1;
 	if (cub->side == 0 && cub->raydirx > 0)
 		cub->color = RED;
 	else if (cub->side == 0 && cub->raydirx < 0)
@@ -52,26 +53,35 @@ void	plain_color(t_structcub *cub)
 	while (cub->start_copy < cub->draw_end)
 		cub->screen.addr_img[cub->start_copy++ *
 		cub->screen.width + cub->x] = cub->color;
+	if (cub->input.t == 1)
+		cub->input.plain = 0;
 }
-*/
+
 
 void	textures(t_structcub *cub)
 {
-	if (cub->side == 0)
-		cub->tex.wallx = cub->pos_y + cub->perpwalldist * cub->raydiry;
-	else
-		cub->tex.wallx = cub->pos_x + cub->perpwalldist * cub->raydirx;
-	cub->tex.wallx -= floor(cub->tex.wallx);
-	cub->tex.tex_x = (int)(cub->tex.wallx * (double)cub->tex.active_width);
-	if (cub->side == 0 && cub->raydirx > 0)
-		cub->tex.tex_x = cub->tex.active_width - cub->tex.tex_x - 1;
-	if (cub->side == 1 && cub->raydiry < 0)
-		cub->tex.tex_x = cub->tex.active_width - cub->tex.tex_x - 1;
-	cub->start_copy = cub->draw_start;
-	cub->end_copy = cub->draw_end;
-	texture_calculation(cub);
-	texture_color_selector(cub);
-	texture_floor_ceiling(cub);
+	if (cub->input.t == 0 && cub->input.plain == 0)
+	{
+		if (cub->side == 0)
+			cub->tex.wallx = cub->pos_y + cub->perpwalldist * cub->raydiry;
+		else
+			cub->tex.wallx = cub->pos_x + cub->perpwalldist * cub->raydirx;
+		cub->tex.wallx -= floor(cub->tex.wallx);
+		cub->tex.tex_x = (int)(cub->tex.wallx * (double)cub->tex.active_width);
+		if (cub->side == 0 && cub->raydirx > 0)
+			cub->tex.tex_x = cub->tex.active_width - cub->tex.tex_x - 1;
+		if (cub->side == 1 && cub->raydiry < 0)
+			cub->tex.tex_x = cub->tex.active_width - cub->tex.tex_x - 1;
+		cub->start_copy = cub->draw_start;
+		cub->end_copy = cub->draw_end;
+		texture_calculation(cub);
+		texture_color_selector(cub);
+		texture_floor_ceiling(cub);
+	}
+	else if (cub->input.t == 1 && cub->input.plain == 0)
+	{
+		plain_color(cub);
+	}
 }
 
 void	texture_calculation(t_structcub *cub)
@@ -100,7 +110,6 @@ void	texture_calculation(t_structcub *cub)
 		cub->tex.active_width = cub->tex.t_n_width;
 		cub->tex.active_height = cub->tex.t_n_height;
 	}
-	//plain_color(cub);
 }
 
 void	texture_color_selector(t_structcub *cub)
