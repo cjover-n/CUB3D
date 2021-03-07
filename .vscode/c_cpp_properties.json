@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "name": "Cub3d",
+            "includePath": [
+                "/usr/X11/include",
+                "/usr/X11/lib"
+            ],
+            "defines": [],
+            "macFrameworkPath": [
+                "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks"
+            ],
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "clang-x64",
+            "compilerArgs": []
+        }
+    ],
+    "version": 4
+}
