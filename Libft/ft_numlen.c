@@ -6,19 +6,19 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 16:46:18 by cjover-n          #+#    #+#             */
-/*   Updated: 2020/11/15 16:53:59 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/04/19 23:47:06 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_numlen(int n)
+int	ft_numlen(int n)
 {
-	int len;
+	int	len;
 
 	len = 0;
-    if (n == 0)
-        return (1);
+	if (n == 0)
+		return (1);
 	if (n < 0)
 	{
 		n = n * -1;

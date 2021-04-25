@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 23:43:46 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/03/07 19:31:04 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/04/25 18:06:21 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@
 # define BLUE 0x000000FF
 # define GREEN 0x0000FF00
 # define YELLOW 0x00FFFF00
+# define BLACK 0x00000000
 
-typedef struct	s_screen
+typedef struct s_screen
 {
 	void			*mlx_ptr;
 	void			*win_ptr;
@@ -47,9 +48,12 @@ typedef struct	s_screen
 	int				width;
 	int				height;
 	unsigned int	*addr_img;
+	int				size_line;
+	int				bit;
+	int				endian;
 }				t_structscreen;
 
-typedef struct	s_texture
+typedef struct s_texture
 {
 	void			*t_north;
 	void			*t_east;
@@ -77,7 +81,7 @@ typedef struct	s_texture
 	double			tex_pos;
 }				t_structtexture;
 
-typedef struct	s_player
+typedef struct s_player
 {
 	int				player_ok;
 	int				player_north;
@@ -86,7 +90,7 @@ typedef struct	s_player
 	int				player_west;
 }				t_structplayer;
 
-typedef struct	s_sprite
+typedef struct s_sprite
 {
 	int				found;//contador de sprites en mapa
 	void			*t_sprite;//imagen sin addr
@@ -96,8 +100,8 @@ typedef struct	s_sprite
 	double			*zbuffer;//distancia entre la distancia de cada muro y el jugador
 	int				*spriteorder;
 	double			*spritedistance;
-	double			x;
-	double			y;
+	double			*x;
+	double			*y;
 	double			sprite_x;
 	double			sprite_y;
 	double			invdet;
@@ -112,12 +116,13 @@ typedef struct	s_sprite
 	int				drawend_x;
 	unsigned int	color;
 	char			*array;
-	double			posx;
-	double			posy;
-	int				vmovescreen;
+//	double			posx;
+//	double			posy;
+//	int				vmovescreen;
+	int				stripe;
 }				t_structsprite;
 
-typedef struct	s_input
+typedef struct s_input
 {
 	int				esc;
 	int				w;
@@ -130,7 +135,7 @@ typedef struct	s_input
 	int				plain;
 }				t_input;
 
-typedef struct	s_structcub
+typedef struct s_structcub
 {
 	t_structscreen	screen;
 	t_structplayer	player;
@@ -139,9 +144,9 @@ typedef struct	s_structcub
 	t_input			input;
 	int				x;
     //void			*img_ptr;
-	int				bit;
-	int				endian;
-	int				size_line;//va a ser igual que cub.screen.width * 4
+	int				bit[5];
+	int				endian[5];
+	int				size_line[5];
 	double			camerax;
 	double			deltadist_x;
 	double			deltadist_y;
@@ -216,7 +221,6 @@ void			player_south(t_structcub *cub);
 void			player_west(t_structcub *cub);
 void			destroy_and_exit(t_structcub *cub);
 void			textures(t_structcub *cub);
-//void			plain_color(t_structcub *cub);
 void			load_texture(t_structcub *cub);
 void			texture_calculation(t_structcub *cub);
 void			texture_color_selector(t_structcub *cub);
@@ -226,10 +230,11 @@ int				flood_check(t_structcub *cub, int posy, int posx);
 void			sprites(t_structcub *cub);
 void			ft_realloc(t_structcub *cub);
 
-void	spriteproject(t_structcub *cub);
-void	spritedraw(t_structcub *cub);
-void	spritedistance(t_structcub *cub);
-void	sortsprites(t_structcub *cub);
-void	spritewhere(t_structcub *cub, int found, int i);
+void			spriteproject(t_structcub *cub);
+void			spritedraw(t_structcub *cub);
+void			spritedistance(t_structcub *cub);
+void			sortsprites(t_structcub *cub);
+//void			spritewhere(t_structcub *cub, int found, int i);
+void			get_sprites(t_structcub *cub);
 
 #endif

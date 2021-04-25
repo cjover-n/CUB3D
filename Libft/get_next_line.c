@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 03:53:03 by cjover-n          #+#    #+#             */
-/*   Updated: 2020/09/29 21:23:12 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/04/23 01:18:04 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,9 @@ int		get_next_line(int fd, char **line)
 	if (!(stat[fd][ft_strlen(*line)] == '\0'))
 		heap = ft_strdup(ft_strchr(stat[fd], '\n') + 1);
 	free(stat[fd]);
-	return ((stat[fd] = heap) == NULL ? 0 : 1);
+	stat[fd] = heap;
+	if (stat[fd] == NULL)
+		return (0);
+	else
+		return (1);
 }

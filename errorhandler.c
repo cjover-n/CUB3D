@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errorhandler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 12:33:30 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/03/04 18:32:13 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/04/19 23:47:59 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	error_handler1(int error)
 	{
 		ft_printf("Error\nNo se encuentra jugador en el mapa. ¿Dónde está?\n");
 		return ;
-	} 
+	}
 	if (error == 10)
 	{
 		ft_printf("Error\nHay más de un jugador en el mapa.\n");

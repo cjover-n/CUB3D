@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprite.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 09:39:01 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/03/07 21:50:46 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/04/25 20:13:20 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	sprites(t_structcub *cub)
 {
-	cub->spr.vmovescreen = (int)(0.0 / cub->spr.trans_y);
+	//cub->spr.vmovescreen = (int)(0.0 / cub->spr.trans_y);
 	spritedistance(cub);
 	sortsprites(cub);
 	spriteproject(cub);
 }
-
+/*
 void	spritewhere(t_structcub *cub, int found, int i)
 {
 	ft_realloc(cub);
@@ -27,6 +27,34 @@ void	spritewhere(t_structcub *cub, int found, int i)
 	cub->spr.posy = (double)cub->line_counter;
 	cub->spr.array[(found * 2) - 2] = cub->spr.posx;
 	cub->spr.array[(found * 2) - 1] = cub->spr.posy;
+}
+*/
+
+void	get_sprites(t_structcub *cub)
+{
+	int		i;
+	int		r;
+	int		c;
+
+	i = 0;
+	r = -1;
+	cub->spr.spritedistance = malloc(sizeof(double) * cub->spr.found);
+	cub->spr.x = malloc(sizeof(double) * cub->spr.found);
+	cub->spr.y = malloc(sizeof(double) * cub->spr.found);
+	while (++r < cub->line_counter - 1)
+	{
+		c = -1;
+		while (++c < cub->map_len)
+		{
+			//ft_printf("ESTO ES LO QUE VALE MAP RC: %s", cub->map[r]);
+			if (cub->map[r][c] == 50)
+			{
+				cub->spr.x[i] = r + 0.5;
+				cub->spr.y[i] = c + 0.5;
+				i++;
+			}
+		}
+	}
 }
 
 void	spriteproject(t_structcub *cub)
@@ -36,71 +64,84 @@ void	spriteproject(t_structcub *cub)
 	i = 0;
 	while (i < cub->spr.found)
 	{
-		cub->spr.sprite_x = cub->spr.posx - cub->pos_x;
-		cub->spr.sprite_y = cub->spr.posy - cub->pos_y;
-		cub->spr.invdet = 1.0 / (cub->plane_x * cub->dir_y - cub->dir_x *
-			cub->plane_y);
-		cub->spr.trans_x = cub->spr.invdet * (cub->dir_y *
-			cub->spr.sprite_x - cub->dir_x * cub->spr.sprite_y);
-		cub->spr.trans_y = cub->spr.invdet * ((-1 * cub->plane_y) *
-			cub->spr.sprite_x + cub->plane_x * cub->spr.sprite_y);
-		cub->spr.sprscreenx = (int)(cub->screen.width / 2) * (1 + cub->spr.trans_x / cub->spr.trans_y);
-		
-		cub->spr.sprheight = abs((int)(cub->screen.height / cub->spr.trans_y));
-		cub->spr.drawstart_y = (-1 * cub->spr.sprheight) / 2 + cub->screen.height / 2;
-		if (cub->spr.drawstart_y < 0)
-			 cub->spr.drawstart_y = 0;
-		cub->spr.drawend_y = cub->spr.sprheight / 2 + cub->screen.height / 2 + cub->spr.vmovescreen;
-		if (cub->spr.drawend_y >= cub->screen.height)
-			cub->spr.drawend_y = cub->screen.height - 1;
-		cub->spr.sprwidth = abs((int)(cub->screen.height / cub->spr.trans_y));
-		cub->spr.drawstart_x = -1 * cub->spr.sprwidth / 2 + cub->spr.sprscreenx;
-		cub->spr.drawstart_x < 0 ? cub->spr.drawstart_x = 0 : 0;
-		cub->spr.drawend_x = cub->spr.sprwidth / 2 + cub->spr.sprscreenx;
-		if (cub->spr.drawend_x > cub->screen.width)
-			cub->spr.drawend_x = cub->screen.width - 1;
-		spritedraw(cub);
+		if (cub->map[(int)cub->spr.x[i]][(int)cub->spr.y[i]] == '2')
+		{
+			cub->spr.sprite_y = cub->spr.x[i] - cub->pos_y;
+			cub->spr.sprite_x = cub->spr.y[i] - cub->pos_x;
+			//aqui empieza projection_spr de Elena
+			cub->spr.invdet = 1.0 / (cub->plane_x * cub->dir_y
+					- cub->dir_x * cub->plane_y);
+			cub->spr.trans_x = cub->spr.invdet * (cub->dir_y
+					* cub->spr.sprite_x - cub->dir_x * cub->spr.sprite_y);
+			cub->spr.trans_y = cub->spr.invdet * (-cub->plane_y * cub->spr.sprite_x + cub->plane_x * cub->spr.sprite_y);
+			cub->spr.sprscreenx = (int)((cub->screen.width / 2) * (1 + cub->spr.trans_x / cub->spr.trans_y));
+			cub->spr.sprheight = abs((int)(cub->screen.height / cub->spr.trans_y));
+			cub->spr.drawstart_y = (-cub->spr.sprheight / 2) + (cub->screen.height / 2);
+			if (cub->spr.drawstart_y < 0)
+				cub->spr.drawstart_y = 0;
+			cub->spr.drawend_y = (cub->spr.sprheight / 2) + (cub->screen.height / 2);
+			if (cub->spr.drawend_y >= cub->screen.height)
+				cub->spr.drawend_y = cub->screen.height - 1;
+			cub->spr.sprwidth = abs((int)(cub->screen.height / cub->spr.trans_y));
+			cub->spr.drawstart_x = (-cub->spr.sprwidth / 2) + cub->spr.sprscreenx;
+			if (cub->spr.drawstart_x < 0)
+				cub->spr.drawstart_x = 0;
+			cub->spr.drawend_x = cub->spr.sprwidth / 2 + cub->spr.sprscreenx;
+			if (cub->spr.drawend_x >= cub->screen.width)
+				cub->spr.drawend_x = cub->screen.width - 1;
+			cub->spr.stripe = cub->spr.drawstart_x;
+			//aqui termina
+			spritedraw(cub);
+		}
 		i++;
 	}
 }
 
 void	spritedraw(t_structcub *cub)
 {
-	int		stripe;
-	int		texx;
-	int		texy;
-	int		y;
-	int		d;
+	int				texx;
+	int				texy;
+	int				y;
+	int				d;
+	char	*dst;
 
-	stripe = cub->spr.drawstart_x;
-	while (stripe < cub->spr.drawend_x)
+	while (cub->spr.stripe < cub->spr.drawend_x)
 	{
-		texx = (int)(256 * (stripe - ((-1) * cub->spr.sprwidth / 2 + cub->spr.sprscreenx)) * cub->spr.s_width / cub->spr.sprwidth) / 256;
-		if (cub->spr.trans_y > 0 && stripe > 0 && stripe < cub->screen.width && cub->spr.trans_y < cub->spr.zbuffer[stripe])
+		//texx = (int)(256 * (cub->spr.stripe - (-cub->spr.sprwidth / 2 + cub->spr.sprscreenx)) * cub->spr.s_width / cub->spr.sprwidth) / 256;
+		texx = (int)(((cub->spr.s_height * 4) * (cub->spr.stripe - ((-cub->spr.sprwidth / 2) + cub->spr.sprscreenx))) * cub->spr.s_width / cub->spr.sprwidth) / (cub->spr.s_height * 4);
+		if (cub->spr.trans_y > 0 && cub->spr.stripe > 0 && cub->spr.stripe < cub->screen.width && cub->spr.trans_y < cub->spr.zbuffer[cub->spr.stripe])
 		{
 			y = cub->spr.drawstart_y;
 			while (y < cub->spr.drawend_y)
 			{
-				d = (y - cub->spr.vmovescreen) * 256 - cub->screen.height * 128 + cub->spr.sprheight * 128;
-				//texy = ((d * texheight) / cub->spr.s_height) / 256;
-				texy = ((d * cub->spr.s_height) / cub->spr.sprheight) / 256;
-				cub->spr.color = cub->spr.addr_sprite[cub->spr.sprwidth * texy + texx];
+				//d = (y - cub->spr.vmovescreen) * 256 - cub->screen.height * 128 + cub->spr.sprheight * 128;
+				d = (y) * (cub->spr.s_height * 4) - cub->screen.height * (cub->spr.s_height * 2) + cub->spr.sprheight * (cub->spr.s_height * 2);
+				texy = ((d * cub->spr.s_height) / cub->spr.sprheight) / (cub->spr.s_height * 4);
+				cub->spr.color = cub->spr.addr_sprite[(cub->size_line[4] / 4) *texy + texx];
+
+				if ((cub->spr.color & BLACK) != 0)
+					cub->screen.addr_img[y * cub->screen.width + cub->spr.stripe] = cub->spr.color;
+				if (cub->spr.color != 0)
+				{
+					dst = (char *)cub->screen.addr_img + (y * cub->screen.size_line + cub->spr.stripe * (cub->screen.bit / 8));
+					*(unsigned int *)dst = cub->spr.color;
+ 				}
 				y++;
 			}
 		}
-		stripe++;
+		cub->spr.stripe++;
 	}
 }
 
 void	spritedistance(t_structcub *cub)
 {
-	int		i;
+	int i;
 
 	i = 0;
 	while (i < cub->spr.found)
 	{
-		cub->spr.spriteorder[i] = i;
-		cub->spr.spritedistance[i] = sqrt(pow(cub->pos_x - cub->spr.posx, 2.0) + pow(cub->pos_y - cub->spr.posy, 2.0));
+		//cub->spr.spriteorder[i] = i;
+		cub->spr.spritedistance[i] = sqrt(pow(cub->pos_x - cub->spr.x[i], 2.0) + pow(cub->pos_y - cub->spr.y[i], 2.0));
 		i++;
 	}
 }
@@ -108,22 +149,29 @@ void	spritedistance(t_structcub *cub)
 void	sortsprites(t_structcub *cub)
 {
 	int			i;
-	double		distance[cub->spr.found];
 	int			tmp;
+	int			j;
 
-	i = -1;
-	while (cub->spr.found >= 1 && ++i <= cub->spr.found)
+	i = 0;
+	while (i < cub->spr.found)
 	{
-		if (distance[i] < distance[i + 1])
+		j = 0;
+		while (j < cub->spr.found - i - 1)
 		{
-			tmp = distance[i];
-			distance[i] = distance[i + 1];
-			distance[i + 1] = tmp;
-			tmp = cub->spr.spriteorder[i];
-			cub->spr.spriteorder[i] = cub->spr.spriteorder[i + 1];
-			cub->spr.spriteorder[i + 1] = tmp;
-			i = -1;
+			if (cub->spr.spritedistance[j] < cub->spr.spritedistance[j + 1])
+			{
+				tmp = cub->spr.x[j];
+				cub->spr.x[j] = cub->spr.x[j + 1];
+				cub->spr.x[j + 1] = tmp;
+				tmp = cub->spr.y[j];
+				cub->spr.y[j] = cub->spr.y[j + 1];
+				cub->spr.y[j + 1] = tmp;
+				tmp = cub->spr.spritedistance[j];
+				cub->spr.spritedistance[j] = cub->spr.spritedistance[j + 1];
+				cub->spr.spritedistance[j + 1] = tmp;
+			}
+			j++;
 		}
+		i++;
 	}
 }
-

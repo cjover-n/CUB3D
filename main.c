@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 17:12:52 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/03/06 21:50:09 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/04/25 18:05:40 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	destroy_and_exit(t_structcub *cub)
 {
-	mlx_destroy_image(cub->screen.mlx_ptr, cub->screen.buffer_img);
-	mlx_destroy_window(cub->screen.mlx_ptr, cub->screen.win_ptr);
+	//mlx_destroy_image(cub->screen.mlx_ptr, cub->screen.buffer_img);
+	//mlx_destroy_window(cub->screen.mlx_ptr, cub->screen.win_ptr);
 	free(cub->spr.zbuffer);
 	if (cub->spr.found)
 		free(cub->spr.spriteorder);
@@ -24,7 +24,7 @@ void	destroy_and_exit(t_structcub *cub)
 
 void	messages(t_structcub *cub)
 {
-	int n;
+	int	n;
 
 	n = 0;
 	ft_printf("El mapa tiene anchura de: %i\n", cub->screen.width);
@@ -45,7 +45,7 @@ void	messages(t_structcub *cub)
 	ft_printf("El número de sprites es: %i\n", cub->spr.found);
 }
 
-int		main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_structcub		cub;
 
@@ -65,18 +65,17 @@ int		main(int argc, char **argv)
 		messages(&cub);
 		cub.screen.mlx_ptr = mlx_init();
 		cub.screen.win_ptr = mlx_new_window(cub.screen.mlx_ptr,
-			cub.screen.width, cub.screen.height, "Nombre ventana");
+				cub.screen.width, cub.screen.height, "Nombre ventana");
 		mlx_do_key_autorepeatoff(cub.screen.mlx_ptr);
 		mlx_hook(cub.screen.win_ptr, 2, 1L << 0, keypress, &cub);
 		//mlx_key_hook(cub.screen.win_ptr, deal_key, &cub);
 		mlx_hook(cub.screen.win_ptr, 3, 1L << 1, keyrelease, &cub);
 		cub.screen.buffer_img = mlx_new_image(cub.screen.mlx_ptr,
-			cub.screen.width, cub.screen.height);
-		cub.screen.addr_img = (unsigned int*)mlx_get_data_addr(
-			cub.screen.buffer_img, &cub.bit, &cub.size_line, &cub.endian);
+				cub.screen.width, cub.screen.height);
+		cub.screen.addr_img = (unsigned int *)mlx_get_data_addr(
+				cub.screen.buffer_img, &cub.screen.bit, &cub.screen.size_line, &cub.screen.endian);
 		load_texture(&cub);
 		cub.spr.zbuffer = ft_calloc(cub.screen.width, sizeof(double));
-		
 		if (cub.spr.found)
 		{
 			cub.spr.spriteorder = ft_calloc(cub.spr.found, sizeof(int));

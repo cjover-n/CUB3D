@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 17:16:59 by cjover-n          #+#    #+#             */
-/*   Updated: 2019/11/17 17:58:39 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/04/19 23:46:45 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	*ft_memset(void *b, int c, size_t len)
 	char	*p;
 	size_t	i;
 
-	p = (char*)b;
+	p = (char *)b;
 	i = 0;
 	if (len)
 	{

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsersmap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 16:56:29 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/03/06 20:26:01 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/04/25 14:47:42 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void			resolution_parser(char *line, t_structcub *cub)
+void	resolution_parser(char *line, t_structcub *cub)
 {
 	int		i;
 
@@ -30,7 +30,7 @@ void			resolution_parser(char *line, t_structcub *cub)
 		error_handler1(3);
 }
 
-char			*texture_parser(char *arr)
+char	*texture_parser(char *arr)
 {
 	while (*arr != '.' && *arr != '\0')
 		arr++;
@@ -73,7 +73,7 @@ unsigned int	color_parser(char *line)
 	return (ret);
 }
 
-int				is_map_line(char *line, t_structcub *cub)
+int	is_map_line(char *line, t_structcub *cub)
 {
 	int		i;
 
@@ -81,22 +81,25 @@ int				is_map_line(char *line, t_structcub *cub)
 	while (line[i])
 	{
 		if (line[i] == '0' || line[i] == '1' || line[i] == '2' || line[i] == 'N'
-			|| line[i] == 'S' || line[i] == 'W' || line[i] == 'E' || line[i] == ' ')
+			|| line[i] == 'S' || line[i] == 'W' || line[i] == 'E'
+			|| line[i] == ' ')
 		{
 			cub->isline = 1;
 			if (line[i] == '2')
 			{
 				cub->spr.found++;
-				spritewhere(cub, cub->spr.found, i);
+				//spritewhere(cub, cub->spr.found, i);
 			}
-			if (line[i] == 'N' || line[i] == 'S' || line[i] == 'W' || line[i] == 'E')
+			if (line[i] == 'N' || line[i] == 'S' || line[i] == 'W'
+				|| line[i] == 'E')
 			{
 				if (cub->player.player_ok == 0)
 					get_player(cub, line[i], i);
 				else
 					error_handler1(10);
 			}
-			if (line[i] == '0' || line[i] == 'N' || line[i] == 'S' || line[i] == 'W' || line[i] == 'E')
+			if (line[i] == '0' || line[i] == 'N' || line[i] == 'S'
+				|| line[i] == 'W' || line[i] == 'E')
 				line[i] = 33;
 			cub->map_len = ft_strlen(line);//tener en cuenta que solo está almacenando ahora mismo el largo de la ÚLTIMA línea
 		}
@@ -107,9 +110,9 @@ int				is_map_line(char *line, t_structcub *cub)
 	return (cub->isline);
 }
 
-void			get_map(t_structcub *cub, char *line, char **buffer)
+void	get_map(t_structcub *cub, char *line, char **buffer)
 {
-	char *temp;
+	char	*temp;
 
 	if (*buffer == 0)
 		*buffer = ft_strdup(line);

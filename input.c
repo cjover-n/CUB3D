@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   input.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 19:39:11 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/03/07 18:04:11 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/04/19 23:33:11 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		keypress(int key, t_structcub *cub)
+int	keypress(int key, t_structcub *cub)
 {
 	if (key == KEY_ESC)
 		cub->input.esc = 1;
@@ -33,7 +33,7 @@ int		keypress(int key, t_structcub *cub)
 	return (0);
 }
 
-int		keyrelease(int key, t_structcub *cub)
+int	keyrelease(int key, t_structcub *cub)
 {
 	if (key == KEY_ESC)
 		cub->input.esc = 0;
