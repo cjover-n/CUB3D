@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 09:39:01 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/04/25 20:13:20 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/04/26 20:33:34 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void	get_sprites(t_structcub *cub)
 			//ft_printf("ESTO ES LO QUE VALE MAP RC: %s", cub->map[r]);
 			if (cub->map[r][c] == 50)
 			{
-				cub->spr.x[i] = r + 0.5;
-				cub->spr.y[i] = c + 0.5;
+				cub->spr.x[i] = c + 0.5;
+				cub->spr.y[i] = r + 0.5;
 				i++;
 			}
 		}
@@ -64,10 +64,12 @@ void	spriteproject(t_structcub *cub)
 	i = 0;
 	while (i < cub->spr.found)
 	{
-		if (cub->map[(int)cub->spr.x[i]][(int)cub->spr.y[i]] == '2')
+		if (cub->map[(int)cub->spr.y[i]][(int)cub->spr.x[i]] == '2')
 		{
-			cub->spr.sprite_y = cub->spr.x[i] - cub->pos_y;
-			cub->spr.sprite_x = cub->spr.y[i] - cub->pos_x;
+			cub->spr.sprite_x = cub->spr.x[i] - cub->pos_x;
+			cub->spr.sprite_y = cub->spr.y[i] - cub->pos_y;
+			//printf("spr_x [%f]\n", cub->spr.x[i]);
+			//printf("spr_y [%f]\n", cub->spr.y[i]);
 			//aqui empieza projection_spr de Elena
 			cub->spr.invdet = 1.0 / (cub->plane_x * cub->dir_y
 					- cub->dir_x * cub->plane_y);
@@ -118,10 +120,9 @@ void	spritedraw(t_structcub *cub)
 				d = (y) * (cub->spr.s_height * 4) - cub->screen.height * (cub->spr.s_height * 2) + cub->spr.sprheight * (cub->spr.s_height * 2);
 				texy = ((d * cub->spr.s_height) / cub->spr.sprheight) / (cub->spr.s_height * 4);
 				cub->spr.color = cub->spr.addr_sprite[(cub->size_line[4] / 4) *texy + texx];
-
 				if ((cub->spr.color & BLACK) != 0)
 					cub->screen.addr_img[y * cub->screen.width + cub->spr.stripe] = cub->spr.color;
-				if (cub->spr.color != 0)
+				if (cub->spr.color != TRANSPARENCY)
 				{
 					dst = (char *)cub->screen.addr_img + (y * cub->screen.size_line + cub->spr.stripe * (cub->screen.bit / 8));
 					*(unsigned int *)dst = cub->spr.color;
@@ -149,7 +150,7 @@ void	spritedistance(t_structcub *cub)
 void	sortsprites(t_structcub *cub)
 {
 	int			i;
-	int			tmp;
+	double			tmp;
 	int			j;
 
 	i = 0;

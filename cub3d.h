@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 23:43:46 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/04/25 18:06:21 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/04/26 20:27:53 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@
 # define GREEN 0x0000FF00
 # define YELLOW 0x00FFFF00
 # define BLACK 0x00000000
+# define TRANSPARENCY 0xff000000
 
 typedef struct s_screen
 {
