@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 17:12:52 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/04/26 22:06:40 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/04/26 22:09:09 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int	main(int argc, char **argv)
 				cub.screen.width, cub.screen.height, "Nombre ventana");
 		mlx_do_key_autorepeatoff(cub.screen.mlx_ptr);
 		mlx_hook(cub.screen.win_ptr, 2, 1L << 0, keypress, &cub);
-		//mlx_key_hook(cub.screen.win_ptr, deal_key, &cub);
 		mlx_hook(cub.screen.win_ptr, 3, 1L << 1, keyrelease, &cub);
 		cub.screen.buffer_img = mlx_new_image(cub.screen.mlx_ptr,
 				cub.screen.width, cub.screen.height);

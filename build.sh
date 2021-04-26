@@ -1,2 +1,2 @@
 make re
-./CUB3D map.cub
+./cub3D map.cub

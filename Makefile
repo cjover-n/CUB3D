@@ -6,11 +6,11 @@
 #    By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/30 18:49:31 by cjover-n          #+#    #+#              #
-#    Updated: 2021/03/13 09:40:34 by cjover-n         ###   ########lyon.fr    #
+#    Updated: 2021/04/26 22:14:41 by cjover-n         ###   ########lyon.fr    #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = CUB3D
+NAME = cub3D
 
 SRC =	main.c raycaster.c readmap.c rgbutils.c parsersmap.c errorhandler.c \
 		cubutils.c movement.c player.c input.c textures.c	floodfill.c		\
@@ -50,7 +50,7 @@ MLXFLAGS = -framework OpenGL -framework AppKit
 all: $(NAME)
 
 $(NAME): $(SRC) $(ADDLIBFT) $(ADDPRINT) Libft/libft.h
-	@gcc $(MLX) $(MLXFLAGS) $(FLAGS) ./$(SRC) $(ADDLIBFT) $(ADDPRINT) -o CUB3D
+	@gcc $(MLX) $(MLXFLAGS) $(FLAGS) ./$(SRC) $(ADDLIBFT) $(ADDPRINT) -o cub3D
 
 clean:
 	@rm -f *.o
