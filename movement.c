@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 20:44:48 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/04/25 18:53:52 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/04/26 21:55:29 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //TODO revisar los 0.6 para que no tire segfault en ninguna dirección
 
-int	movement(t_structcub *cub)
+void	movement1(t_structcub *cub)
 {
 	if (cub->input.esc == 1)
 		destroy_and_exit(cub);
@@ -36,6 +36,11 @@ int	movement(t_structcub *cub)
 				* (cub->movespeed + 0.6))][(int)cub->pos_x] != '1')
 			cub->pos_y -= cub->plane_y * cub->movespeed;
 	}
+	movement2(cub);
+}
+
+void	movement2(t_structcub *cub)
+{
 	if (cub->input.s == 1)
 	{
 		if (cub->map[(int)cub->pos_y][(int)(cub->pos_x
@@ -54,11 +59,15 @@ int	movement(t_structcub *cub)
 				* (cub->movespeed + 0.6))][(int)cub->pos_x] != '1')
 			cub->pos_y += cub->plane_y * cub->movespeed;
 	}
+	rotation(cub);
+}
+
+void	rotation(t_structcub *cub)
+{
 	if (cub->input.l == 1)
 		rotation_left(cub);
 	if (cub->input.r == 1)
 		rotation_right(cub);
-	return (0);
 }
 
 void	rotation_left(t_structcub *cub)

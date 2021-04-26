@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 19:00:09 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/04/25 19:15:03 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/04/26 21:42:51 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,42 +17,42 @@ void	readmap(char *cubmap, t_structcub *cub)
 	char	*line;
 	int		fd;
 	int		gnl;
-	int		isline;
-	char	*map_buffer;
 
 	fd = open(cubmap, O_RDONLY, S_IRUSR);
-	isline = 0;
-	map_buffer = NULL;
 	if (fd >= 3)
 	{
 		line = NULL;
 		while ((gnl = get_next_line(fd, &line)) > 0)
 		{
-			isline = 0;
+			cub->isline = 0;
 			if (!everything_ok(cub))
 				line_checker(line, cub);
 			else
 			{
 				if (line[0] != '\0')
 				{
-					isline = is_map_line(line, cub);
-					if (!isline)
+					cub->isline = is_map_line(line, cub);
+					if (!cub->isline)
 						error_handler1(7);
 					else
-					{
-						get_map(cub, line, &map_buffer);
-					}
+						get_map(cub, line, &cub->map_buff);
 				}
 			}
 		}
-		gnl_handler(gnl, isline, line, map_buffer, cub);
+		gnl_ch(gnl, line, cub);
 		close(fd);
 		if (cub->spr.found > 0)
 			get_sprites(cub);
 	}
 }
+/*
+void	readmap2(char *line, char *cub->map_buff, t_structcub *cub)
+{
 
-void	gnl_handler(int gnl, int isline, char *line, char *map_buffer, t_structcub *cub)
+}
+*/
+
+void	gnl_ch(int gnl, char *line, t_structcub *cub)
 {
 	if (gnl < 0)
 		error_handler1(2);
@@ -62,18 +62,18 @@ void	gnl_handler(int gnl, int isline, char *line, char *map_buffer, t_structcub 
 	}
 	else if (gnl == 0)
 	{
-		isline = 0;
-		isline = is_map_line(line, cub);
-		if (!isline)
+		cub->isline = 0;
+		cub->isline = is_map_line(line, cub);
+		if (!cub->isline)
 			error_handler1(7);
 		else
 		{
-			get_map(cub, line, &map_buffer);
+			get_map(cub, line, &cub->map_buff);
 		}
-		cub->map = ft_split(map_buffer, '.');
+		cub->map = ft_split(cub->map_buff, '.');
 		if (flood_check(cub, cub->pos_y, cub->pos_x) == 1)
 			error_handler1(11);
-		free(map_buffer);
+		free(cub->map_buff);
 	}
 }
 

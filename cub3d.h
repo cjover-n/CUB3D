@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 23:43:46 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/04/26 20:27:53 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/04/26 21:55:47 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 # define GREEN 0x0000FF00
 # define YELLOW 0x00FFFF00
 # define BLACK 0x00000000
-# define TRANSPARENCY 0xff000000
+# define TRANSPARENCY 0xFF000000
 
 typedef struct s_screen
 {
@@ -93,12 +93,12 @@ typedef struct s_player
 
 typedef struct s_sprite
 {
-	int				found;//contador de sprites en mapa
-	void			*t_sprite;//imagen sin addr
-	int				s_width;//ancho del sprite
-	int				s_height;//alto del sprite
-	unsigned int	*addr_sprite;//addr imagen sprite
-	double			*zbuffer;//distancia entre la distancia de cada muro y el jugador
+	int				found;
+	void			*t_sprite;
+	int				s_width;
+	int				s_height;
+	unsigned int	*addr_sprite;
+	double			*zbuffer;
 	int				*spriteorder;
 	double			*spritedistance;
 	double			*x;
@@ -117,9 +117,6 @@ typedef struct s_sprite
 	int				drawend_x;
 	unsigned int	color;
 	char			*array;
-//	double			posx;
-//	double			posy;
-//	int				vmovescreen;
 	int				stripe;
 }				t_structsprite;
 
@@ -144,7 +141,6 @@ typedef struct s_structcub
 	t_structsprite	spr;
 	t_input			input;
 	int				x;
-    //void			*img_ptr;
 	int				bit[5];
 	int				endian[5];
 	int				size_line[5];
@@ -155,11 +151,11 @@ typedef struct s_structcub
 	double			sidedist_y;
 	double			rotspeed;
 	double			movespeed;
-	double			pos_x;//posicion del jugador, el mismo cambio en pos se aplica a plane
+	double			pos_x;
 	double			pos_y;
-	double			dir_x;//plano x del mapa
-	double			dir_y;//el plano "y" empieza en -1 OJO!!
-	double			plane_x;//direccion de la camara, linea perpendicular al jugador
+	double			dir_x;
+	double			dir_y;
+	double			plane_x;
 	double			plane_y;
 	double			raydirx;
 	double			raydiry;
@@ -189,12 +185,15 @@ typedef struct s_structcub
 	int				end_copy;
 	int				line_counter;
 	size_t			buf;
+	char			*map_buff;
 }				t_structcub;
 
 void			init_parameters(t_structcub *cub);
 void			error_handler1(int error);
 void			messages(t_structcub *cub);
-int				movement(t_structcub *cub);
+void			movement1(t_structcub *cub);
+void			movement2(t_structcub *cub);
+void			rotation(t_structcub *cub);
 int				keypress(int key, t_structcub *cub);
 int				keyrelease(int key, t_structcub *cub);
 void			vertical_movement(t_structcub *cub);
@@ -202,7 +201,7 @@ void			horizontal_movement(t_structcub *cub);
 void			rotation_right(t_structcub *cub);
 void			rotation_left(t_structcub *cub);
 void			readmap(char *cubmap, t_structcub *cub);
-void			gnl_handler(int gnl, int isline, char *line, char *map_buffer, t_structcub *cub);
+void			gnl_ch(int gnl, char *line, t_structcub *cub);
 void			line_checker(char *line, t_structcub *cub);
 void			resolution_parser(char *line, t_structcub *cub);
 int				rgb_range(int cr);
@@ -230,12 +229,9 @@ void			hit_checker(t_structcub *cub);
 int				flood_check(t_structcub *cub, int posy, int posx);
 void			sprites(t_structcub *cub);
 void			ft_realloc(t_structcub *cub);
-
 void			spriteproject(t_structcub *cub);
 void			spritedraw(t_structcub *cub);
-void			spritedistance(t_structcub *cub);
 void			sortsprites(t_structcub *cub);
-//void			spritewhere(t_structcub *cub, int found, int i);
 void			get_sprites(t_structcub *cub);
 
 #endif
