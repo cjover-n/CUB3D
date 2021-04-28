@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 23:43:46 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/04/26 21:55:47 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/04/28 14:42:21 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ typedef struct s_sprite
 	unsigned int	*addr_sprite;
 	double			*zbuffer;
 	int				*spriteorder;
-	double			*spritedistance;
+	double			*spritedist;
 	double			*x;
 	double			*y;
 	double			sprite_x;
@@ -118,6 +118,10 @@ typedef struct s_sprite
 	unsigned int	color;
 	char			*array;
 	int				stripe;
+	int				texx;
+	int				texy;
+	int				p;
+	int				d;
 }				t_structsprite;
 
 typedef struct s_input
@@ -213,6 +217,8 @@ int				is_map_line(char *line, t_structcub *cub);
 int				everything_ok(t_structcub *cub);
 void			get_map(t_structcub *cub, char *line, char **buffer);
 int				raycaster(t_structcub *cub);
+void			raycaster_calc(t_structcub *cub);
+void			raycaster_draw(t_structcub *cub);
 void			step(t_structcub *cub);
 void			get_player(t_structcub *cub, char line, int i);
 void			player_north(t_structcub *cub);
@@ -229,9 +235,11 @@ void			hit_checker(t_structcub *cub);
 int				flood_check(t_structcub *cub, int posy, int posx);
 void			sprites(t_structcub *cub);
 void			ft_realloc(t_structcub *cub);
+void			spritecalc(t_structcub *cub);
 void			spriteproject(t_structcub *cub);
 void			spritedraw(t_structcub *cub);
 void			sortsprites(t_structcub *cub);
 void			get_sprites(t_structcub *cub);
+void			spritedraw_while(t_structcub *cub);
 
 #endif
