@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 17:12:52 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/04/28 14:42:08 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/04/28 14:54:06 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,7 @@ int	main(int argc, char **argv)
 		if (cub.player.player_ok == 0)
 			error_handler1(9);
 		while (cub.map[cub.map_height] != NULL)
-		{
 			cub.map_height++;
-		}
 		messages(&cub);
 		cub.screen.mlx_ptr = mlx_init();
 		cub.screen.win_ptr = mlx_new_window(cub.screen.mlx_ptr,
