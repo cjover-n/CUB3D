@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 23:43:46 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/04/28 14:42:21 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/05/03 20:27:06 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,6 @@ typedef struct s_sprite
 	int				drawend_y;
 	int				drawend_x;
 	unsigned int	color;
-	char			*array;
 	int				stripe;
 	int				texx;
 	int				texy;
@@ -190,14 +189,19 @@ typedef struct s_structcub
 	int				line_counter;
 	size_t			buf;
 	char			*map_buff;
+	int				bmp;
 }				t_structcub;
 
+void			cub_core(t_structcub *cub, char **argv);
 void			init_parameters(t_structcub *cub);
 void			error_handler1(int error);
+void			error_handler2(int error);
+void			error_handler3(int error);
 void			messages(t_structcub *cub);
 void			movement1(t_structcub *cub);
 void			movement2(t_structcub *cub);
 void			rotation(t_structcub *cub);
+void			keyhandle(t_structcub *cub);
 int				keypress(int key, t_structcub *cub);
 int				keyrelease(int key, t_structcub *cub);
 void			vertical_movement(t_structcub *cub);
@@ -205,6 +209,7 @@ void			horizontal_movement(t_structcub *cub);
 void			rotation_right(t_structcub *cub);
 void			rotation_left(t_structcub *cub);
 void			readmap(char *cubmap, t_structcub *cub);
+void			gnl(char *line, int fd, t_structcub *cub);
 void			gnl_ch(int gnl, char *line, t_structcub *cub);
 void			line_checker(char *line, t_structcub *cub);
 void			resolution_parser(char *line, t_structcub *cub);
@@ -214,6 +219,7 @@ char			*texture_parser(char *arr);
 unsigned int	color_parser(char *line);
 int				space_checker(char *line, int i);
 int				is_map_line(char *line, t_structcub *cub);
+void			is_map_player(char *line, t_structcub *cub, int i);
 int				everything_ok(t_structcub *cub);
 void			get_map(t_structcub *cub, char *line, char **buffer);
 int				raycaster(t_structcub *cub);
@@ -234,12 +240,18 @@ void			texture_floor_ceiling(t_structcub *cub);
 void			hit_checker(t_structcub *cub);
 int				flood_check(t_structcub *cub, int posy, int posx);
 void			sprites(t_structcub *cub);
-void			ft_realloc(t_structcub *cub);
 void			spritecalc(t_structcub *cub);
 void			spriteproject(t_structcub *cub);
 void			spritedraw(t_structcub *cub);
 void			sortsprites(t_structcub *cub);
 void			get_sprites(t_structcub *cub);
 void			spritedraw_while(t_structcub *cub);
+int				buttonclose(t_structcub *cub);
+void			iwanttobreakfree(t_structcub *cub);
+void			screenshot(t_structcub *cub);
+void			screenshot_draw(t_structcub *cub, int o);
+void			screenshot_header(t_structcub *cub, int o, \
+					unsigned char *bmp, int size);
+void			screenshot_bit(unsigned char *src, int nb);
 
 #endif

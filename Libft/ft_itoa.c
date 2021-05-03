@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 18:28:03 by cjover-n          #+#    #+#             */
-/*   Updated: 2019/12/01 14:29:50 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/03 19:42:36 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ char	*ft_itoa(int n)
 {
 	char	*ret;
 
-	if (!(ret = (char *)malloc(sizeof(char) * 2)))
+	ret = (char *)malloc(sizeof(char) * 2);
+	if (!ret)
 		return (NULL);
 	if (n == -2147483648)
 		return (ft_strdup("-2147483648"));

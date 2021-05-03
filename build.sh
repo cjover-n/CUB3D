@@ -1,2 +1,2 @@
 make re
-./cub3D map.cub
+./cub3D map.cub --save

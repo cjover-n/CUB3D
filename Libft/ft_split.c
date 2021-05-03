@@ -3,89 +3,92 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/01 16:01:19 by cjover-n          #+#    #+#             */
-/*   Updated: 2019/12/02 20:27:51 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/03 21:36:34 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_counting_charsets(const char *s, char c)
+static int	ft_count_words(char const *s, char c)
 {
-	size_t	counter;
 	int		i;
+	int		words;
+	int		hasword;
 
-	counter = 0;
 	i = 0;
+	words = 0;
+	hasword = 0;
+	while (s[i] == c && s[i])
+		i++;
 	while (s[i])
 	{
+		if (s[i] != c && s[i])
+			hasword = 1;
 		if (s[i] == c)
 		{
-			i++;
-			continue;
+			while (s[i] == c && s[i])
+				i++;
+			if (s[i])
+				words++;
 		}
-		counter++;
-		while (s[i] && s[i] != c)
+		else
 			i++;
 	}
-	return (counter);
+	return (words + hasword);
 }
 
-static char		*ft_strndup(char const *s1, size_t n)
+static char	*ft_alloc_word(char const *s, char c)
 {
-	char	*clone;
-	size_t	i;
+	int		size;
+	char	*tab;
 
-	if ((clone = (char *)malloc(sizeof(char) * (n + 1))) == NULL)
-		return (NULL);
-	i = 0;
-	while (i < n)
-	{
-		clone[i] = s1[i];
-		i++;
-	}
-	clone[i] = '\0';
-	return (clone);
-}
-
-static void		*ft_destroy(char **str)
-{
-	int		i;
-
-	i = 0;
-	while (str[i] != NULL)
-		free(str[i++]);
-	free(str);
-	return (NULL);
-}
-
-char			**ft_split(char const *str, char charset)
-{
-	char	**ret;
-	size_t	tab;
-	size_t	i;
-	size_t	x;
-
-	if (str == NULL)
-		return (NULL);
-	tab = ft_counting_charsets(str, charset);
-	if ((ret = (char **)malloc(sizeof(char *) * (tab + 1))) == NULL)
-		return (NULL);
+	size = 0;
 	tab = 0;
-	x = -1;
-	while (str[++x])
+	while (s[size] && s[size] != c)
+		size++;
+	tab = (char *)malloc(sizeof(char) * (size + 1));
+	if (!tab)
+		return (NULL);
+	ft_strlcpy(tab, s, size + 1);
+	return (tab);
+}
+
+char	*equis(char **tab, int count)
+{
+	if (!tab[count])
 	{
-		if (str[x] == charset)
-			continue;
-		i = 0;
-		while (str[x + i] && str[x + i] != charset)
-			i++;
-		if ((ret[tab++] = ft_strndup(&str[x], i)) == NULL)
-			return (ft_destroy(ret));
-		x += i - 1;
+		while (count > 0)
+			free(tab[count--]);
+		free(tab);
+		return (NULL);
 	}
-	ret[tab] = NULL;
-	return (ret);
+	return (*tab);
+}
+
+char	**ft_split(char const *s, char c)
+{
+	int		count;
+	int		words;
+	char	**tab;
+
+	count = -1;
+	if (!s)
+		return (NULL);
+	words = ft_count_words(s, c);
+	tab = malloc(sizeof(char *) * (words + 1));
+	if (!tab)
+		return (NULL);
+	while (++count < words)
+	{
+		while (s[0] == c)
+			s++;
+		tab[count] = ft_alloc_word(s, c);
+		equis(tab, count);
+		s += ft_strlen(tab[count]);
+	}
+	tab[count] = 0;
+	return (tab);
 }

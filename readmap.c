@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 19:00:09 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/04/26 21:42:51 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/05/03 20:14:39 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,41 +16,41 @@ void	readmap(char *cubmap, t_structcub *cub)
 {
 	char	*line;
 	int		fd;
-	int		gnl;
 
 	fd = open(cubmap, O_RDONLY, S_IRUSR);
 	if (fd >= 3)
 	{
 		line = NULL;
-		while ((gnl = get_next_line(fd, &line)) > 0)
-		{
-			cub->isline = 0;
-			if (!everything_ok(cub))
-				line_checker(line, cub);
-			else
-			{
-				if (line[0] != '\0')
-				{
-					cub->isline = is_map_line(line, cub);
-					if (!cub->isline)
-						error_handler1(7);
-					else
-						get_map(cub, line, &cub->map_buff);
-				}
-			}
-		}
-		gnl_ch(gnl, line, cub);
+		gnl(line, fd, cub);
+		gnl_ch((get_next_line(fd, &line)), line, cub);
 		close(fd);
 		if (cub->spr.found > 0)
 			get_sprites(cub);
+		free(line);
 	}
 }
-/*
-void	readmap2(char *line, char *cub->map_buff, t_structcub *cub)
-{
 
+void	gnl(char *line, int fd, t_structcub *cub)
+{
+	while (get_next_line(fd, &line) > 0)
+	{
+		cub->isline = 0;
+		if (!everything_ok(cub))
+			line_checker(line, cub);
+		else
+		{
+			if (line[0] != '\0')
+			{
+				cub->isline = is_map_line(line, cub);
+				if (!cub->isline)
+					error_handler1(7);
+				else
+					get_map(cub, line, &cub->map_buff);
+			}
+		}
+		free(line);
+	}
 }
-*/
 
 void	gnl_ch(int gnl, char *line, t_structcub *cub)
 {
@@ -64,12 +64,10 @@ void	gnl_ch(int gnl, char *line, t_structcub *cub)
 	{
 		cub->isline = 0;
 		cub->isline = is_map_line(line, cub);
-		if (!cub->isline)
+		if (!cub->isline && *line != '\0')
 			error_handler1(7);
 		else
-		{
 			get_map(cub, line, &cub->map_buff);
-		}
 		cub->map = ft_split(cub->map_buff, '.');
 		if (flood_check(cub, cub->pos_y, cub->pos_x) == 1)
 			error_handler1(11);
@@ -85,15 +83,15 @@ void	line_checker(char *line, t_structcub *cub)
 	if ((ft_strchr(line, 'R')))
 		resolution_parser(line, cub);
 	else if ((ft_strnstr(line, "NO", len)))
-		cub->t_north = texture_parser(line);
+		cub->t_north = ft_strdup(texture_parser(line));
 	else if ((ft_strnstr(line, "EA", len)))
-		cub->t_east = texture_parser(line);
+		cub->t_east = ft_strdup(texture_parser(line));
 	else if ((ft_strnstr(line, "SO", len)))
-		cub->t_south = texture_parser(line);
+		cub->t_south = ft_strdup(texture_parser(line));
 	else if ((ft_strnstr(line, "WE", len)))
-		cub->t_west = texture_parser(line);
+		cub->t_west = ft_strdup(texture_parser(line));
 	else if ((ft_strchr(line, 'S')))
-		cub->t_sprite = texture_parser(line);
+		cub->t_sprite = ft_strdup(texture_parser(line));
 	else if ((ft_strchr(line, 'F')))
 		cub->f_hex = color_parser(line);
 	else if ((ft_strchr(line, 'C')))

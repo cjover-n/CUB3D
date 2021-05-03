@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalnum.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 18:12:55 by cjover-n          #+#    #+#             */
-/*   Updated: 2019/11/15 21:01:42 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/03 21:13:16 by cjover-n         ###   ########lyon.fr   */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_isalnum(int n)
+int	ft_isalnum(int n)
 {
-	if ((n >= '0' && n <= '9') || (n >= 'A' && n <= 'Z') ||
-			(n >= 'a' && n <= 'z'))
+	if ((n >= '0' && n <= '9') || (n >= 'A' && n <= 'Z') \
+			|| (n >= 'a' && n <= 'z'))
 		return (1);
 	else
 		return (0);
