@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   screenshot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/03 15:13:24 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/03 17:29:43 by cjover-n         ###   ########lyon.fr   */
+/*   Created: 2021/05/03 21:53:19 by cjover-n          #+#    #+#             */
+/*   Updated: 2021/05/03 22:01:16 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	screenshot_draw(t_structcub *cub, int o)
 {
 	int				y;
 	int				x;
-	int				*color;
+	unsigned int	*color;
 	int				bpp;
 
 	bpp = (cub->screen.bit / 8);
@@ -48,7 +48,7 @@ void	screenshot_draw(t_structcub *cub, int o)
 		x = -1;
 		while (++x < cub->screen.width)
 		{
-			color = (int *)&cub->screen.addr_img[(cub->screen.size_line * y) + x * bpp];
+			color = &cub->screen.addr_img[(cub->screen.size_line * y) + x * bpp];
 			if (write(o, color, bpp) < 0)
 			{
 				printf("Error haciendo la captura\n");
