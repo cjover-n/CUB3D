@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 17:12:52 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/03 19:43:14 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/05/04 21:06:47 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,20 @@ void	keyhandle(t_structcub *cub)
 	mlx_hook(cub->screen.win_ptr, 2, 1L << 0, keypress, cub);
 	mlx_hook(cub->screen.win_ptr, 3, 1L << 1, keyrelease, cub);
 	mlx_hook(cub->screen.win_ptr, 17, 0, buttonclose, cub);
+}
+
+void	file_checker(char **argv)
+{
+	char	*tmp;
+
+	if ((ft_strchr(argv[1], '.')))
+	{
+		tmp = ft_strchr(argv[1], '.');
+		if (!(*++tmp == 'c' && *++tmp == 'u' && *++tmp == 'b' && *++tmp == '\0'))
+			error_handler1(12);
+	}
+	else
+		error_handler1(13);
 }
 
 void	cub_core(t_structcub *cub, char **argv)
@@ -59,6 +73,7 @@ int	main(int argc, char **argv)
 {
 	t_structcub	cub;
 
+	file_checker(argv);
 	ft_bzero(&cub, sizeof(cub));
 	init_parameters(&cub);
 	if (argc < 2)
@@ -66,10 +81,7 @@ int	main(int argc, char **argv)
 	else if (argc == 3)
 	{
 		if (ft_strncmp(argv[2], "--save", -1))
-		{
-			printf("If saving a bmp you want to do, a --save you have to put\n");
-			exit(1);
-		}
+			error_handler1(14);
 		else
 			cub.bmp = 1;
 		cub_core(&cub, argv);
@@ -77,6 +89,6 @@ int	main(int argc, char **argv)
 	else if (argc == 2)
 		cub_core(&cub, argv);
 	else if (argc > 3)
-		printf("Demasiados argumentos\n");
+		error_handler1(15);
 	return (0);
 }

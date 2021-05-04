@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sprites1.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 09:39:01 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/04/28 14:42:05 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/05/04 20:35:21 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	sprites(t_structcub *cub)
 	int	i;
 
 	i = -1;
-	while (i++ < cub->spr.found)
+	while (++i < cub->spr.found)
 		cub->spr.spritedist[i] = sqrt(pow(cub->pos_x - cub->spr.x[i], 2.0)
 				+ pow(cub->pos_y - cub->spr.y[i], 2.0));
 	sortsprites(cub);

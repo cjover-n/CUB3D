@@ -1,4 +1,5 @@
-R 1067 745
+R 1033 789
+
 EA ./textures/dark.xpm
 NO ./textures/pink.xpm
 SO ./textures/purple.xpm

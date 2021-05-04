@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+         #
+#    By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/30 18:49:31 by cjover-n          #+#    #+#              #
-#    Updated: 2021/05/03 19:55:54 by cjover-n         ###   ########lyon.fr    #
+#    Updated: 2021/05/04 20:34:22 by cjover-n         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,24 +28,31 @@ SRCLIB =	ft_isalpha.c	ft_isprint.c	ft_strlcpy.c	ft_strrchr.c	\
 			ft_strnew.c		ft_putchar.c	ft_putnbr.c		ft_putstr.c		\
 			get_next_line.c	ft_numlen.c
 
+
 DIRLIBFTSRC = Libft/
 
 ADDLIBFT =	$(addprefix $(DIRLIBFTSRC)/,$(SRCLIB))
+SRCOBJ = 	$(SRC:.c=.o) $(ADDLIBFT:.c=.o)
 
-FLAGS = -Wextra -Wall -Werror
+#CFLAGS = -Wextra -Wall -Werror -I ./
 
-MLX = -I ./ -I /usr/X11/include -g -L /usr/X11/lib -l mlx
+#MLX = -l mlx
+
+CFLAGS = -Wextra -Wall -Werror -I ./ -I /usr/X11/include
+
+MLX = -L /usr/X11/lib -l mlx
 
 MLXFLAGS = -framework OpenGL -framework AppKit
 
 all: $(NAME)
 
-$(NAME): $(SRC) $(ADDLIBFT) Libft/libft.h
-	@gcc $(MLX) $(MLXFLAGS) $(FLAGS) ./$(SRC) $(ADDLIBFT) -o cub3D
+$(NAME): $(SRC) $(SRCOBJ) Libft/libft.h
+	@gcc $(MLX) $(MLXFLAGS) $(SRCOBJ) -o cub3D
 	@echo ========= PROGRAMA RECOMPILADO ========
 
 clean:
 	@rm -f *.o
+	@rm -f $(DIRLIBFTSRC)*.o
 	@rm -f *.out
 	@rm -f -r *.dSYM
 

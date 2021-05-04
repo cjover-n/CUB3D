@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 23:43:46 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/03 20:27:06 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/05/04 22:29:13 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,8 @@ void			init_parameters(t_structcub *cub);
 void			error_handler1(int error);
 void			error_handler2(int error);
 void			error_handler3(int error);
+void			error_handler4(int error);
+void			error_handler5(int error);
 void			messages(t_structcub *cub);
 void			movement1(t_structcub *cub);
 void			movement2(t_structcub *cub);
@@ -253,5 +255,6 @@ void			screenshot_draw(t_structcub *cub, int o);
 void			screenshot_header(t_structcub *cub, int o, \
 					unsigned char *bmp, int size);
 void			screenshot_bit(unsigned char *src, int nb);
+void			file_checker(char **argv);
 
 #endif

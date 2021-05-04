@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   destroy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 12:13:47 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/03 15:30:33 by cjover-n         ###   ########lyon.fr   */
+/*   Updated: 2021/05/04 20:41:41 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	destroy_and_exit(t_structcub *cub)
 {
-	iwanttobreakfree(cub);
+	cub++;
+	//iwanttobreakfree(cub);
 	system("leaks cub3D");
 	exit(0);
 }
@@ -34,7 +35,8 @@ void	iwanttobreakfree(t_structcub *cub)
 
 int	buttonclose(t_structcub *cub)
 {
-	iwanttobreakfree(cub);
+	cub++;
+	//iwanttobreakfree(cub);
 	system("leaks cub3D");
 	exit (0);
 	return (0);
