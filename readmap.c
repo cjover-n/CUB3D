@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 19:00:09 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/05 00:49:39 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/05 21:52:15 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,15 +84,15 @@ void	line_checker(char *line, t_structcub *cub)
 	if ((ft_strchr(line, 'R')))
 		resolution_parser(line, cub);
 	else if ((ft_strnstr(line, "NO", len)))
-		cub->t_north = ft_strdup(texture_parser(line));
+		texture_check1(cub, line, 0);
 	else if ((ft_strnstr(line, "EA", len)))
-		cub->t_east = ft_strdup(texture_parser(line));
+		texture_check1(cub, line, 1);
 	else if ((ft_strnstr(line, "SO", len)))
-		cub->t_south = ft_strdup(texture_parser(line));
+		texture_check1(cub, line, 2);
 	else if ((ft_strnstr(line, "WE", len)))
-		cub->t_west = ft_strdup(texture_parser(line));
+		texture_check1(cub, line, 3);
 	else if ((ft_strchr(line, 'S')))
-		cub->t_sprite = ft_strdup(texture_parser(line));
+		texture_check1(cub, line, 4);
 	else if ((ft_strchr(line, 'F')))
 		cub->f_hex = color_parser(line);
 	else if ((ft_strchr(line, 'C')))

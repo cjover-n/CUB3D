@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 12:33:30 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/05 00:51:29 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/05 22:10:02 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,36 @@ void	error_handler5(int error)
 	if (error == 18)
 	{
 		printf("Resolución repetida ¬¬\n");
+		exit (0);
+	}
+	if (error == 19)
+	{
+		printf("No tienes textura norte. Perdiste el norte, jeje.\n");
+		exit (0);
+	}
+	if (error == 20)
+	{
+		printf("No tienes textura este.\n");
+		exit (0);
+	}
+	error_handler6(error);
+}
+
+void	error_handler6(int error)
+{
+	if (error == 21)
+	{
+		printf("No tienes textura sur.\n");
+		exit (0);
+	}
+	if (error == 22)
+	{
+		printf("No tienes textura oeste.\n");
+		exit (0);
+	}
+	if (error == 23)
+	{
+		printf("El sprite no es válido.\n");
 		exit (0);
 	}
 }

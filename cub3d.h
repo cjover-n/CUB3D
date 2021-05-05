@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 23:43:46 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/04 22:29:13 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/05 21:49:59 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,7 @@ void			error_handler2(int error);
 void			error_handler3(int error);
 void			error_handler4(int error);
 void			error_handler5(int error);
+void			error_handler6(int error);
 void			messages(t_structcub *cub);
 void			movement1(t_structcub *cub);
 void			movement2(t_structcub *cub);
@@ -217,7 +218,7 @@ void			line_checker(char *line, t_structcub *cub);
 void			resolution_parser(char *line, t_structcub *cub);
 int				rgb_range(int cr);
 unsigned int	create_trgb(int t, int r, int g, int b);
-char			*texture_parser(char *arr);
+char			*texture_parser(t_structcub *cub, char *arr);
 unsigned int	color_parser(char *line);
 int				space_checker(char *line, int i);
 int				is_map_line(char *line, t_structcub *cub);
@@ -256,5 +257,7 @@ void			screenshot_header(t_structcub *cub, int o, \
 					unsigned char *bmp, int size);
 void			screenshot_bit(unsigned char *src, int nb);
 void			file_checker(char **argv);
+void			texture_check1(t_structcub *cub, char *line, int i);
+void			texture_check2(t_structcub *cub, int i, char *img, char *line);
 
 #endif

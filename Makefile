@@ -6,7 +6,7 @@
 #    By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/30 18:49:31 by cjover-n          #+#    #+#              #
-#    Updated: 2021/05/04 20:34:22 by cjover-n         ###   ########.fr        #
+#    Updated: 2021/05/05 23:04:00 by cjover-n         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = cub3D
 
 SRC =	main.c raycaster.c readmap.c messages.c mapparser.c errorhandler.c \
 		cubutils.c movement.c player.c input.c textures.c	floodfill.c		\
-		sprites1.c sprites2.c destroy.c screenshot.c mapcheck.c
+		sprites1.c sprites2.c destroy.c screenshot.c mapcheck.c texturecheck.c
 
 SRCLIB =	ft_isalpha.c	ft_isprint.c	ft_strlcpy.c	ft_strrchr.c	\
 			ft_atoi.c		ft_isascii.c	ft_strchr.c		ft_strlen.c		\
@@ -28,17 +28,22 @@ SRCLIB =	ft_isalpha.c	ft_isprint.c	ft_strlcpy.c	ft_strrchr.c	\
 			ft_strnew.c		ft_putchar.c	ft_putnbr.c		ft_putstr.c		\
 			get_next_line.c	ft_numlen.c
 
+R = $(shell printf "\033[31m")
+G = $(shell printf "\033[32m")
+B = $(shell printf "\033[34m")
+X = $(shell printf "\033[0m")
+Y = $(shell printf "\033[33m")
 
 DIRLIBFTSRC = Libft/
 
-ADDLIBFT =	$(addprefix $(DIRLIBFTSRC)/,$(SRCLIB))
-SRCOBJ = 	$(SRC:.c=.o) $(ADDLIBFT:.c=.o)
+ADDLIBFT = $(addprefix $(DIRLIBFTSRC),$(SRCLIB))
+SRCOBJ = $(SRC:.c=.o) $(ADDLIBFT:.c=.o)
 
 #CFLAGS = -Wextra -Wall -Werror -I ./
 
 #MLX = -l mlx
 
-CFLAGS = -Wextra -Wall -Werror -I ./ -I /usr/X11/include
+CFLAGS = -Wextra -Wall -Werror -I ./ -I /usr/X11/include -g
 
 MLX = -L /usr/X11/lib -l mlx
 
@@ -48,7 +53,9 @@ all: $(NAME)
 
 $(NAME): $(SRC) $(SRCOBJ) Libft/libft.h
 	@gcc $(MLX) $(MLXFLAGS) $(SRCOBJ) -o cub3D
-	@echo ========= PROGRAMA RECOMPILADO ========
+	@echo ${Y}==== CUB COMPILADO CORRECTAMENTE ==========${X}
+	@echo ${G}==== AHORA EJECTUTA ${R}cub3D ${G}SEGUIDO DE UN MAPA ${R}.cub ${G}====${X}
+	@echo ${G}==== USA ${B}--save ${G}COMO 3ER PARÁMETRO PARA OBTENER UN SCREENSHOT ====${X}
 
 clean:
 	@rm -f *.o
@@ -58,8 +65,17 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo =========== PROGRAMA LIMPIO ===========
+	@echo ${B}=========== CUB LIMPIO, CUB CONTENTO ===========${X}
 
 re: fclean all
+
+pizza:
+	@echo ${Y}"Sin piña, por favor :)"${X}
+
+love:
+	@echo ${R}"<3 Love is in the air <3"${X}
+
+tig:
+	@echo ${B}"NO DEBERÍAS!! ¬¬"${X}
 
 .PHONY: all clean fclean re

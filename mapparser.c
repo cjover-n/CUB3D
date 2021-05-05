@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 16:56:29 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/05 00:52:47 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/05 21:56:02 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,9 @@ void	resolution_parser(char *line, t_structcub *cub)
 		error_handler1(18);
 }
 
-char	*texture_parser(char *arr)
+char	*texture_parser(t_structcub *cub, char *arr)
 {
+	(void)cub;
 	while (*arr != '.' && *arr != '\0')
 		arr++;
 	if (*arr != '.')
@@ -54,7 +55,7 @@ char	*texture_parser(char *arr)
 		error_handler1(5);
 		return (NULL);
 	}
-	return (arr);
+	return (ft_strdup(arr));
 }
 
 unsigned int	color_parser(char *line)
