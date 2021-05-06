@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 23:43:46 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/05 21:49:59 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/06 19:28:47 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,7 @@ void			error_handler3(int error);
 void			error_handler4(int error);
 void			error_handler5(int error);
 void			error_handler6(int error);
+void			error_handler7(int error);
 void			messages(t_structcub *cub);
 void			movement1(t_structcub *cub);
 void			movement2(t_structcub *cub);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errorhandler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 12:33:30 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/06 15:26:37 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/06 19:34:48 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,22 +116,22 @@ void	error_handler5(int error)
 {
 	if (error == 17)
 	{
-		printf("Alguna textura no es válida.\n");
+		printf("Error\nAlguna textura no es válida.\n");
 		exit (0);
 	}
 	if (error == 18)
 	{
-		printf("Resolución repetida ¬¬\n");
+		printf("Error\nResolución repetida ¬¬\n");
 		exit (0);
 	}
 	if (error == 19)
 	{
-		printf("No tienes textura norte. Perdiste el norte, jeje.\n");
+		printf("Error\nNo tienes textura norte. Perdiste el norte, jeje.\n");
 		exit (0);
 	}
 	if (error == 20)
 	{
-		printf("No tienes textura este.\n");
+		printf("Error\nNo tienes textura este.\n");
 		exit (0);
 	}
 	error_handler6(error);
@@ -141,22 +141,42 @@ void	error_handler6(int error)
 {
 	if (error == 21)
 	{
-		printf("No tienes textura sur.\n");
+		printf("Error\nNo tienes textura sur.\n");
 		exit (0);
 	}
 	if (error == 22)
 	{
-		printf("No tienes textura oeste.\n");
+		printf("Error\nNo tienes textura oeste.\n");
 		exit (0);
 	}
 	if (error == 23)
 	{
-		printf("El sprite no es válido.\n");
+		printf("Error\nEl sprite no es válido.\n");
 		exit (0);
 	}
+	error_handler7(error);
+}
+
+void	error_handler7(int error)
+{
 	if (error == 24)
 	{
-		printf("Has metido algo raro en los colores ¬¬\n");
+		printf("Error\nHas metido algo raro en los colores ¬¬\n");
+		exit (0);
+	}
+	if (error == 25)
+	{
+		printf("Error\nError en el rango de color del mapa.\n");
+		exit (0);
+	}
+	if (error == 26)
+	{
+		printf("Error\nError en los colores del mapa.\n");
+		exit (0);
+	}
+	if (error == 27)
+	{
+		printf("Error\nComas mal en el color RGB.\n");
 		exit (0);
 	}
 }

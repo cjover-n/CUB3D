@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 17:12:52 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/04 21:06:47 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/06 19:23:16 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	init_parameters(t_structcub *cub)
 {
 	cub->rotspeed = 0.01;
-	cub->movespeed = 0.05;
+	cub->movespeed = 0.09;
 	cub->buf = 4;
 }
 

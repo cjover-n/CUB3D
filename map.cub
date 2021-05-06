@@ -1,4 +1,4 @@
-R 1033 789
+R 3000 2000
 
 EA ./textures/dark.xpm
 NO ./textures/pink.xpm

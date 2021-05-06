@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapparser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 16:56:29 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/06 15:26:54 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/06 19:33:35 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,16 @@ unsigned int	color_parser(char *line)
 			if (!ft_isdigit(line[i + 1]))
 				error_handler1(24);
 			if (rgb_range(color[x]) == 0)
-				printf("Error\nRango de color mal\n");
+				error_handler1(25);
 			i += ft_numlen(color[x]);
 		}
 		else
-			printf("Error\n Color mal\n");
+			error_handler1(26);
 		if (line[i] == ',')
 			x++;
 		i += (line[i] != '\0');
 	}
 	if (x != 2)
-		printf("Error\n Comas mal\n");
+		error_handler1(27);
 	return (create_trgb(0, color[0], color[1], color[2]));
 }
