@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 12:33:30 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/06 19:34:48 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/06 19:59:02 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	error_handler3(int error)
 	}
 	if (error == 11)
 	{
-		printf("Error\nMapa mal.\n");
+		printf("Error\nMapa incorrecto, no está bien cerrado.\n");
 		exit (0);
 	}
 	if (error == 12)

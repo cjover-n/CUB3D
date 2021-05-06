@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+         #
+#    By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/30 18:49:31 by cjover-n          #+#    #+#              #
-#    Updated: 2021/05/05 23:04:00 by cjover-n         ###   ########.fr        #
+#    Updated: 2021/05/06 20:57:47 by cjover-n         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ SRCOBJ = $(SRC:.c=.o) $(ADDLIBFT:.c=.o)
 
 CFLAGS = -Wextra -Wall -Werror -I ./ -I /usr/X11/include -g
 
-MLX = -L /usr/X11/lib -l mlx
+MLX = -L /usr/X11/lib -l mlx #-fsanitize=address
 
 MLXFLAGS = -framework OpenGL -framework AppKit
 

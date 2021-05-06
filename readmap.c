@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readmap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 19:00:09 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/05 21:52:15 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/06 21:41:52 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	readmap(char *cubmap, t_structcub *cub)
 	{
 		line = NULL;
 		gnl(line, fd, cub);
-		gnl_ch((get_next_line(fd, &line)), line, cub);
 		close(fd);
 		if (cub->spr.found > 0)
 			get_sprites(cub);
@@ -32,7 +31,10 @@ void	readmap(char *cubmap, t_structcub *cub)
 
 void	gnl(char *line, int fd, t_structcub *cub)
 {
-	while (get_next_line(fd, &line) > 0)
+	int gnl;
+
+	gnl = get_next_line(fd, &line);
+	while (gnl > 0)
 	{
 		cub->isline = 0;
 		if (!everything_ok(cub))
@@ -43,13 +45,18 @@ void	gnl(char *line, int fd, t_structcub *cub)
 			{
 				cub->isline = is_map_line(line, cub);
 				if (!cub->isline)
+				{
+					free(line);
 					error_handler1(7);
+				}
 				else
 					get_map(cub, line, &cub->map_buff);
 			}
 		}
 		free(line);
+		gnl = get_next_line(fd, &line);
 	}
+	gnl_ch(gnl, line, cub);
 	free(line);
 }
 
@@ -57,10 +64,6 @@ void	gnl_ch(int gnl, char *line, t_structcub *cub)
 {
 	if (gnl < 0)
 		error_handler1(2);
-	else if (!everything_ok(cub))
-	{
-		error_handler1(6);
-	}
 	else if (gnl == 0)
 	{
 		cub->isline = 0;
@@ -74,6 +77,9 @@ void	gnl_ch(int gnl, char *line, t_structcub *cub)
 			error_handler1(11);
 		free(cub->map_buff);
 	}
+	else if (!everything_ok(cub))
+		error_handler1(6);
+	
 }
 
 void	line_checker(char *line, t_structcub *cub)

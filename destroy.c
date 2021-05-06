@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   destroy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 12:13:47 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/04 20:41:41 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/06 21:42:49 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ void	destroy_and_exit(t_structcub *cub)
 
 void	iwanttobreakfree(t_structcub *cub)
 {
-	mlx_destroy_image(cub->screen.mlx_ptr, cub->screen.buffer_img);
-	mlx_destroy_window(cub->screen.mlx_ptr, cub->screen.win_ptr);
+	//ESTA FUNCION NO HACE FALTA?????
+	//mlx_destroy_image(cub->screen.mlx_ptr, cub->screen.buffer_img);
+	//mlx_destroy_window(cub->screen.mlx_ptr, cub->screen.win_ptr);
 	free(cub->spr.zbuffer);
 	if (cub->spr.found)
 	{
@@ -37,7 +38,7 @@ int	buttonclose(t_structcub *cub)
 {
 	cub++;
 	//iwanttobreakfree(cub);
-	system("leaks cub3D");
+	//system("leaks cub3D");
 	exit (0);
 	return (0);
 }
