@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 16:56:29 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/05 21:56:02 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/06 15:26:54 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ unsigned int	color_parser(char *line)
 		if (ft_isdigit(line[i]))
 		{
 			color[x] = ft_atoi(line + i);
+			if (!ft_isdigit(line[i + 1]))
+				error_handler1(24);
 			if (rgb_range(color[x]) == 0)
 				printf("Error\nRango de color mal\n");
 			i += ft_numlen(color[x]);

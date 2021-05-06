@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 12:33:30 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/05 22:10:02 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/06 15:26:37 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,11 @@ void	error_handler6(int error)
 	if (error == 23)
 	{
 		printf("El sprite no es válido.\n");
+		exit (0);
+	}
+	if (error == 24)
+	{
+		printf("Has metido algo raro en los colores ¬¬\n");
 		exit (0);
 	}
 }
