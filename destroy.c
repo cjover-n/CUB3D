@@ -3,24 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   destroy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 12:13:47 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/06 21:42:49 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/07 07:37:07 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	destroy_and_exit(t_structcub *cub)
+int		destroy_and_exit(t_structcub *cub)
 {
-	cub++;
+	(void)cub;
 	//iwanttobreakfree(cub);
 	system("leaks cub3D");
 	exit(0);
 }
-
-void	iwanttobreakfree(t_structcub *cub)
+void		iwanttobreakfree(t_structcub *cub)
 {
 	//ESTA FUNCION NO HACE FALTA?????
 	//mlx_destroy_image(cub->screen.mlx_ptr, cub->screen.buffer_img);
@@ -32,13 +31,4 @@ void	iwanttobreakfree(t_structcub *cub)
 		free(cub->spr.y);
 		free(cub->spr.spriteorder);
 	}
-}
-
-int	buttonclose(t_structcub *cub)
-{
-	cub++;
-	//iwanttobreakfree(cub);
-	//system("leaks cub3D");
-	exit (0);
-	return (0);
 }

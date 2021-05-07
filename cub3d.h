@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 23:43:46 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/06 19:28:47 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/07 07:41:09 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,7 +235,7 @@ void			player_north(t_structcub *cub);
 void			player_east(t_structcub *cub);
 void			player_south(t_structcub *cub);
 void			player_west(t_structcub *cub);
-void			destroy_and_exit(t_structcub *cub);
+int				destroy_and_exit(t_structcub *cub);
 void			textures(t_structcub *cub);
 void			load_texture(t_structcub *cub);
 void			texture_calculation(t_structcub *cub);
@@ -250,7 +250,6 @@ void			spritedraw(t_structcub *cub);
 void			sortsprites(t_structcub *cub);
 void			get_sprites(t_structcub *cub);
 void			spritedraw_while(t_structcub *cub);
-int				buttonclose(t_structcub *cub);
 void			iwanttobreakfree(t_structcub *cub);
 void			screenshot(t_structcub *cub);
 void			screenshot_draw(t_structcub *cub, int o);
@@ -260,5 +259,6 @@ void			screenshot_bit(unsigned char *src, int nb);
 void			file_checker(char **argv);
 void			texture_check1(t_structcub *cub, char *line, int i);
 void			texture_check2(t_structcub *cub, int i, char *img, char *line);
+void			error_handler_free(char *line, int error);
 
 #endif

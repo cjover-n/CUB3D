@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readmap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 19:00:09 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/06 21:41:52 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/07 07:52:19 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	readmap(char *cubmap, t_structcub *cub)
 
 void	gnl(char *line, int fd, t_structcub *cub)
 {
-	int gnl;
+	int	gnl;
 
 	gnl = get_next_line(fd, &line);
 	while (gnl > 0)
@@ -47,7 +47,8 @@ void	gnl(char *line, int fd, t_structcub *cub)
 				if (!cub->isline)
 				{
 					free(line);
-					error_handler1(7);
+					error_handler_free(line, 1);
+					//error_handler1(7);
 				}
 				else
 					get_map(cub, line, &cub->map_buff);
@@ -79,7 +80,7 @@ void	gnl_ch(int gnl, char *line, t_structcub *cub)
 	}
 	else if (!everything_ok(cub))
 		error_handler1(6);
-	
+
 }
 
 void	line_checker(char *line, t_structcub *cub)

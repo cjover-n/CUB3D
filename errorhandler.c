@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errorhandler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 12:33:30 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/06 19:59:02 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/07 07:40:56 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	error_handler2(int error)
 		exit (0);
 	}
 	if (error == 7)
-	{
+	{//Este es el del freeee
 		printf("Error\nHay caracteres basura antes/después del mapa.\n");
 		exit (0);
 	}
@@ -177,6 +177,16 @@ void	error_handler7(int error)
 	if (error == 27)
 	{
 		printf("Error\nComas mal en el color RGB.\n");
+		exit (0);
+	}
+}
+
+void	error_handler_free(char *line, int error)
+{
+	if (error == 1)
+	{
+		free(line);
+		printf("Error\nMe salgo de aquí.\n");
 		exit (0);
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 17:12:52 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/06 19:23:16 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/07 07:33:10 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	keyhandle(t_structcub *cub)
 	mlx_do_key_autorepeatoff(cub->screen.mlx_ptr);
 	mlx_hook(cub->screen.win_ptr, 2, 1L << 0, keypress, cub);
 	mlx_hook(cub->screen.win_ptr, 3, 1L << 1, keyrelease, cub);
-	mlx_hook(cub->screen.win_ptr, 17, 0, buttonclose, cub);
+	mlx_hook(cub->screen.win_ptr, 17, 0, destroy_and_exit, cub);
 }
 
 void	file_checker(char **argv)
