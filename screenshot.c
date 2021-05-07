@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   screenshot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 21:53:19 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/07 15:12:55 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/07 21:11:29 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,10 @@ void	screenshot(t_structcub *cub)
 	int						o;
 	int						size;
 
-	o = open("screenshot.bmp", O_WRONLY | O_CREAT | O_TRUNC, \
-		S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | O_APPEND, 0644);
+	o = open("screenshot.bmp", O_WRONLY | O_CREAT | O_TRUNC | O_APPEND, 0744);
 	if (o < 0)
 		printf("Error creando screenshot\n");
-	size = 54 + cub->screen.width * cub->screen.height;
+	size = 54 + 4 * (cub->screen.width * cub->screen.height);
 	screenshot_header(cub, o, bmp, size);
 	screenshot_draw(cub, o);
 	close(o);

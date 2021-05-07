@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readmap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 19:00:09 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/07 15:22:51 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/07 20:46:57 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,10 @@ void	gnl_ch(int gnl, char *line, t_structcub *cub)
 		if (flood_check(cub, cub->pos_y, cub->pos_x) == 1)
 			error_handler1(11);
 		free(cub->map_buff);
+
 	}
-	else if (!everything_ok(cub))
-		error_handler1(6);
+	//else if (!everything_ok(cub))
+	//	error_handler1(6);
 }
 
 void	line_checker(char *line, t_structcub *cub)
@@ -109,8 +110,8 @@ int	everything_ok(t_structcub *cub)
 {
 	int		todo;
 
-	if (!cub->t_north || !cub->t_west || !cub->t_east || !cub->t_south
-		|| !cub->t_sprite || !cub->screen.width || !cub->screen.height
+	if (!cub->t_north || !cub->t_west || !cub->t_east || !cub->t_south \
+		|| !cub->t_sprite || !cub->screen.width || !cub->screen.height \
 		|| !cub->f_hex || !cub->c_hex)
 		todo = 0;
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 23:43:46 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/07 07:41:09 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/07 19:58:38 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -237,7 +237,8 @@ void			player_south(t_structcub *cub);
 void			player_west(t_structcub *cub);
 int				destroy_and_exit(t_structcub *cub);
 void			textures(t_structcub *cub);
-void			load_texture(t_structcub *cub);
+void			load_texture1(t_structcub *cub);
+void			load_texture2(t_structcub *cub);
 void			texture_calculation(t_structcub *cub);
 void			texture_color_selector(t_structcub *cub);
 void			texture_floor_ceiling(t_structcub *cub);

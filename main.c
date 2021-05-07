@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 17:12:52 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/07 07:33:10 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/07 21:14:18 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	cub_core(t_structcub *cub, char **argv)
 	cub->screen.addr_img = (unsigned int *)mlx_get_data_addr(\
 			cub->screen.buffer_img, &cub->screen.bit, &cub->screen.size_line, \
 			&cub->screen.endian);
-	load_texture(cub);
+	load_texture1(cub);
 	cub->spr.zbuffer = ft_calloc(cub->screen.width, sizeof(double));
 	messages(cub);
 	if (cub->spr.found)
