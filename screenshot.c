@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 21:53:19 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/03 22:01:16 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/07 15:12:55 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	screenshot_draw(t_structcub *cub, int o)
 {
 	int				y;
 	int				x;
-	unsigned int	*color;
+	unsigned int	*clr;
 	int				bpp;
 
 	bpp = (cub->screen.bit / 8);
@@ -48,8 +48,8 @@ void	screenshot_draw(t_structcub *cub, int o)
 		x = -1;
 		while (++x < cub->screen.width)
 		{
-			color = &cub->screen.addr_img[(cub->screen.size_line * y) + x * bpp];
-			if (write(o, color, bpp) < 0)
+			clr = &cub->screen.addr_img[(cub->screen.size_line * y) + x * bpp];
+			if (write(o, clr, bpp) < 0)
 			{
 				printf("Error haciendo la captura\n");
 				exit(1);
@@ -66,7 +66,7 @@ void	screenshot(t_structcub *cub)
 	int						size;
 
 	o = open("screenshot.bmp", O_WRONLY | O_CREAT | O_TRUNC, \
-		S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH);
+		S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | O_APPEND, 0644);
 	if (o < 0)
 		printf("Error creando screenshot\n");
 	size = 54 + cub->screen.width * cub->screen.height;

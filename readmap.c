@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 19:00:09 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/07 07:52:19 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/07 15:22:51 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void	gnl_ch(int gnl, char *line, t_structcub *cub)
 	}
 	else if (!everything_ok(cub))
 		error_handler1(6);
-
 }
 
 void	line_checker(char *line, t_structcub *cub)
