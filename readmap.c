@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 19:00:09 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/07 20:46:57 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/08 20:30:21 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ void	gnl(char *line, int fd, t_structcub *cub)
 				if (!cub->isline)
 				{
 					free(line);
-					error_handler_free(line, 1);
-					//error_handler1(7);
+					error_handler1(7);
 				}
 				else
 					get_map(cub, line, &cub->map_buff);
@@ -77,33 +76,36 @@ void	gnl_ch(int gnl, char *line, t_structcub *cub)
 		if (flood_check(cub, cub->pos_y, cub->pos_x) == 1)
 			error_handler1(11);
 		free(cub->map_buff);
-
 	}
-	//else if (!everything_ok(cub))
-	//	error_handler1(6);
 }
 
 void	line_checker(char *line, t_structcub *cub)
 {
 	int		len;
+	int		i;
 
+	i = 0;
+	while (ft_isspace(line[i]))
+		i++;
 	len = ft_strlen(line);
-	if ((ft_strchr(line, 'R')))
+	if (line[i] == 'R' && ft_strchr(line, 'R'))
 		resolution_parser(line, cub);
-	else if ((ft_strnstr(line, "NO", len)))
+	else if (line[i] == 'N' && ft_strnstr(line, "NO", len))
 		texture_check1(cub, line, 0);
-	else if ((ft_strnstr(line, "EA", len)))
+	else if (line[i] == 'E' && ft_strnstr(line, "EA", len))
 		texture_check1(cub, line, 1);
-	else if ((ft_strnstr(line, "SO", len)))
+	else if (line[i] == 'S' && ft_strnstr(line, "SO", len))
 		texture_check1(cub, line, 2);
-	else if ((ft_strnstr(line, "WE", len)))
+	else if (line[i] == 'W' && ft_strnstr(line, "WE", len))
 		texture_check1(cub, line, 3);
-	else if ((ft_strchr(line, 'S')))
+	else if (line[i] == 'S' && ft_strchr(line, 'S'))
 		texture_check1(cub, line, 4);
-	else if ((ft_strchr(line, 'F')))
+	else if (line[i] == 'F' && ft_strchr(line, 'F'))
 		cub->f_hex = color_parser(line);
-	else if ((ft_strchr(line, 'C')))
+	else if (line[i] == 'C' && ft_strchr(line, 'C'))
 		cub->c_hex = color_parser(line);
+	else if (something_strange(cub, line, len))
+		error_handler1(28);
 }
 
 int	everything_ok(t_structcub *cub)

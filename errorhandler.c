@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 12:33:30 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/07 19:41:13 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/08 19:55:57 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ void	error_handler1(int error)
 		printf("Error\nError al leer la resolución del mapa.\n");
 		exit (1);
 	}
-	if (error == 4)
-	{
-		printf("Error\nEl mapa tiene caracteres inválidos.\n");
-		exit (1);
-	}
+	//if (error == 4)
+	//{
+	//	printf("Error\nEl mapa tiene caracteres inválidos.\n");
+	//	exit (1);
+	//}
 	error_handler2(error);
 }
 
@@ -50,8 +50,8 @@ void	error_handler2(int error)
 		exit (1);
 	}
 	if (error == 7)
-	{//Este es el del freeee
-		printf("Error\nHay caracteres basura antes/después del mapa.\n");
+	{
+		printf("Error\nHay caracteres basura en el mapa.\n");
 		exit (1);
 	}
 	if (error == 8)
@@ -66,7 +66,7 @@ void	error_handler3(int error)
 {
 	if (error == 9)
 	{
-		printf("Error\nNo se encuentra jugador en el mapa. ¿Dónde está?\n");
+		printf("Error\nNo se encuentra jugador en el mapa.\n");
 		exit (1);
 	}
 	if (error == 10)
@@ -77,6 +77,7 @@ void	error_handler3(int error)
 	if (error == 11)
 	{
 		printf("Error\nMapa incorrecto, no está bien cerrado.\n");
+		system("leaks cub3D");
 		exit (1);
 	}
 	if (error == 12)
@@ -126,7 +127,7 @@ void	error_handler5(int error)
 	}
 	if (error == 19)
 	{
-		printf("Error\nNo tienes textura norte. Perdiste el norte, jeje.\n");
+		printf("Error\nNo tienes textura norte.\n");
 		exit (1);
 	}
 	if (error == 20)
@@ -161,7 +162,7 @@ void	error_handler7(int error)
 {
 	if (error == 24)
 	{
-		printf("Error\nHas metido algo raro en los colores ¬¬\n");
+		printf("Error\nColor falta o es inválido\n");
 		exit (1);
 	}
 	if (error == 25)
@@ -181,22 +182,12 @@ void	error_handler7(int error)
 	}
 	if (error == 28)
 	{
-		printf("Error\nTextura no válida.\n");
+		printf("Error\nTextura o color inválido dentro del .cub.\n");
 		exit (1);
 	}
 	if (error == 29)
 	{
 		printf("Error\nMAL MAL MAL MAL\n");
-		exit (1);
-	}
-}
-
-void	error_handler_free(char *line, int error)
-{
-	if (error == 1)
-	{
-		free(line);
-		printf("Error\nMe salgo de aquí.\n");
 		exit (1);
 	}
 }

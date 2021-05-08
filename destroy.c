@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 12:13:47 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/07 20:11:20 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/08 21:44:06 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,14 @@
 int		destroy_and_exit(t_structcub *cub)
 {
 	(void)cub;
-	//iwanttobreakfree(cub);
-	//system("leaks cub3D");
+	//free_things(cub);
+	system("leaks cub3D");
 	exit(0);
 }
-void		iwanttobreakfree(t_structcub *cub)
+void	free_things(t_structcub *cub)
 {
-	//ESTA FUNCION NO HACE FALTA?????
-	//mlx_destroy_image(cub->screen.mlx_ptr, cub->screen.buffer_img);
-	//mlx_destroy_window(cub->screen.mlx_ptr, cub->screen.win_ptr);
+	mlx_destroy_image(cub->screen.mlx_ptr, cub->screen.buffer_img);
+	mlx_destroy_window(cub->screen.mlx_ptr, cub->screen.win_ptr);
 	free(cub->spr.zbuffer);
 	if (cub->spr.found)
 	{

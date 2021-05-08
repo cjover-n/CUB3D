@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 16:56:29 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/07 20:13:07 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/08 21:43:52 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,10 @@ unsigned int	color_parser(char *line)
 
 	x = 0;
 	i = space_checker(line, 1);
+	if (line[i] == 'F' || line[i] == 'C')
+		i++;
+	if (ft_isspace(line[i]))
+		i++;
 	while (ft_isdigit(line[i]))
 	{
 		if (ft_isdigit(line[i]))

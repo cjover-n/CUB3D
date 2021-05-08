@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 19:55:30 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/07 19:36:04 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/08 19:35:00 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	is_map_line(char *line, t_structcub *cub)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] == '0' || line[i] == '1' || line[i] == '2' || line[i] == 'N'
+		if (line[i] == '0' || line[i] == '1' || line[i] == '2' || line[i] == 'N' \
 			|| line[i] == 'S' || line[i] == 'W' || line[i] == 'E'
 			|| line[i] == ' ')
 		{
@@ -27,13 +27,13 @@ int	is_map_line(char *line, t_structcub *cub)
 			if (line[i] == '2')
 				cub->spr.found++;
 			is_map_player(line, cub, i);
-			if (line[i] == '0' || line[i] == 'N' || line[i] == 'S'
+			if (line[i] == '0' || line[i] == 'N' || line[i] == 'S' \
 				|| line[i] == 'W' || line[i] == 'E')
 				line[i] = 33;
 			cub->map_len = ft_strlen(line);
 		}
 		else
-			cub->isline = 0;
+			return (0);
 		i++;
 	}
 	return (cub->isline);
@@ -41,7 +41,7 @@ int	is_map_line(char *line, t_structcub *cub)
 
 void	is_map_player(char *line, t_structcub *cub, int i)
 {
-	if (line[i] == 'N' || line[i] == 'S' || line[i] == 'W'
+	if (line[i] == 'N' || line[i] == 'S' || line[i] == 'W' \
 		|| line[i] == 'E')
 	{
 		if (cub->player.player_ok == 0)
