@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 23:43:46 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/09 18:46:01 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/09 20:02:19 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,5 +260,6 @@ void			file_checker(char **argv);
 void			texture_check1(t_structcub *cub, char *line, int i);
 void			texture_check2(t_structcub *cub, int i, char *img, char *line);
 int				something_strange(t_structcub *cub, char *line, int len);
+void			height_width_check(t_structcub *cub, int id);
 
 #endif

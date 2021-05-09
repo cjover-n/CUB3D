@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 16:56:29 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/09 17:43:57 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/09 20:23:25 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ void	resolution_parser(char *line, t_structcub *cub)
 		if (ft_isdigit(line[i]))
 		{
 			cub->screen.width = ft_atoi(&line[i]);
-			if (cub->screen.width > 2560)
-				cub->screen.width = 2560;
+			height_width_check(cub, 0);
 			i = ft_numlen(cub->screen.width) + i + 1;
 			if (ft_isdigit(line[i]) == 1)
 			{
 				cub->screen.height = ft_atoi(&line[i]);
-				if (cub->screen.height > 1395)
-					cub->screen.height = 1395;
+				height_width_check(cub, 1);
 				i = ft_numlen(cub->screen.width) + ft_numlen(cub->screen.height) \
 					+ 3;
-				if (line[i] != '\n' && line[i] != '\0' )
+				if (line[i] == '\0')
+					return ;
+				if (!ft_isdigit(line[i]))
 					error_handler1(16);
 			}
 		}
@@ -45,6 +45,24 @@ void	resolution_parser(char *line, t_structcub *cub)
 		error_handler1(18);
 }
 
+void	height_width_check(t_structcub *cub, int id)
+{
+	if (id == 0)
+	{
+		if (cub->screen.width > 2560)
+			cub->screen.width = 2560;
+		if (cub->screen.width == -1)
+			error_handler1(4);
+	}
+	if (id == 1)
+	{
+		if (cub->screen.height > 1395)
+			cub->screen.height = 1395;
+		if (cub->screen.height == -1)
+			error_handler1(4);
+	}
+}
+
 char	*texture_parser(t_structcub *cub, char *arr)
 {
 	(void)cub;
@@ -52,7 +70,7 @@ char	*texture_parser(t_structcub *cub, char *arr)
 		arr++;
 	if (*arr != '.')
 		error_handler1(5);
-	return (ft_strdup(arr));
+	return (arr);
 }
 
 unsigned int	color_parser(char *line)

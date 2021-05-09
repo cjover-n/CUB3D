@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 21:53:19 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/09 18:49:58 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/09 18:52:45 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,30 +46,6 @@ void	screenshot_draw(t_structcub *cub, int o)
 	pixels_image = (char *)cub->screen.addr_img;
 	while (i < cub->screen.width)
 		write(o, &pixels_image[i++ * (cub->screen.size_line * 4)], cub->screen.width * 16);
-
-	/*
-	int				y;
-	int				x;
-	unsigned int	*clr;
-	int				bpp;
-
-	bpp = (cub->screen.bit / 8);
-	y = cub->screen.height - 1;
-	while (y >= 0)
-	{
-		x = -1;
-		while (++x < cub->screen.width)
-		{
-			clr = &cub->screen.addr_img[(cub->screen.size_line * y) + x * bpp];
-			if (write(o, clr, bpp) < 0)
-			{
-				printf("Error haciendo la captura\n");
-				exit(1);
-			}
-		}
-		y--;
-	}
-	*/
 }
 
 void	screenshot(t_structcub *cub)

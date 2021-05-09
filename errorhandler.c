@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 12:33:30 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/08 19:55:57 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/09 19:18:04 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ void	error_handler1(int error)
 		printf("Error\nError al leer la resolución del mapa.\n");
 		exit (1);
 	}
-	//if (error == 4)
-	//{
-	//	printf("Error\nEl mapa tiene caracteres inválidos.\n");
-	//	exit (1);
-	//}
+	if (error == 4)
+	{
+		printf("Error\nValor de la resolución es más grande que INT.\n");
+		exit (1);
+	}
 	error_handler2(error);
 }
 

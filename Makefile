@@ -6,7 +6,7 @@
 #    By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/30 18:49:31 by cjover-n          #+#    #+#              #
-#    Updated: 2021/05/08 19:19:40 by cjover-n         ###   ########.fr        #
+#    Updated: 2021/05/09 20:14:00 by cjover-n         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,16 +43,16 @@ SRCOBJ = $(SRC:.c=.o) $(ADDLIBFT:.c=.o)
 
 #MLX = -l mlx
 
-CFLAGS = -Wextra -Wall -Werror -I ./ -I /usr/X11/include -g
+CFLAGS = -Wextra -Wall -Werror -I ./ -I /usr/X11/include #-g3 -fsanitize=address
 
-MLX = -L /usr/X11/lib -l mlx #-fsanitize=address
+MLX = -L /usr/X11/lib -l mlx
 
 MLXFLAGS = -framework OpenGL -framework AppKit
 
 all: $(NAME)
 
 $(NAME): $(SRC) $(SRCOBJ) Libft/libft.h
-	@gcc $(MLX) $(MLXFLAGS) $(SRCOBJ) -o cub3D
+	@gcc $(MLX) $(MLXFLAGS) $(SRCOBJ) $(CFLAGS) -o cub3D
 	@echo ${Y}==== CUB COMPILADO CORRECTAMENTE ==========${X}
 	@echo ${G}==== AHORA EJECTUTA ${R}cub3D ${G}SEGUIDO DE UN MAPA ${R}.cub ${G}====${X}
 	@echo ${G}==== USA ${B}--save ${G}COMO 3ER PARÁMETRO PARA OBTENER UN SCREENSHOT ====${X}
@@ -60,6 +60,7 @@ $(NAME): $(SRC) $(SRCOBJ) Libft/libft.h
 clean:
 	@rm -f *.o
 	@rm -f $(DIRLIBFTSRC)*.o
+	@rm -f screenshot.bmp
 	@rm -f *.out
 	@rm -f -r *.dSYM
 
