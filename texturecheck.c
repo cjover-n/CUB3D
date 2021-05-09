@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texturecheck.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 09:25:11 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/08 21:39:45 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/09 12:23:20 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	texture_check2(t_structcub *cub, int i, char *img, char *line)
 	}
 }
 
-int		something_strange(t_structcub *cub, char *line, int len)
+int	something_strange(t_structcub *cub, char *line, int len)
 {
 	(void)cub;
 	if (!(ft_strchr(line, 'R')) && !(ft_strnstr(line, "NO", len)) \

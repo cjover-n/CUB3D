@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapparser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 16:56:29 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/08 21:43:52 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/09 12:30:17 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,7 @@ char	*texture_parser(t_structcub *cub, char *arr)
 	while (*arr != '.' && *arr != '\0')
 		arr++;
 	if (*arr != '.')
-	{
 		error_handler1(5);
-		return (NULL);
-	}
 	return (ft_strdup(arr));
 }
 
