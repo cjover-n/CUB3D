@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/04 17:18:59 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/07 21:14:27 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/09 18:09:26 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,6 @@ int	raycaster(t_structcub *cub)
 		sprites(cub);
 	mlx_put_image_to_window(cub->screen.mlx_ptr, cub->screen.win_ptr,
 		cub->screen.buffer_img, 0, 0);
-	if (cub->bmp)
-	{
-		screenshot(cub);
-		exit(0);
-	}
 	movement1(cub);
 	return (0);
 }

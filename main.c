@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 17:12:52 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/07 21:14:18 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/09 18:41:45 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,16 @@ void	cub_core(t_structcub *cub, char **argv)
 		cub->spr.spriteorder = ft_calloc(cub->spr.found, sizeof(int));
 		cub->spr.spritedist = ft_calloc(cub->screen.width, sizeof(double));
 	}
-	mlx_loop_hook(cub->screen.mlx_ptr, raycaster, cub);
-	mlx_loop(cub->screen.mlx_ptr);
+	if (cub->bmp)
+	{
+		raycaster(cub);
+		screenshot(cub);
+	}
+	else
+	{
+		mlx_loop_hook(cub->screen.mlx_ptr, raycaster, cub);
+		mlx_loop(cub->screen.mlx_ptr);
+	}
 }
 
 int	main(int argc, char **argv)

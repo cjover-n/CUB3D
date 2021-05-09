@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 23:43:46 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/08 19:17:54 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/09 18:46:01 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,9 +254,8 @@ void			spritedraw_while(t_structcub *cub);
 void			free_things(t_structcub *cub);
 void			screenshot(t_structcub *cub);
 void			screenshot_draw(t_structcub *cub, int o);
-void			screenshot_header(t_structcub *cub, int o, \
-					unsigned char *bmp, int size);
-void			screenshot_bit(unsigned char *src, int nb);
+void			screenshot_header(t_structcub *cub, int o, int size);
+void			screenshot_bit(char *src, int nb);
 void			file_checker(char **argv);
 void			texture_check1(t_structcub *cub, char *line, int i);
 void			texture_check2(t_structcub *cub, int i, char *img, char *line);
