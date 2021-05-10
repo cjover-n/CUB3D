@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 13:01:02 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/07 19:29:17 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/10 14:19:28 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-
 
 void	load_texture1(t_structcub *cub)
 {
@@ -67,6 +65,7 @@ void	textures(t_structcub *cub)
 
 void	texture_calculation(t_structcub *cub)
 {
+	cub->tex.active = 0;
 	if (cub->side == 0 && cub->raydirx > 0)
 	{
 		cub->tex.active = cub->tex.addr_east;

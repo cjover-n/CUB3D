@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   screenshot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 21:53:19 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/09 18:52:45 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/10 14:21:32 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	screenshot_draw(t_structcub *cub, int o)
 	i = 0;
 	pixels_image = (char *)cub->screen.addr_img;
 	while (i < cub->screen.width)
-		write(o, &pixels_image[i++ * (cub->screen.size_line * 4)], cub->screen.width * 16);
+		write(o, &pixels_image[i++ *(cub->screen.size_line * 4)], \
+		cub->screen.width * 16);
 }
 
 void	screenshot(t_structcub *cub)
@@ -53,7 +54,8 @@ void	screenshot(t_structcub *cub)
 	int						o;
 	int						size;
 
-	o = open("screenshot.bmp", O_WRONLY | O_CREAT | S_IRWXU | O_TRUNC | O_APPEND);
+	o = open("screenshot.bmp", O_WRONLY | O_CREAT | S_IRWXU \
+		| O_TRUNC | O_APPEND);
 	if (o < 0)
 		printf("Error creando screenshot\n");
 	size = 54 + (cub->screen.width * cub->screen.height * 4);
