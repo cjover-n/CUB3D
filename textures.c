@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 13:01:02 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/10 14:19:28 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/10 20:26:53 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,8 @@ void	texture_color_selector(t_structcub *cub)
 		cub->tex.tex_pos += cub->tex.step;
 		cub->color = cub->tex.active[cub->tex.active_width \
 			* cub->tex.tex_y + cub->tex.tex_x];
+		if (cub->side == 1)
+			cub->color = (cub->color >> 1) & 8355711;
 		cub->screen.addr_img[y * cub->screen.width + cub->x] = cub->color;
 		y++;
 	}

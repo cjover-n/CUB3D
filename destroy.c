@@ -3,22 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   destroy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 12:13:47 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/10 19:38:45 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/10 20:28:45 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int		destroy_and_exit(t_structcub *cub)
+int	destroy_and_exit(t_structcub *cub)
 {
 	(void)cub;
-	//free_things(cub);
+	free_things(cub);
 	system("leaks cub3D");
 	exit(0);
 }
+
 void	free_things(t_structcub *cub)
 {
 	mlx_destroy_image(cub->screen.mlx_ptr, cub->screen.buffer_img);
