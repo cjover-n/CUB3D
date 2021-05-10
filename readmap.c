@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 19:00:09 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/10 19:38:59 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/10 21:47:27 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,7 @@ void	gnl(char *line, int fd, t_structcub *cub)
 			{
 				cub->isline = is_map_line(line, cub);
 				if (!cub->isline)
-				{
-					free(line);
 					error_handler1(7);
-				}
 				else
 					get_map(cub, line, &cub->map_buff);
 			}
