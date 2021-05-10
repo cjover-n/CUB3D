@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+         #
+#    By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/30 18:49:31 by cjover-n          #+#    #+#              #
-#    Updated: 2021/05/10 14:19:35 by cjover-n         ###   ########.fr        #
+#    Updated: 2021/05/10 19:31:48 by cjover-n         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ SRCOBJ = $(SRC:.c=.o) $(ADDLIBFT:.c=.o)
 
 #MLX = -l mlx
 
-CFLAGS = -Wextra -Wall -Werror -I ./ -I /usr/X11/include #-g3 -fsanitize=address
+CFLAGS = -Wextra -Wall -Werror -I ./ -I /usr/X11/include -g #-g3 -fsanitize=address
 
 MLX = -L /usr/X11/lib -l mlx
 
