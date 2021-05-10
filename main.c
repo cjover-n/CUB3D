@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 17:12:52 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/09 18:41:45 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/10 21:18:42 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	cub_core(t_structcub *cub, char **argv)
 	if (cub->spr.found)
 	{
 		cub->spr.spriteorder = ft_calloc(cub->spr.found, sizeof(int));
-		cub->spr.spritedist = ft_calloc(cub->screen.width, sizeof(double));
+		//cub->spr.spritedist = ft_calloc(cub->screen.width, sizeof(double));
 	}
 	if (cub->bmp)
 	{
