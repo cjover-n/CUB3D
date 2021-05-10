@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 17:12:52 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/10 21:18:42 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/10 21:31:39 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,6 @@ void	keyhandle(t_structcub *cub)
 	mlx_hook(cub->screen.win_ptr, 2, 1L << 0, keypress, cub);
 	mlx_hook(cub->screen.win_ptr, 3, 1L << 1, keyrelease, cub);
 	mlx_hook(cub->screen.win_ptr, 17, 0, destroy_and_exit, cub);
-}
-
-void	file_checker(char **argv)
-{
-	char	*tmp;
-
-	if ((ft_strchr(argv[1], '.')))
-	{
-		tmp = ft_strchr(argv[1], '.');
-		if (!(*++tmp == 'c' && *++tmp == 'u' && *++tmp == 'b' && *++tmp == '\0'))
-			error_handler1(12);
-	}
-	else
-		error_handler1(13);
 }
 
 void	cub_core(t_structcub *cub, char **argv)
@@ -61,10 +47,12 @@ void	cub_core(t_structcub *cub, char **argv)
 	cub->spr.zbuffer = ft_calloc(cub->screen.width, sizeof(double));
 	messages(cub);
 	if (cub->spr.found)
-	{
 		cub->spr.spriteorder = ft_calloc(cub->spr.found, sizeof(int));
-		//cub->spr.spritedist = ft_calloc(cub->screen.width, sizeof(double));
-	}
+	run_raycaster(cub);
+}
+
+void	run_raycaster(t_structcub *cub)
+{
 	if (cub->bmp)
 	{
 		raycaster(cub);

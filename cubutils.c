@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cubutils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 21:01:39 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/08 18:07:28 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/10 21:30:38 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,18 @@ int	rgb_range(int cr)
 unsigned int	create_trgb(int t, int r, int g, int b)
 {
 	return (t << 24 | r << 16 | g << 8 | b);
+}
+
+void	file_checker(char **argv)
+{
+	char	*tmp;
+
+	if ((ft_strchr(argv[1], '.')))
+	{
+		tmp = ft_strchr(argv[1], '.');
+		if (!(*++tmp == 'c' && *++tmp == 'u' && *++tmp == 'b' && *++tmp == '\0'))
+			error_handler1(12);
+	}
+	else
+		error_handler1(13);
 }

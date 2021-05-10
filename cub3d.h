@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 23:43:46 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/10 21:06:02 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/10 21:32:07 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,7 @@ typedef struct s_structcub
 
 void			cub_core(t_structcub *cub, char **argv);
 void			init_parameters(t_structcub *cub);
+void			run_raycaster(t_structcub *cub);
 void			error_handler1(int error);
 void			error_handler2(int error);
 void			error_handler3(int error);

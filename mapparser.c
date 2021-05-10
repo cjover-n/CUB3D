@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapparser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 16:56:29 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/09 20:23:25 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/10 21:35:51 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	resolution_parser(char *line, t_structcub *cub)
 			{
 				cub->screen.height = ft_atoi(&line[i]);
 				height_width_check(cub, 1);
-				i = ft_numlen(cub->screen.width) + ft_numlen(cub->screen.height) \
-					+ 3;
+				i = ft_numlen(cub->screen.width) \
+					+ ft_numlen(cub->screen.height) + 3;
 				if (line[i] == '\0')
 					return ;
 				if (!ft_isdigit(line[i]))
