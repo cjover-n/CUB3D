@@ -6,44 +6,11 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 16:56:29 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/10 21:35:51 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/11 14:40:14 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	resolution_parser(char *line, t_structcub *cub)
-{
-	int		i;
-
-	i = 0;
-	if (!cub->screen.width && !cub->screen.height)
-	{
-		while (!(ft_isdigit(line[i])))
-			i++;
-		if (ft_isdigit(line[i]))
-		{
-			cub->screen.width = ft_atoi(&line[i]);
-			height_width_check(cub, 0);
-			i = ft_numlen(cub->screen.width) + i + 1;
-			if (ft_isdigit(line[i]) == 1)
-			{
-				cub->screen.height = ft_atoi(&line[i]);
-				height_width_check(cub, 1);
-				i = ft_numlen(cub->screen.width) \
-					+ ft_numlen(cub->screen.height) + 3;
-				if (line[i] == '\0')
-					return ;
-				if (!ft_isdigit(line[i]))
-					error_handler1(16);
-			}
-		}
-		else
-			error_handler1(3);
-	}
-	else
-		error_handler1(18);
-}
 
 void	height_width_check(t_structcub *cub, int id)
 {
@@ -73,36 +40,35 @@ char	*texture_parser(t_structcub *cub, char *arr)
 	return (arr);
 }
 
-unsigned int	color_parser(char *line)
+unsigned int	color_parser1(t_structcub *cub, char *line)
 {
-	int				i;
-	int				x;
-	int				color[3];
-
-	x = 0;
-	i = space_checker(line, 1);
-	if (line[i] == 'F' || line[i] == 'C')
-		i++;
-	if (ft_isspace(line[i]))
-		i++;
-	while (ft_isdigit(line[i]))
+	cub->col_x = 0;
+	cub->col_i = space_checker(line, 1);
+	if (line[cub->col_i] == 'F' || line[cub->col_i] == 'C')
+		cub->col_i++;
+	if (ft_isspace(line[cub->col_i]))
+		cub->col_i++;
+	while (ft_isdigit(line[cub->col_i]))
 	{
-		if (ft_isdigit(line[i]))
-		{
-			color[x] = ft_atoi(line + i);
-			if (!ft_isdigit(line[i + 1]))
-				error_handler1(24);
-			if (rgb_range(color[x]) == 0)
-				error_handler1(25);
-			i += ft_numlen(color[x]);
-		}
+		if (ft_isdigit(line[cub->col_i]))
+			color_parser2(cub, line);
 		else
 			error_handler1(26);
-		if (line[i] == ',')
-			x++;
-		i += (line[i] != '\0');
+		if (line[cub->col_i] == ',')
+			cub->col_x++;
+		cub->col_i += (line[cub->col_i] != '\0');
 	}
-	if (x != 2)
+	if (cub->col_x != 2)
 		error_handler1(27);
-	return (create_trgb(0, color[0], color[1], color[2]));
+	return (create_trgb(0, cub->c_color[0], cub->c_color[1], cub->c_color[2]));
+}
+
+void	color_parser2(t_structcub *cub, char *line)
+{
+	cub->c_color[cub->col_x] = ft_atoi(line + cub->col_i);
+	if (!ft_isdigit(line[cub->col_i + 1]))
+		error_handler1(24);
+	if (rgb_range(cub->c_color[cub->col_x]) == 0)
+		error_handler1(25);
+	cub->col_i += ft_numlen(cub->c_color[cub->col_x]);
 }

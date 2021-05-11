@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 23:43:46 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/10 21:32:07 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/11 14:39:07 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,6 +190,9 @@ typedef struct s_structcub
 	size_t			buf;
 	char			*map_buff;
 	int				bmp;
+	int				col_i;
+	int				col_x;
+	int				c_color[3];
 }				t_structcub;
 
 void			cub_core(t_structcub *cub, char **argv);
@@ -217,11 +220,13 @@ void			readmap(char *cubmap, t_structcub *cub);
 void			gnl(char *line, int fd, t_structcub *cub);
 void			gnl_ch(int gnl, char *line, t_structcub *cub);
 void			line_checker(char *line, t_structcub *cub);
-void			resolution_parser(char *line, t_structcub *cub);
+void			resolution_parser1(char *line, t_structcub *cub);
+void			resolution_parser2(char *line, t_structcub *cub, int i);
 int				rgb_range(int cr);
 unsigned int	create_trgb(int t, int r, int g, int b);
 char			*texture_parser(t_structcub *cub, char *arr);
-unsigned int	color_parser(char *line);
+unsigned int	color_parser1(t_structcub *cub, char *line);
+void			color_parser2(t_structcub *cub, char *line);
 int				space_checker(char *line, int i);
 int				is_map_line(char *line, t_structcub *cub);
 void			is_map_player(char *line, t_structcub *cub, int i);
