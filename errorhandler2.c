@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errorhandler2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 12:33:30 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/12 13:23:28 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/13 19:31:08 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,17 @@ void	error_handler8(int error)
 {
 	if (error == 28)
 	{
-		printf("Error\nFalta o sobra algún parámetro del .cub\n");
+		printf("Error\nFalta algún parámetro del .cub\n");
 		exit (1);
 	}
 	if (error == 29)
 	{
-		printf("Error\nFalta la resolución.\n");
+		printf("Error\nFalta la resolución o hay algo incorrecto.\n");
+		exit (1);
+	}
+	if (error == 30)
+	{
+		printf("Error\nHas metido algo no permitido entre los parámetros\n");
 		exit (1);
 	}
 }

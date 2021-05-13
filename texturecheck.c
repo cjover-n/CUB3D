@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texturecheck.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 09:25:11 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/12 13:41:22 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/13 19:45:41 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,10 @@ void	texture_floor_ceiling(t_structcub *cub)
 int	something_strange(t_structcub *cub, char *line, int len)
 {
 	(void)cub;
-	if (!(ft_strchr(line, 'R')) && !(ft_strnstr(line, "NO", len)) \
-		&& !(ft_strnstr(line, "EA", len)) && !(ft_strnstr(line, "SO", len)) \
-		&& !(ft_strnstr(line, "WE", len)) && !(ft_strchr(line, 'S')) \
-		&& !(ft_strchr(line, 'F')) && !(ft_strchr(line, 'C')) \
-		&& !cub->map_start)
+	if (!(ft_strnstr(line, "R ", len)) && !(ft_strnstr(line, "NO ", len)) \
+		&& !(ft_strnstr(line, "EA ", len)) && !(ft_strnstr(line, "SO ", len)) \
+		&& !(ft_strnstr(line, "WE ", len)) && !(ft_strnstr(line, "C ", len)) \
+		&& !(ft_strnstr(line, "F ", len)) && !(ft_strnstr(line, "S ", len)))
 		return (1);
 	else
 		return (0);

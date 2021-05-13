@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readmap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 19:00:09 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/12 19:16:07 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/13 20:21:36 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	gnl(char *line, int fd, t_structcub *cub)
 	while (gnl > 0)
 	{
 		cub->isline = 0;
-		if (!everything_ok(cub) && ft_strncmp(line, "111", 3) != 0 \
+		if (!everything_ok(cub) && !ft_strnstr(line, "111", 3) \
 			&& cub->map_start < 1)
 			line_checker(line, cub);
 		else
@@ -87,28 +87,28 @@ void	line_checker(char *line, t_structcub *cub)
 	while (ft_isspace(line[i]))
 		i++;
 	len = ft_strlen(line);
-	if (line[i] == 'R' && ft_strchr(line, 'R') && !cub->r_flag)
+	if (line[i] == 'R' && ft_strnstr(line, "R ", len) && !cub->r_flag)
 		resolution_parser1(line, cub);
-	else if (line[i] == 'N' && ft_strnstr(line, "NO", len) && !cub->n_flag)
+	else if (line[i] == 'N' && ft_strnstr(line, "NO ", len) && !cub->n_flag)
 		texture_check1(cub, line, 0);
-	else if (line[i] == 'E' && ft_strnstr(line, "EA", len) && !cub->e_flag)
+	else if (line[i] == 'E' && ft_strnstr(line, "EA ", len) && !cub->e_flag)
 		texture_check1(cub, line, 1);
-	else if (line[i] == 'S' && ft_strnstr(line, "SO", len) && !cub->s_flag)
+	else if (line[i] == 'S' && ft_strnstr(line, "SO ", len) && !cub->s_flag)
 		texture_check1(cub, line, 2);
-	else if (line[i] == 'W' && ft_strnstr(line, "WE", len) && !cub->w_flag)
+	else if (line[i] == 'W' && ft_strnstr(line, "WE ", len) && !cub->w_flag)
 		texture_check1(cub, line, 3);
-	else if (line[i] == 'S' && ft_strchr(line, 'S') && !cub->s_flag)
+	else if (line[i] == 'S' && ft_strnstr(line, "S ", len) && !cub->spr_flag)
 		texture_check1(cub, line, 4);
-	else if (line[i] == 'F' && ft_strchr(line, 'F') && !cub->f_flag)
+	else if (line[i] == 'F' && ft_strnstr(line, "F ", len) && !cub->f_flag)
 		color_asign(cub, line, 0);
-	else if (line[i] == 'C' && ft_strchr(line, 'C') && !cub->c_flag)
+	else if (line[i] == 'C' && ft_strnstr(line, "C ", len) && !cub->c_flag)
 		color_asign(cub, line, 1);
 	else if (line[i++] == '\0')
 		return ;
 	else
 		map_error(cub);
 	if (something_strange(cub, line, len))
-		error_handler1(28);
+		error_handler1(30);
 }
 
 void	map_error(t_structcub *cub)
@@ -116,22 +116,22 @@ void	map_error(t_structcub *cub)
 	if (!cub->r_flag && cub->n_flag && cub->s_flag && cub->w_flag \
 		&& cub->e_flag && cub->c_flag && cub->f_flag && cub->spr_flag)
 		error_handler1(29);
-	if (cub->r_flag && !cub->n_flag && cub->s_flag && cub->w_flag \
+	else if (cub->r_flag && !cub->n_flag && cub->s_flag && cub->w_flag \
 		&& cub->e_flag && cub->c_flag && cub->f_flag && cub->spr_flag)
 		error_handler1(19);
-	if (cub->r_flag && cub->n_flag && !cub->s_flag && cub->w_flag \
+	else if (cub->r_flag && cub->n_flag && !cub->s_flag && cub->w_flag \
 		&& cub->e_flag && cub->c_flag && cub->f_flag && cub->spr_flag)
 		error_handler1(21);
-	if (cub->r_flag && cub->n_flag && cub->s_flag && !cub->w_flag \
+	else if (cub->r_flag && cub->n_flag && cub->s_flag && !cub->w_flag \
 		&& cub->e_flag && cub->c_flag && cub->f_flag && cub->spr_flag)
 		error_handler1(22);
-	if (cub->r_flag && cub->n_flag && cub->s_flag && cub->w_flag \
+	else if (cub->r_flag && cub->n_flag && cub->s_flag && cub->w_flag \
 		&& !cub->e_flag && cub->c_flag && cub->f_flag && cub->spr_flag)
 		error_handler1(20);
-	if (cub->r_flag && cub->n_flag && cub->s_flag && cub->w_flag \
+	else if (cub->r_flag && cub->n_flag && cub->s_flag && cub->w_flag \
 		&& cub->e_flag && (!cub->c_flag || !cub->f_flag) && cub->spr_flag)
 		error_handler1(24);
-	if (cub->r_flag && cub->n_flag && cub->s_flag && cub->w_flag \
+	else if (cub->r_flag && cub->n_flag && cub->s_flag && cub->w_flag \
 		&& cub->e_flag && cub->c_flag && cub->f_flag && !cub->spr_flag)
 		error_handler1(23);
 	else

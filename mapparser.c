@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapparser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 16:56:29 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/12 13:13:26 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/13 20:21:45 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ unsigned int	color_parser1(t_structcub *cub, char *line)
 {
 	cub->col_x = 0;
 	cub->col_i = space_checker(line, 1);
-	//if (line[cub->col_i] == 'F' || line[cub->col_i] == 'C')
-	//	cub->col_i++;
 	if (ft_isspace(line[cub->col_i]))
 		cub->col_i++;
 	while (ft_isdigit(line[cub->col_i]))
@@ -82,7 +80,7 @@ unsigned int	color_parser1(t_structcub *cub, char *line)
 void	color_parser2(t_structcub *cub, char *line)
 {
 	cub->c_color[cub->col_x] = ft_atoi(line + cub->col_i);
-	if (!ft_isdigit(line[cub->col_i + 1]))
+	if (!ft_isdigit(line[cub->col_i + 1]) && line[cub->col_i + 1] != ',' && line[cub->col_i + 1] != '\0')
 		error_handler1(24);
 	if (rgb_range(cub->c_color[cub->col_x]) == 0)
 		error_handler1(25);
