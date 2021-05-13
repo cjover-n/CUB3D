@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:22:29 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/13 22:39:18 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/13 23:35:46 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	resolution_parser1(char *line, t_structcub *cub)
 		if (ft_isdigit(line[i]))
 			resolution_parser2(line, cub, i);
 		else
+			error_handler1(3);
+		if (!cub->screen.height)
 			error_handler1(3);
 	}
 	else

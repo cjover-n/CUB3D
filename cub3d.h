@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 23:43:46 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/13 22:56:08 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/13 23:37:46 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <mlx.h>
 # include <math.h>
 # include <stdio.h>
+# include <limits.h>
 # include "./Libft/libft.h"
 
 # define KEY_ESC 53
