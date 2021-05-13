@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 12:33:30 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/13 19:31:08 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/13 22:34:23 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,12 @@ void	error_handler8(int error)
 	}
 	if (error == 30)
 	{
-		printf("Error\nHas metido algo no permitido entre los parámetros\n");
+		printf("Error\nHas metido algo no permitido.\n");
+		exit (1);
+	}
+	if (error == 31)
+	{
+		printf("Error\nCosas repetidas.\n");
 		exit (1);
 	}
 }

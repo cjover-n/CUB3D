@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 19:00:09 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/13 20:21:36 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/13 22:56:44 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	line_checker(char *line, t_structcub *cub)
 	while (ft_isspace(line[i]))
 		i++;
 	len = ft_strlen(line);
+	repeating_values(cub, line, len);
 	if (line[i] == 'R' && ft_strnstr(line, "R ", len) && !cub->r_flag)
 		resolution_parser1(line, cub);
 	else if (line[i] == 'N' && ft_strnstr(line, "NO ", len) && !cub->n_flag)

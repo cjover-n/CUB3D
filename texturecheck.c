@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 09:25:11 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/13 19:45:41 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/13 22:55:37 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,20 @@ void	texture_floor_ceiling(t_structcub *cub)
 int	something_strange(t_structcub *cub, char *line, int len)
 {
 	(void)cub;
-	if (!(ft_strnstr(line, "R ", len)) && !(ft_strnstr(line, "NO ", len)) \
+	if ((!(ft_strnstr(line, "R ", len)) && !(ft_strnstr(line, "NO ", len)) \
 		&& !(ft_strnstr(line, "EA ", len)) && !(ft_strnstr(line, "SO ", len)) \
 		&& !(ft_strnstr(line, "WE ", len)) && !(ft_strnstr(line, "C ", len)) \
-		&& !(ft_strnstr(line, "F ", len)) && !(ft_strnstr(line, "S ", len)))
+		&& !(ft_strnstr(line, "F ", len)) && !(ft_strnstr(line, "S ", len))))
 		return (1);
 	else
 		return (0);
+}
+
+void	repeating_values(t_structcub *cub, char *line, int len)
+{
+	if (((ft_strnstr(line, "R ", len) && cub->r_flag) || (ft_strnstr(line, "NO ", len) && cub->n_flag) \
+	|| (ft_strnstr(line, "EA ", len) && cub->e_flag) || (ft_strnstr(line, "SO ", len) && cub->s_flag) \
+	|| (ft_strnstr(line, "WE ", len) && cub->w_flag) || (ft_strnstr(line, "C ", len) && cub->c_flag) \
+	|| (ft_strnstr(line, "F ", len) && cub->f_flag) || (ft_strnstr(line, "S ", len) && cub->spr_flag)))
+		error_handler1(31);
 }

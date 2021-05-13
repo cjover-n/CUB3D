@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 23:43:46 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/13 19:58:25 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/13 22:56:08 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -281,5 +281,6 @@ int				something_strange(t_structcub *cub, char *line, int len);
 void			height_width_check(t_structcub *cub, int id);
 void			map_error(t_structcub *cub);
 void			color_asign(t_structcub *cub, char *line, int id);
+void			repeating_values(t_structcub *cub, char *line, int len);
 
 #endif

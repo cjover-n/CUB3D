@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 12:13:47 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/10 21:18:02 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/13 22:09:22 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	destroy_and_exit(t_structcub *cub)
 {
 	(void)cub;
 	free_things(cub);
-	system("leaks cub3D");
+	//system("leaks cub3D");
 	exit(1);
 }
 

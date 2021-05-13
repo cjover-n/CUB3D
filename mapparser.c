@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 16:56:29 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/13 20:21:45 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/13 22:18:52 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,6 @@ void	color_parser2(t_structcub *cub, char *line)
 		error_handler1(24);
 	if (rgb_range(cub->c_color[cub->col_x]) == 0)
 		error_handler1(25);
-	cub->col_i += ft_numlen(cub->c_color[cub->col_x]);
+	while (ft_isdigit(line[cub->col_i]))
+		cub->col_i++;
 }
