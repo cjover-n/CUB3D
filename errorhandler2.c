@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 12:33:30 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/10 21:29:13 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/12 13:23:28 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	error_handler6(int error)
 	}
 	if (error == 23)
 	{
-		printf("Error\nEl sprite no es válido.\n");
+		printf("Error\nFalta el sprite.\n");
 		exit (1);
 	}
 	error_handler7(error);
@@ -76,12 +76,22 @@ void	error_handler7(int error)
 	}
 	if (error == 27)
 	{
-		printf("Error\nComas mal en el color RGB.\n");
+		printf("Error\nError en el color RGB.\n");
 		exit (1);
 	}
+	error_handler8(error);
+}
+
+void	error_handler8(int error)
+{
 	if (error == 28)
 	{
-		printf("Error\nTextura o color inválido dentro del .cub.\n");
+		printf("Error\nFalta o sobra algún parámetro del .cub\n");
+		exit (1);
+	}
+	if (error == 29)
+	{
+		printf("Error\nFalta la resolución.\n");
 		exit (1);
 	}
 }

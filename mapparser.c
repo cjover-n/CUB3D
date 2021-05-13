@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 16:56:29 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/11 14:40:14 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/12 13:13:26 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	height_width_check(t_structcub *cub, int id)
 {
 	if (id == 0)
 	{
+		cub->w_len = ft_numlen(cub->screen.width);
 		if (cub->screen.width > 2560)
 			cub->screen.width = 2560;
 		if (cub->screen.width == -1)
@@ -23,6 +24,7 @@ void	height_width_check(t_structcub *cub, int id)
 	}
 	if (id == 1)
 	{
+		cub->h_len = ft_numlen(cub->screen.height);
 		if (cub->screen.height > 1395)
 			cub->screen.height = 1395;
 		if (cub->screen.height == -1)
@@ -40,12 +42,26 @@ char	*texture_parser(t_structcub *cub, char *arr)
 	return (arr);
 }
 
+void	color_asign(t_structcub *cub, char *line, int id)
+{
+	if (id == 0)
+	{
+		cub->f_hex = color_parser1(cub, line);
+		cub->f_flag = 1;
+	}
+	if (id == 1)
+	{
+		cub->c_hex = color_parser1(cub, line);
+		cub->c_flag = 1;
+	}
+}
+
 unsigned int	color_parser1(t_structcub *cub, char *line)
 {
 	cub->col_x = 0;
 	cub->col_i = space_checker(line, 1);
-	if (line[cub->col_i] == 'F' || line[cub->col_i] == 'C')
-		cub->col_i++;
+	//if (line[cub->col_i] == 'F' || line[cub->col_i] == 'C')
+	//	cub->col_i++;
 	if (ft_isspace(line[cub->col_i]))
 		cub->col_i++;
 	while (ft_isdigit(line[cub->col_i]))

@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/28 23:43:46 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/11 14:39:07 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/12 13:40:42 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,6 +193,17 @@ typedef struct s_structcub
 	int				col_i;
 	int				col_x;
 	int				c_color[3];
+	int				w_len;
+	int				h_len;
+	int				r_flag;
+	int				n_flag;
+	int				s_flag;
+	int				w_flag;
+	int				e_flag;
+	int				c_flag;
+	int				f_flag;
+	int				spr_flag;
+	int				map_start;
 }				t_structcub;
 
 void			cub_core(t_structcub *cub, char **argv);
@@ -205,6 +216,7 @@ void			error_handler4(int error);
 void			error_handler5(int error);
 void			error_handler6(int error);
 void			error_handler7(int error);
+void			error_handler8(int error);
 void			messages(t_structcub *cub);
 void			movement1(t_structcub *cub);
 void			movement2(t_structcub *cub);
@@ -267,5 +279,7 @@ void			texture_check1(t_structcub *cub, char *line, int i);
 void			texture_check2(t_structcub *cub, int i, char *img, char *line);
 int				something_strange(t_structcub *cub, char *line, int len);
 void			height_width_check(t_structcub *cub, int id);
+void			map_error(t_structcub *cub);
+void			color_asign(t_structcub *cub, char *line, int id);
 
 #endif
