@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 12:33:30 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/10 21:28:14 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/14 13:36:05 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void	error_handler3(int error)
 	if (error == 11)
 	{
 		printf("Error\nMapa incorrecto, no está bien cerrado.\n");
-		system("leaks cub3D");
 		exit (1);
 	}
 	if (error == 12)
