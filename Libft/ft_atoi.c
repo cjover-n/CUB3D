@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atoi_cub.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 19:29:30 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/13 21:54:35 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/14 09:21:33 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+int	ft_atoi_cub(const char *str)
 {
 	unsigned int	result;
 	int				sign;
@@ -35,5 +35,7 @@ int	ft_atoi(const char *str)
 		result = (result * 10) + str[i] - 48;
 		i++;
 	}
+	if (ft_numlen(result) > 5)
+		return (-1);
 	return (result * sign);
 }

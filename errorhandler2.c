@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errorhandler2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 12:33:30 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/13 22:34:23 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/14 09:31:30 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	error_handler8(int error)
 {
 	if (error == 28)
 	{
-		printf("Error\nFalta algún parámetro del .cub\n");
+		printf("Error\nFalta un parámetro del .cub o es incorrecto\n");
 		exit (1);
 	}
 	if (error == 29)

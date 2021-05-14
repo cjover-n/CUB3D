@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   resparser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:22:29 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/13 23:35:46 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/14 09:29:00 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,16 @@ void	resolution_parser1(char *line, t_structcub *cub)
 
 void	resolution_parser2(char *line, t_structcub *cub, int i)
 {
-	cub->screen.width = ft_atoi(&line[i]);
+	cub->screen.width = ft_atoi_cub(&line[i]);
+	if (cub->screen.width < 0 || ft_strchr(line, '-'))
+		error_handler1(29);
 	height_width_check(cub, 0);
 	i = cub->w_len + i + 1;
 	if (ft_isdigit(line[i]) == 1)
 	{
-		cub->screen.height = ft_atoi(&line[i]);
+		cub->screen.height = ft_atoi_cub(&line[i]);
+		if (cub->screen.height < 0 || ft_strchr(line, '-'))
+			error_handler1(29);
 		height_width_check(cub, 1);
 		i = cub->w_len + cub->h_len + 3;
 		if (line[i] == '\0')
