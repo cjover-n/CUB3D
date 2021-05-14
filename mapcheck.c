@@ -6,7 +6,7 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 19:55:30 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/13 23:19:55 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/14 19:30:00 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ int	is_map_line(char *line, t_structcub *cub)
 				line[i] = '?';
 			}
 			is_map_player(line, cub, i);
-			if (line[i] == '0' || line[i] == 'N' || line[i] == 'S' \
-				|| line[i] == 'W' || line[i] == 'E')
-				line[i] = 33;
+			flood_prepare(line, i);
 			cub->map_len = ft_strlen(line);
 		}
 		else
@@ -40,6 +38,13 @@ int	is_map_line(char *line, t_structcub *cub)
 		i++;
 	}
 	return (cub->isline);
+}
+
+void	flood_prepare(char *line, int i)
+{
+	if (line[i] == '0' || line[i] == 'N' || line[i] == 'S' \
+		|| line[i] == 'W' || line[i] == 'E')
+		line[i] = 33;
 }
 
 void	is_map_player(char *line, t_structcub *cub, int i)
@@ -68,4 +73,17 @@ void	get_map(t_structcub *cub, char *line, char **buffer)
 	*buffer = ft_strdup(temp2);
 	free(temp2);
 	cub->line_counter++;
+}
+
+int	everything_ok(t_structcub *cub)
+{
+	int		todo;
+
+	if (!cub->t_north || !cub->t_west || !cub->t_east || !cub->t_south \
+		|| !cub->t_sprite || !cub->screen.width || !cub->screen.height \
+		|| !cub->f_hex || !cub->c_hex)
+		todo = 0;
+	else
+		todo = 1;
+	return (todo);
 }

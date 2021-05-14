@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   resparser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 14:22:29 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/14 09:29:00 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/14 19:21:27 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,6 @@ void	resolution_parser2(char *line, t_structcub *cub, int i)
 			return ;
 		if (!ft_isdigit(line[i]))
 			error_handler1(16);
-		cub->r_flag = 1;
+		cub->rf = 1;
 	}
 }

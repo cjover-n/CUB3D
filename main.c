@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/29 17:12:52 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/10 21:31:39 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/14 19:29:09 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,21 @@ void	init_parameters(t_structcub *cub)
 	cub->buf = 4;
 }
 
-void	keyhandle(t_structcub *cub)
+void	readmap(char *cubmap, t_structcub *cub)
 {
-	mlx_do_key_autorepeatoff(cub->screen.mlx_ptr);
-	mlx_hook(cub->screen.win_ptr, 2, 1L << 0, keypress, cub);
-	mlx_hook(cub->screen.win_ptr, 3, 1L << 1, keyrelease, cub);
-	mlx_hook(cub->screen.win_ptr, 17, 0, destroy_and_exit, cub);
+	char	*line;
+	int		fd;
+
+	fd = open(cubmap, O_RDONLY, S_IRUSR);
+	if (fd >= 3)
+	{
+		line = NULL;
+		gnl(line, fd, cub);
+		close(fd);
+		if (cub->spr.found > 0)
+			get_sprites(cub);
+		free(line);
+	}
 }
 
 void	cub_core(t_structcub *cub, char **argv)

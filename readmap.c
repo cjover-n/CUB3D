@@ -6,35 +6,16 @@
 /*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/17 19:00:09 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/13 22:56:44 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/14 19:29:13 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	readmap(char *cubmap, t_structcub *cub)
-{
-	char	*line;
-	int		fd;
-
-	fd = open(cubmap, O_RDONLY, S_IRUSR);
-	if (fd >= 3)
-	{
-		line = NULL;
-		gnl(line, fd, cub);
-		close(fd);
-		if (cub->spr.found > 0)
-			get_sprites(cub);
-		free(line);
-	}
-}
-
 void	gnl(char *line, int fd, t_structcub *cub)
 {
-	int	gnl;
-
-	gnl = get_next_line(fd, &line);
-	while (gnl > 0)
+	cub->gnl = get_next_line(fd, &line);
+	while (cub->gnl > 0)
 	{
 		cub->isline = 0;
 		if (!everything_ok(cub) && !ft_strnstr(line, "111", 3) \
@@ -53,17 +34,17 @@ void	gnl(char *line, int fd, t_structcub *cub)
 			}
 		}
 		free(line);
-		gnl = get_next_line(fd, &line);
+		cub->gnl = get_next_line(fd, &line);
 	}
-	gnl_ch(gnl, line, cub);
+	gnl_ch(line, cub);
 	free(line);
 }
 
-void	gnl_ch(int gnl, char *line, t_structcub *cub)
+void	gnl_ch(char *line, t_structcub *cub)
 {
-	if (gnl < 0)
+	if (cub->gnl < 0)
 		error_handler1(2);
-	else if (gnl == 0)
+	else if (cub->gnl == 0)
 	{
 		cub->isline = 0;
 		cub->isline = is_map_line(line, cub);
@@ -78,76 +59,65 @@ void	gnl_ch(int gnl, char *line, t_structcub *cub)
 	}
 }
 
+void	line_init(char *line, t_structcub *cub)
+{
+	cub->z = 0;
+	while (ft_isspace(line[cub->z]))
+		cub->z++;
+	cub->l = ft_strlen(line);
+	repeating_values(cub, line);
+}
+
 void	line_checker(char *line, t_structcub *cub)
 {
-	int		len;
-	int		i;
-
-	i = 0;
-	while (ft_isspace(line[i]))
-		i++;
-	len = ft_strlen(line);
-	repeating_values(cub, line, len);
-	if (line[i] == 'R' && ft_strnstr(line, "R ", len) && !cub->r_flag)
+	line_init(line, cub);
+	if (line[cub->z] == 'R' && ft_strnstr(line, "R ", cub->l) && !cub->rf)
 		resolution_parser1(line, cub);
-	else if (line[i] == 'N' && ft_strnstr(line, "NO ", len) && !cub->n_flag)
+	else if (line[cub->z] == 'N' && ft_strnstr(line, "NO ", cub->l) && !cub->nf)
 		texture_check1(cub, line, 0);
-	else if (line[i] == 'E' && ft_strnstr(line, "EA ", len) && !cub->e_flag)
+	else if (line[cub->z] == 'E' && ft_strnstr(line, "EA ", cub->l) && !cub->ef)
 		texture_check1(cub, line, 1);
-	else if (line[i] == 'S' && ft_strnstr(line, "SO ", len) && !cub->s_flag)
+	else if (line[cub->z] == 'S' && ft_strnstr(line, "SO ", cub->l) && !cub->sf)
 		texture_check1(cub, line, 2);
-	else if (line[i] == 'W' && ft_strnstr(line, "WE ", len) && !cub->w_flag)
+	else if (line[cub->z] == 'W' && ft_strnstr(line, "WE ", cub->l) && !cub->wf)
 		texture_check1(cub, line, 3);
-	else if (line[i] == 'S' && ft_strnstr(line, "S ", len) && !cub->spr_flag)
+	else if (line[cub->z] == 'S' && ft_strnstr(line, "S ", cub->l) && !cub->pf)
 		texture_check1(cub, line, 4);
-	else if (line[i] == 'F' && ft_strnstr(line, "F ", len) && !cub->f_flag)
+	else if (line[cub->z] == 'F' && ft_strnstr(line, "F ", cub->l) && !cub->ff)
 		color_asign(cub, line, 0);
-	else if (line[i] == 'C' && ft_strnstr(line, "C ", len) && !cub->c_flag)
+	else if (line[cub->z] == 'C' && ft_strnstr(line, "C ", cub->l) && !cub->cf)
 		color_asign(cub, line, 1);
-	else if (line[i++] == '\0')
+	else if (line[cub->z++] == '\0')
 		return ;
 	else
 		map_error(cub);
-	if (something_strange(cub, line, len))
+	if (something_strange(cub, line))
 		error_handler1(30);
 }
 
 void	map_error(t_structcub *cub)
 {
-	if (!cub->r_flag && cub->n_flag && cub->s_flag && cub->w_flag \
-		&& cub->e_flag && cub->c_flag && cub->f_flag && cub->spr_flag)
+	if (!cub->rf && cub->nf && cub->sf && cub->wf \
+		&& cub->ef && cub->cf && cub->ff && cub->pf)
 		error_handler1(29);
-	else if (cub->r_flag && !cub->n_flag && cub->s_flag && cub->w_flag \
-		&& cub->e_flag && cub->c_flag && cub->f_flag && cub->spr_flag)
+	else if (cub->rf && !cub->nf && cub->sf && cub->wf \
+		&& cub->ef && cub->cf && cub->ff && cub->pf)
 		error_handler1(19);
-	else if (cub->r_flag && cub->n_flag && !cub->s_flag && cub->w_flag \
-		&& cub->e_flag && cub->c_flag && cub->f_flag && cub->spr_flag)
+	else if (cub->rf && cub->nf && !cub->sf && cub->wf \
+		&& cub->ef && cub->cf && cub->ff && cub->pf)
 		error_handler1(21);
-	else if (cub->r_flag && cub->n_flag && cub->s_flag && !cub->w_flag \
-		&& cub->e_flag && cub->c_flag && cub->f_flag && cub->spr_flag)
+	else if (cub->rf && cub->nf && cub->sf && !cub->wf \
+		&& cub->ef && cub->cf && cub->ff && cub->pf)
 		error_handler1(22);
-	else if (cub->r_flag && cub->n_flag && cub->s_flag && cub->w_flag \
-		&& !cub->e_flag && cub->c_flag && cub->f_flag && cub->spr_flag)
+	else if (cub->rf && cub->nf && cub->sf && cub->wf \
+		&& !cub->ef && cub->cf && cub->ff && cub->pf)
 		error_handler1(20);
-	else if (cub->r_flag && cub->n_flag && cub->s_flag && cub->w_flag \
-		&& cub->e_flag && (!cub->c_flag || !cub->f_flag) && cub->spr_flag)
+	else if (cub->rf && cub->nf && cub->sf && cub->wf \
+		&& cub->ef && (!cub->cf || !cub->ff) && cub->pf)
 		error_handler1(24);
-	else if (cub->r_flag && cub->n_flag && cub->s_flag && cub->w_flag \
-		&& cub->e_flag && cub->c_flag && cub->f_flag && !cub->spr_flag)
+	else if (cub->rf && cub->nf && cub->sf && cub->wf \
+		&& cub->ef && cub->cf && cub->ff && !cub->pf)
 		error_handler1(23);
 	else
 		return ;
-}
-
-int	everything_ok(t_structcub *cub)
-{
-	int		todo;
-
-	if (!cub->t_north || !cub->t_west || !cub->t_east || !cub->t_south \
-		|| !cub->t_sprite || !cub->screen.width || !cub->screen.height \
-		|| !cub->f_hex || !cub->c_hex)
-		todo = 0;
-	else
-		todo = 1;
-	return (todo);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mapparser.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cjover-n <cjover-n@student.42madrid.com>   +#+  +:+       +#+        */
+/*   By: cjover-n <cjover-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/15 16:56:29 by cjover-n          #+#    #+#             */
-/*   Updated: 2021/05/14 09:22:03 by cjover-n         ###   ########.fr       */
+/*   Updated: 2021/05/14 19:21:41 by cjover-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,12 @@ void	color_asign(t_structcub *cub, char *line, int id)
 	if (id == 0)
 	{
 		cub->f_hex = color_parser1(cub, line);
-		cub->f_flag = 1;
+		cub->ff = 1;
 	}
 	if (id == 1)
 	{
 		cub->c_hex = color_parser1(cub, line);
-		cub->c_flag = 1;
+		cub->cf = 1;
 	}
 }
 
